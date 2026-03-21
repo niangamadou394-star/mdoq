@@ -1,0 +1,107 @@
+version: '3.9'
+
+# ── Local development stack ────────────────────────────────────────────────────
+# Usage:
+#   cp .env.example .env          # fill in your secrets
+#   docker compose up -d          # start everything
+#   docker compose up backend -d --build   # rebuild after code change
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: medoq_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       medoq_db
+      POSTGRES_USER:     medoq_user
+      POSTGRES_PASSWORD: medoq_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - medoq_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medoq_user -d medoq_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: medoq_redis
+    restart: unless-stopped
+    command: redis-server --requirepass medoq_redis_pass --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - medoq_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "medoq_redis_pass", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: medoq_backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      # Internal Docker networking — override the .env values
+      SPRING_DATASOURCE_URL:      jdbc:postgresql://postgres:5432/medoq_db
+      SPRING_DATASOURCE_USERNAME: medoq_user
+      SPRING_DATASOURCE_PASSWORD: medoq_pass
+      SPRING_REDIS_HOST:          redis
+      SPRING_REDIS_PORT:          6379
+      SPRING_REDIS_PASSWORD:      medoq_redis_pass
+      # Secrets from .env (falls back to dev defaults if .env absent)
+      JWT_SECRET:                 ${JWT_SECRET:-medoq_super_secret_jwt_key_change_in_production_2024}
+      JWT_EXPIRATION:             ${JWT_EXPIRATION:-86400000}
+      JWT_REFRESH_EXPIRATION:     ${JWT_REFRESH_EXPIRATION:-604800000}
+      ENCRYPTION_KEY:             ${ENCRYPTION_KEY:-bWVkb3Ffc2VjcmV0X2tleV8zMmNoYXJhY3RlcnM=}
+      # Payment providers
+      WAVE_API_KEY:               ${WAVE_API_KEY:-wave_sn_test_key}
+      WAVE_WEBHOOK_SECRET:        ${WAVE_WEBHOOK_SECRET:-wave_webhook_test_secret}
+      ORANGE_MERCHANT_KEY:        ${ORANGE_MERCHANT_KEY:-om_test_merchant_key}
+      ORANGE_NOTIF_TOKEN:         ${ORANGE_NOTIF_TOKEN:-om_notif_test_token}
+      # Africa's Talking
+      AT_API_KEY:                 ${AT_API_KEY:-sandbox_key}
+      AT_USERNAME:                ${AT_USERNAME:-sandbox}
+      AT_SENDER_ID:               ${AT_SENDER_ID:-Medoq}
+      # Firebase FCM
+      FCM_SERVICE_ACCOUNT_PATH:   ${FCM_SERVICE_ACCOUNT_PATH:-}
+      # Email
+      SMTP_HOST:                  ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT:                  ${SMTP_PORT:-587}
+      SMTP_USER:                  ${SMTP_USER:-}
+      SMTP_PASSWORD:              ${SMTP_PASSWORD:-}
+      EMAIL_FROM:                 ${EMAIL_FROM:-noreply@medoq.sn}
+      # App
+      APP_BASE_URL:               ${APP_BASE_URL:-http://localhost:8080}
+      SPRING_PROFILES_ACTIVE:     ${SPRING_PROFILES_ACTIVE:-dev}
+    volumes:
+      # Mount Firebase service account if path is set
+      - ${FCM_SERVICE_ACCOUNT_PATH:-/dev/null}:/opt/medoq/secrets/firebase-service-account.json:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - medoq_net
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  medoq_net:
+    driver: bridge

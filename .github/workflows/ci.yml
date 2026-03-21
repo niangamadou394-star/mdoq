@@ -1,0 +1,126 @@
+name: CI — Tests & Build
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # ── Backend: unit + integration tests ──────────────────────────────────────
+  backend-test:
+    name: Backend Tests (Java 21)
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: medoq_test
+          POSTGRES_USER: medoq_user
+          POSTGRES_PASSWORD: medoq_pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U medoq_user -d medoq_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: temurin
+          cache: maven
+
+      - name: Run tests
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/medoq_test
+          SPRING_DATASOURCE_USERNAME: medoq_user
+          SPRING_DATASOURCE_PASSWORD: medoq_pass
+          SPRING_REDIS_HOST: localhost
+          SPRING_REDIS_PORT: 6379
+          SPRING_REDIS_PASSWORD: ""
+          JWT_SECRET: ci_test_secret_key_at_least_32_chars_long
+          # Disable real external services in tests
+          FCM_SERVICE_ACCOUNT_PATH: ""
+          AT_API_KEY: sandbox_key
+          AT_USERNAME: sandbox
+        run: mvn verify -B
+
+      - name: Upload test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: backend/target/surefire-reports/
+
+  # ── Angular web dashboard build ─────────────────────────────────────────────
+  web-build:
+    name: Angular Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build -- --configuration production
+
+  # ── Flutter mobile build (Android) ─────────────────────────────────────────
+  mobile-build:
+    name: Flutter Build (Android)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.x"
+          channel: stable
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Build APK (debug)
+        run: flutter build apk --debug \
+          --dart-define=API_BASE_URL=https://api.medoq.sn/api/v1 \
+          --dart-define=MAPS_API_KEY=placeholder

@@ -1,0 +1,35 @@
+# Java / Maven
+backend/target/
+*.class
+*.jar
+*.war
+
+# Flutter
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/pubspec.lock
+
+# Angular
+web/node_modules/
+web/dist/
+web/.angular/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Env / Secrets — NEVER commit these
+.env
+.env.local
+.env.production
+*.env
+**/secrets/
+firebase-service-account.json
+*-service-account.json
+
+# OS
+.DS_Store
+Thumbs.db
