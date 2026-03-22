@@ -30,6 +30,9 @@ web/.angular/
 firebase-service-account.json
 *-service-account.json
 
+# Claude Code (fichiers internes, ne pas committer)
+.claude/
+
 # OS
 .DS_Store
 Thumbs.db
