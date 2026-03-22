@@ -11,7 +11,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "reviews",
-       uniqueConstraints = @UniqueConstraint(columnNames = {"pharmacy_id", "customer_id"}))
+       uniqueConstraints = @UniqueConstraint(name = "uq_review_reservation",
+           columnNames = {"reservation_id"}))
 @EntityListeners(AuditingEntityListener.class)
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Review {
@@ -19,6 +20,10 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "reservation_id", nullable = false)
+    private Reservation reservation;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pharmacy_id", nullable = false)

@@ -2,7 +2,9 @@ package com.medoq.backend.service.impl;
 
 import com.medoq.backend.entity.Notification;
 import com.medoq.backend.entity.Notification.Type;
+import com.medoq.backend.entity.PharmacyStock;
 import com.medoq.backend.entity.Reservation;
+import com.medoq.backend.entity.User;
 import com.medoq.backend.entity.notification.NotificationTemplate;
 import com.medoq.backend.repository.DeviceTokenRepository;
 import com.medoq.backend.repository.NotificationRepository;
@@ -83,6 +85,57 @@ public class NotificationServiceImpl implements NotificationService {
                 : "");
         persist(reservation, Type.RESERVATION_UPDATE, "Réservation annulée", body);
         push(reservation, "Réservation annulée", body);
+    }
+
+    // ── Stock alert ────────────────────────────────────────────────
+
+    @Override
+    @Async
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void sendStockAlert(PharmacyStock stock) {
+        User owner  = stock.getPharmacy().getOwner();
+        String title = NotificationTemplate.STOCK_ALERT.title();
+        String body  = String.format(
+            "⚠️ Stock critique: %s (%d unités, seuil: %d) — Pharmacie %s",
+            stock.getMedication().getName(),
+            stock.getQuantity(),
+            stock.getReorderLevel(),
+            stock.getPharmacy().getName());
+
+        // Persist in-app notification for the owner
+        try {
+            Notification n = Notification.builder()
+                    .user(owner)
+                    .type(Type.STOCK_ALERT)
+                    .title(title)
+                    .body(body)
+                    .data(Map.of(
+                        "stockId",        stock.getId().toString(),
+                        "medicationId",   stock.getMedication().getId().toString(),
+                        "medicationName", stock.getMedication().getName(),
+                        "quantity",       String.valueOf(stock.getQuantity()),
+                        "reorderLevel",   String.valueOf(stock.getReorderLevel())
+                    ))
+                    .build();
+            notificationRepository.save(n);
+        } catch (Exception e) {
+            log.error("Failed to persist stock alert notification for stock {}: {}",
+                stock.getId(), e.getMessage());
+        }
+
+        // Push FCM → SMS fallback
+        try {
+            int pushed = fcmService.sendToUser(owner.getId().toString(), title, body, Map.of(
+                "type",    "STOCK_ALERT",
+                "stockId", stock.getId().toString()
+            ));
+            if (pushed == 0) {
+                String sms = body.length() <= 160 ? body : body.substring(0, 157) + "...";
+                atSmsService.send(owner.getPhone(), sms);
+            }
+        } catch (Exception e) {
+            log.warn("Push/SMS delivery failed for stock alert {}: {}", stock.getId(), e.getMessage());
+        }
     }
 
     // ── Internal ───────────────────────────────────────────────────

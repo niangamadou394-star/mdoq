@@ -269,21 +269,23 @@ CREATE INDEX idx_notifications_type    ON notifications(type);
 -- ============================================================
 
 CREATE TABLE reviews (
-    id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    pharmacy_id UUID NOT NULL REFERENCES pharmacies(id) ON DELETE CASCADE,
-    customer_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    rating      SMALLINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
-    comment     TEXT,
-    is_verified BOOLEAN NOT NULL DEFAULT FALSE,   -- purchased before reviewing
-    is_visible  BOOLEAN NOT NULL DEFAULT TRUE,
-    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    UNIQUE (pharmacy_id, customer_id)
+    id             UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    reservation_id UUID NOT NULL REFERENCES reservations(id) ON DELETE CASCADE,
+    pharmacy_id    UUID NOT NULL REFERENCES pharmacies(id) ON DELETE CASCADE,
+    customer_id    UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    rating         SMALLINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    comment        TEXT,
+    is_verified    BOOLEAN NOT NULL DEFAULT FALSE,   -- purchased before reviewing
+    is_visible     BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CONSTRAINT uq_review_reservation UNIQUE (reservation_id)
 );
 
-CREATE INDEX idx_reviews_pharmacy ON reviews(pharmacy_id);
-CREATE INDEX idx_reviews_customer ON reviews(customer_id);
-CREATE INDEX idx_reviews_rating   ON reviews(pharmacy_id, rating);
+CREATE INDEX idx_reviews_pharmacy    ON reviews(pharmacy_id);
+CREATE INDEX idx_reviews_customer    ON reviews(customer_id);
+CREATE INDEX idx_reviews_rating      ON reviews(pharmacy_id, rating);
+CREATE INDEX idx_reviews_reservation ON reviews(reservation_id);
 
 -- ============================================================
 -- AUTO-UPDATE updated_at trigger
@@ -356,6 +358,31 @@ BEFORE INSERT ON reservations
 FOR EACH ROW WHEN (NEW.reference IS NULL OR NEW.reference = '')
 EXECUTE FUNCTION generate_reservation_reference();
 
+
+-- ============================================================
+-- STOCK MOVEMENTS (audit trail)
+-- ============================================================
+
+CREATE TYPE stock_movement_reason AS ENUM (
+    'MANUAL_UPDATE', 'BATCH_UPDATE', 'CSV_IMPORT', 'INITIAL_IMPORT',
+    'RESERVATION_DECREMENT', 'RESERVATION_RESTORE'
+);
+
+CREATE TABLE stock_movements (
+    id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    stock_id        UUID NOT NULL REFERENCES pharmacy_stock(id) ON DELETE CASCADE,
+    actor_user_id   VARCHAR(36),
+    quantity_before INT  NOT NULL,
+    quantity_after  INT  NOT NULL,
+    delta           INT  NOT NULL,
+    reason          stock_movement_reason NOT NULL,
+    note            VARCHAR(255),
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_stock_movements_stock   ON stock_movements(stock_id);
+CREATE INDEX idx_stock_movements_created ON stock_movements(created_at);
+CREATE INDEX idx_stock_movements_actor   ON stock_movements(actor_user_id);
 
 -- ============================================================
 -- DEVICE TOKENS (FCM push notifications)

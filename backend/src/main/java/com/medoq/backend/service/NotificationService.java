@@ -1,9 +1,10 @@
 package com.medoq.backend.service;
 
+import com.medoq.backend.entity.PharmacyStock;
 import com.medoq.backend.entity.Reservation;
 
 /**
- * Sends in-app + push notifications for reservation lifecycle events.
+ * Sends in-app + push notifications for reservation lifecycle and stock events.
  * The implementation persists to the {@code notifications} table and
  * optionally fires FCM/APNs push through a provider adapter.
  */
@@ -23,4 +24,10 @@ public interface NotificationService {
 
     /** ANY → CANCELLED: "Votre réservation a été annulée." */
     void sendReservationCancelled(Reservation reservation);
+
+    /**
+     * Stock at or below reorder threshold — notifies the pharmacy owner.
+     * Persists a STOCK_ALERT notification and fires FCM push (SMS fallback).
+     */
+    void sendStockAlert(PharmacyStock stock);
 }

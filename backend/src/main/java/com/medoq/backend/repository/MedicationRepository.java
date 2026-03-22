@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface MedicationRepository extends JpaRepository<Medication, UUID> {
@@ -197,4 +198,10 @@ public interface MedicationRepository extends JpaRepository<Medication, UUID> {
     List<MedicationDetailStockRow> findDetailStockByMedicationId(
         @Param("medId") String medId
     );
+
+    // ── Used by StockService CSV import ──────────────────────────
+
+    Optional<Medication> findByBarcode(String barcode);
+
+    Optional<Medication> findByNameIgnoreCase(String name);
 }

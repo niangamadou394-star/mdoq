@@ -2,12 +2,15 @@ package com.medoq.backend.repository;
 
 import com.medoq.backend.entity.PharmacyStock;
 import jakarta.persistence.LockModeType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,6 +18,30 @@ public interface PharmacyStockRepository extends JpaRepository<PharmacyStock, UU
 
     Optional<PharmacyStock> findByPharmacyIdAndMedicationId(
         UUID pharmacyId, UUID medicationId);
+
+    /** Paginated stock list for a pharmacy with optional medication name search. */
+    @Query("""
+        SELECT ps FROM PharmacyStock ps
+        JOIN FETCH ps.medication m
+        WHERE ps.pharmacy.id = :pharmacyId
+          AND (:search IS NULL
+               OR LOWER(m.name)        LIKE LOWER(CONCAT('%', :search, '%'))
+               OR LOWER(m.genericName) LIKE LOWER(CONCAT('%', :search, '%')))
+        """)
+    Page<PharmacyStock> findByPharmacyId(
+        @Param("pharmacyId") UUID pharmacyId,
+        @Param("search")     String search,
+        Pageable pageable);
+
+    /** Items where current quantity is at or below the reorder threshold. */
+    @Query("""
+        SELECT ps FROM PharmacyStock ps
+        JOIN FETCH ps.medication
+        WHERE ps.pharmacy.id  = :pharmacyId
+          AND ps.quantity      <= ps.reorderLevel
+        ORDER BY ps.quantity ASC
+        """)
+    List<PharmacyStock> findAlerts(@Param("pharmacyId") UUID pharmacyId);
 
     /**
      * Acquires a row-level write lock on the stock entry.
