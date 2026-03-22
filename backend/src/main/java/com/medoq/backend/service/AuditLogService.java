@@ -68,6 +68,35 @@ public class AuditLogService {
             AuditLog.Status.SUCCESS, oldValue, newValue, null);
     }
 
+    // ── Admin shorthand (no User entity lookup needed) ────────────
+
+    /**
+     * Lightweight admin action log — does not require a User entity,
+     * just the userId string from the security principal.
+     */
+    @Async
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void log(String actorUserId, String action, String resourceType, UUID resourceId) {
+        try {
+            User actor = null;
+            if (actorUserId != null) {
+                actor = new User();
+                actor.setId(UUID.fromString(actorUserId));
+            }
+            AuditLog entry = AuditLog.builder()
+                    .action(action)
+                    .resourceType(resourceType)
+                    .resourceId(resourceId)
+                    .user(actor)
+                    .status(AuditLog.Status.SUCCESS)
+                    .build();
+            auditLogRepository.save(entry);
+        } catch (Exception e) {
+            log.error("Failed to persist admin audit log [{}] {}/{}: {}",
+                action, resourceType, resourceId, e.getMessage());
+        }
+    }
+
     // ── Internal ──────────────────────────────────────────────────
 
     private void persist(String action, String resourceType, UUID resourceId,
