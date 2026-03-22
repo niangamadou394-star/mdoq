@@ -2,10 +2,15 @@ spring:
   application:
     name: medoq-backend
 
+  # Charge automatiquement .env à la racine du projet (Spring Boot 2.4+)
+  # En production, les variables sont injectées par docker-compose / le système
+  config:
+    import: "optional:file:../../.env[.properties]"
+
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/medoq_db}
-    username: ${SPRING_DATASOURCE_USERNAME:medoq_user}
-    password: ${SPRING_DATASOURCE_PASSWORD:medoq_pass}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/medoq_db}
+    username: ${DB_USER:medoq_user}
+    password: ${DB_PASSWORD:medoq_pass}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -26,9 +31,9 @@ spring:
 
   data:
     redis:
-      host: ${SPRING_REDIS_HOST:localhost}
-      port: ${SPRING_REDIS_PORT:6379}
-      password: ${SPRING_REDIS_PASSWORD:medoq_redis_pass}
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:medoq_redis_pass}
       timeout: 2000ms
       lettuce:
         pool:
@@ -49,7 +54,7 @@ server:
 medoq:
   jwt:
     secret: ${JWT_SECRET:medoq_super_secret_jwt_key_change_in_production_2024}
-    expiration: ${JWT_EXPIRATION:86400000}        # 24h
+    expiration: ${JWT_EXPIRATION:86400000}          # 24h
     refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000}  # 7d
 
   cors:
@@ -73,21 +78,18 @@ medoq:
   billing:
     start-date: ${PLATFORM_START_DATE:2024-01-01}
 
-  # Africa's Talking
+  # Africa's Talking (USSD + SMS)
   at:
-    api-key:   ${AT_API_KEY:sandbox_key}
-    username:  ${AT_USERNAME:sandbox}
-    sender-id: ${AT_SENDER_ID:Medoq}
+    api-key:           ${AT_API_KEY:sandbox_key}
+    username:          ${AT_USERNAME:sandbox}
+    sender-id:         ${AT_SENDER_ID:Medoq}
     ussd-service-code: ${AT_USSD_CODE:*338#}
 
-  # Firebase Cloud Messaging (service-account JSON path or base64)
+  # Firebase Cloud Messaging
   fcm:
-    # Path to firebase-service-account.json, or leave blank to auto-detect
-    # from GOOGLE_APPLICATION_CREDENTIALS env var
-    service-account-path: ${FCM_SERVICE_ACCOUNT_PATH:}
+    service-account-path: ${FIREBASE_SERVICE_ACCOUNT:classpath:firebase-service-account.json}
 
   security:
-    # 32-byte base64-encoded AES-256 key — override via env var ENCRYPTION_KEY
     encryption-key: ${ENCRYPTION_KEY:bWVkb3Ffc2VjcmV0X2tleV8zMmNoYXJhY3RlcnM=}
 
   email:
