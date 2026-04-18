@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MonCoach · Par Amadou Niang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #1c1c1c;
+      --surface2: #252525;
+      --border: #2e2e2e;
+      --text: #ffffff;
+      --muted: #777;
+      --accent: #F5C518;
+      --accent-hover: #e0b310;
+      --orange: #F59E0B;
+      --purple: #8B5CF6;
+      --blue: #3B82F6;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ─── LANDING ─────────────────────────────── */
+    #landing {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 28px 48px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .logo { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
+    .logo .mon { color: #fff; }
+    .logo .cch { color: var(--accent); }
+    .logo-sub { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; color: var(--muted); text-transform: uppercase; margin-top: 5px; }
+
+    .landing-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 36px;
+      padding: 40px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      padding: 9px 22px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+      width: fit-content;
+    }
+    .badge .star { color: var(--accent); }
+
+    .headline {
+      font-size: 58px;
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      text-transform: lowercase;
+    }
+    .hl-projet { color: var(--orange); }
+    .hl-pro {
+      background: linear-gradient(120deg, #818CF8 0%, #6366F1 50%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .landing-desc {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--muted);
+      text-align: center;
+    }
+    .landing-desc strong { color: var(--text); }
+
+    .cta-btn {
+      background: var(--accent);
+      color: #111;
+      border: none;
+      padding: 20px 32px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: background .2s, transform .1s;
+      font-family: inherit;
+    }
+    .cta-btn:hover { background: var(--accent-hover); }
+    .cta-btn:active { transform: scale(.99); }
+
+    /* ─── CHAT ────────────────────────────────── */
+    #chat {
+      display: none;
+      flex-direction: column;
+      height: 100vh;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    #chat.active { display: flex; }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .back-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color .2s, border-color .2s;
+      flex-shrink: 0;
+    }
+    .back-btn:hover { color: var(--text); border-color: var(--text); }
+
+    .header-logo { font-size: 17px; font-weight: 900; }
+    .header-logo .mon { color: #fff; }
+    .header-logo .cch { color: var(--accent); }
+    .header-sub { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; margin-top: 2px; }
+
+    .progress-label { margin-left: auto; font-size: 12px; color: var(--muted); font-weight: 600; }
+
+    .progress-track { height: 3px; background: var(--border); flex-shrink: 0; }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--orange), var(--accent));
+      transition: width .5s ease;
+      width: 0%;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .messages::-webkit-scrollbar { width: 3px; }
+    .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .msg { display: flex; gap: 10px; align-items: flex-end; }
+    .msg.user { flex-direction: row-reverse; }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      background: var(--surface2);
+    }
+    .msg.coach .avatar { background: linear-gradient(135deg, var(--orange), var(--purple)); }
+
+    .bubble {
+      max-width: 76%;
+      padding: 11px 15px;
+      border-radius: 18px;
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+    .msg.coach .bubble { background: var(--surface); border-bottom-left-radius: 4px; }
+    .msg.user .bubble {
+      background: var(--accent);
+      color: #111;
+      font-weight: 600;
+      border-bottom-right-radius: 4px;
+    }
+
+    .typing-dots { display: flex; align-items: center; gap: 5px; padding: 6px 4px; }
+    .typing-dots span {
+      width: 7px; height: 7px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: bounce 1.3s infinite ease-in-out;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: .2s; }
+    .typing-dots span:nth-child(3) { animation-delay: .4s; }
+
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-7px); }
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 4px 0;
+    }
+    .cta-card-title { font-size: 15px; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+    .cta-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+    .cta-card-link {
+      display: block;
+      background: var(--accent);
+      color: #111;
+      text-decoration: none;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-align: center;
+      transition: background .2s;
+    }
+    .cta-card-link:hover { background: var(--accent-hover); }
+
+    .input-area {
+      padding: 10px 16px 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      background: var(--bg);
+    }
+    .msg-input {
+      flex: 1;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      border-radius: 24px;
+      padding: 12px 20px;
+      font-size: 14.5px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .msg-input:focus { border-color: var(--accent); }
+    .msg-input::placeholder { color: var(--muted); }
+    .msg-input:disabled { opacity: .4; cursor: not-allowed; }
+
+    .send-btn {
+      width: 48px; height: 48px;
+      background: var(--accent);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #111;
+      flex-shrink: 0;
+      transition: background .2s, transform .1s;
+    }
+    .send-btn:hover { background: var(--accent-hover); }
+    .send-btn:active { transform: scale(.94); }
+    .send-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    @media (min-width: 480px) {
+      #landing, #chat { border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+      body { background: #060606; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════ LANDING ════════ -->
+<div id="landing">
+  <div>
+    <div class="logo"><span class="mon">Mon</span><span class="cch">Coach</span></div>
+    <div class="logo-sub">Par Amadou Niang</div>
+  </div>
+
+  <div class="landing-body">
+    <div class="badge"><span class="star">✦</span> Gratuit · Sans inscription</div>
+
+    <h1 class="headline">
+      Ton&nbsp;<span class="hl-projet">projet</span><br>
+      <span class="hl-pro">pro</span><br>
+      commence<br>
+      ici.
+    </h1>
+
+    <p class="landing-desc">
+      Tu ne sais pas quoi faire après tes études&nbsp;?
+      Tu veux lancer un projet mais tu ne sais pas par où commencer&nbsp;?
+      <strong>MonCoach</strong> t'accompagne en 5 questions.
+    </p>
+
+    <button class="cta-btn" id="startBtn" onclick="startCoaching()">
+      Démarrer mon coaching →
+    </button>
+  </div>
+</div>
+
+<!-- ════════ CHAT ════════ -->
+<div id="chat">
+  <div class="chat-header">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div>
+      <div class="header-logo"><span class="mon">Mon</span><span class="cch">Coach</span></div>
+      <div class="header-sub">Coaching gratuit</div>
+    </div>
+    <div class="progress-label" id="progressLabel">0 / 5</div>
+  </div>
+
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <div class="messages" id="messages"></div>
+
+  <div class="input-area">
+    <input
+      type="text"
+      class="msg-input"
+      id="msgInput"
+      placeholder="Tape ta réponse…"
+      onkeydown="onKey(event)"
+      autocomplete="off"
+    />
+    <button class="send-btn" id="sendBtn" onclick="send()">→</button>
+  </div>
+</div>
+
+<script>
+  const COACHING_SITE = 'https://niangamadou394-star.github.io/Amadou./#about';
+  const OR_KEY        = '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';
+  const OR_URL        = 'https://openrouter.ai/api/v1/chat/completions';
+  const MODEL         = 'anthropic/claude-3-5-sonnet';
+
+  const SYSTEM = `Tu es MonCoach, un coach de carrière bienveillant créé par Amadou Niang.
+Tu accompagnes des étudiants et jeunes professionnels africains à définir leur projet professionnel.
+
+RÈGLES:
+- Pose UNE seule question à la fois dans l'ordre ci-dessous
+- Tes messages : 1-2 phrases courtes + la question
+- Chaleureux, "tu", quelques emojis, toujours en français
+
+SÉQUENCE DES 5 QUESTIONS:
+Q1: Quel est ton domaine d'études ou ta formation actuelle ?
+Q2: Qu'est-ce qui te passionne vraiment dans la vie, même en dehors de tes études ?
+Q3: Dans 5 ans, comment tu te vois ? Quelle vie tu veux avoir ?
+Q4: Qu'est-ce qui te bloque le plus aujourd'hui dans ta progression ?
+Q5: Tu préfères travailler pour quelqu'un d'autre ou créer ton propre projet ?
+
+APRÈS LA 5ÈME RÉPONSE:
+1. Résume le profil de l'utilisateur en 3 bullet points courts
+2. Propose 2 pistes concrètes adaptées
+3. Termine par exactement ce marqueur sur une nouvelle ligne : [SHOW_CTA]
+
+DÉBUT: Accueille chaleureusement en 1-2 phrases puis pose Q1.`;
+
+  let history = [], qCount = 0, busy = false, done = false;
+
+  function startCoaching() {
+    document.getElementById('startBtn').disabled = true;
+    document.getElementById('landing').style.display = 'none';
+    document.getElementById('chat').classList.add('active');
+    callCoach(null, true);
+  }
+
+  function goBack() {
+    if (!confirm('Quitter le coaching ? Ta progression sera perdue.')) return;
+    document.getElementById('chat').classList.remove('active');
+    document.getElementById('landing').style.display = '';
+    document.getElementById('startBtn').disabled = false;
+    history = []; qCount = 0; busy = false; done = false;
+    document.getElementById('messages').innerHTML = '';
+    document.getElementById('msgInput').disabled = false;
+    document.getElementById('sendBtn').disabled = false;
+    setProgress(0);
+  }
+
+  function setProgress(n) {
+    document.getElementById('progressFill').style.width = Math.min((n / 5) * 100, 100) + '%';
+    document.getElementById('progressLabel').textContent = Math.min(n, 5) + ' / 5';
+  }
+
+  function scrollBottom() {
+    const m = document.getElementById('messages');
+    m.scrollTop = m.scrollHeight;
+  }
+
+  function addBubble(role, html) {
+    const msgs = document.getElementById('messages');
+    const wrap = document.createElement('div');
+    wrap.className = 'msg ' + role;
+    const av = document.createElement('div');
+    av.className = 'avatar';
+    av.textContent = role === 'coach' ? '🎯' : '👤';
+    const bub = document.createElement('div');
+    bub.className = 'bubble';
+    bub.innerHTML = html;
+    wrap.appendChild(av);
+    wrap.appendChild(bub);
+    msgs.appendChild(wrap);
+    scrollBottom();
+    return wrap;
+  }
+
+  function showTyping() {
+    const msgs = document.getElementById('messages');
+    const wrap = document.createElement('div');
+    wrap.className = 'msg coach'; wrap.id = 'typing';
+    const av = document.createElement('div'); av.className = 'avatar'; av.textContent = '🎯';
+    const bub = document.createElement('div'); bub.className = 'bubble';
+    bub.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+    wrap.appendChild(av); wrap.appendChild(bub);
+    msgs.appendChild(wrap); scrollBottom();
+  }
+
+  function removeTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
+
+  function showCTA() {
+    const msgs = document.getElementById('messages');
+    const card = document.createElement('div');
+    card.className = 'cta-card';
+    card.innerHTML = `
+      <div class="cta-card-title">🚀 Passe à l'étape suivante</div>
+      <div class="cta-card-desc">Un accompagnement personnalisé avec Amadou Niang pour transformer ton projet en réalité concrète.</div>
+      <a class="cta-card-link" href="${COACHING_SITE}" target="_blank" rel="noopener">
+        Réserver mon accompagnement →
+      </a>`;
+    msgs.appendChild(card);
+    scrollBottom();
+  }
+
+  function renderReply(text) {
+    if (text.includes('[SHOW_CTA]')) {
+      const clean = text.replace('[SHOW_CTA]', '').trim();
+      addBubble('coach', clean.replace(/\n/g, '<br>'));
+      showCTA();
+      done = true;
+      document.getElementById('msgInput').disabled = true;
+      document.getElementById('sendBtn').disabled = true;
+    } else {
+      addBubble('coach', text.replace(/\n/g, '<br>'));
+    }
+  }
+
+  async function callCoach(userText, isInit) {
+    if (busy) return;
+    busy = true;
+    document.getElementById('sendBtn').disabled = true;
+
+    if (!isInit) {
+      addBubble('user', userText);
+      history.push({ role: 'user', content: userText });
+      qCount++;
+      setProgress(qCount);
+    }
+
+    showTyping();
+
+    const messages = [{ role: 'system', content: SYSTEM }, ...history];
+    if (isInit) messages.push({ role: 'user', content: 'Bonjour, je veux commencer mon coaching.' });
+
+    try {
+      const res = await fetch(OR_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + OR_KEY,
+          'HTTP-Referer': 'https://niangamadou394-star.github.io/mdoq/coach/',
+          'X-Title': 'MonCoach par Amadou Niang'
+        },
+        body: JSON.stringify({ model: MODEL, max_tokens: 600, messages })
+      });
+
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      removeTyping();
+      const reply = data.choices[0].message.content;
+      renderReply(reply);
+      history.push({ role: 'assistant', content: reply });
+
+    } catch (err) {
+      removeTyping();
+      addBubble('coach', "Oups, une petite erreur 😅 Réessaie dans quelques secondes.");
+    }
+
+    busy = false;
+    if (!done) document.getElementById('sendBtn').disabled = false;
+  }
+
+  function send() {
+    if (done || busy) return;
+    const input = document.getElementById('msgInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    callCoach(text, false);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  }
+</script>
+</body>
+</html>
