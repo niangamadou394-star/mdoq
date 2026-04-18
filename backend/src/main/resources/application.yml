@@ -92,6 +92,10 @@ medoq:
   security:
     encryption-key: ${ENCRYPTION_KEY:bWVkb3Ffc2VjcmV0X2tleV8zMmNoYXJhY3RlcnM=}
 
+# Anthropic Claude API — used by the coaching chatbot
+anthropic:
+  api-key: ${ANTHROPIC_API_KEY:}
+
   email:
     from: ${EMAIL_FROM:noreply@medoq.sn}
     from-name: Medoq

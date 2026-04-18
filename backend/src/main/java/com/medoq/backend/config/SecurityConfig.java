@@ -44,7 +44,8 @@ public class SecurityConfig {
         "/medications/popular",
         "/webhooks/wave",
         "/webhooks/orange-money",
-        "/ussd"          // Africa's Talking USSD callback — no JWT, secured by IP allowlist
+        "/ussd",         // Africa's Talking USSD callback — no JWT, secured by IP allowlist
+        "/coaching/chat" // Public coaching chatbot — rate-limited, no user data stored
     };
 
     @Bean
