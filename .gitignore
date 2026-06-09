@@ -36,3 +36,6 @@ firebase-service-account.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Netlify
+.netlify/
