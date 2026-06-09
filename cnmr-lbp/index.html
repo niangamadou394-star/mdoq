@@ -5,1440 +5,798 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Espace CNMR — La Banque Postale</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --blue:#003189;
-  --blue-light:#1a4aad;
-  --blue-dark:#001f5c;
-  --gold:#FFCD00;
-  --gold-dark:#e6b800;
-  --bg:#F2F1EC;
+  --brand:#003189;
+  --brand-mid:#1A4AAD;
+  --brand-dark:#001D58;
+  --gold:#C9A800;
+  --gold-bg:#FDF7DC;
+  --bg:#F0EFE9;
   --surface:#FFFFFF;
-  --surface2:#F7F6F2;
-  --border:#E5E3DB;
-  --text:#1A1929;
-  --muted:#6B7080;
-  --soft:#9DA3AF;
-  /* theme palette */
-  --c-conquete:#3B82F6;
-  --c-fidelisation:#8B5CF6;
-  --c-epargne:#10B981;
-  --c-assurance:#F97316;
-  --c-credit:#EF4444;
-  --c-satisfaction:#EC4899;
-  --c-competences:#14B8A6;
-  --c-collectif:#F59E0B;
-  --c-ludique:#A855F7;
-  --c-evenement:#06B6D4;
-  --radius:14px;
-  --radius-sm:8px;
-  --shadow:0 2px 12px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.05);
-  --shadow-md:0 8px 32px rgba(0,0,0,.10),0 2px 8px rgba(0,0,0,.06);
-  --shadow-lg:0 20px 60px rgba(0,0,0,.13);
+  --surface-alt:#F7F6F2;
+  --border:#DDD9D0;
+  --text:#1C1C2A;
+  --muted:#64687A;
+  --subtle:#A0A3AF;
+  --c-conquete:#2563EB;
+  --c-fidelisation:#7C3AED;
+  --c-epargne:#059669;
+  --c-assurance:#EA580C;
+  --c-credit:#DC2626;
+  --c-satisfaction:#BE185D;
+  --c-competences:#0D9488;
+  --c-collectif:#D97706;
+  --c-ludique:#9333EA;
+  --c-evenement:#0891B2;
+  --radius:10px;
+  --shadow-sm:0 1px 4px rgba(0,0,0,.06);
+  --shadow:0 2px 10px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.04);
+  --shadow-md:0 6px 24px rgba(0,0,0,.09),0 2px 6px rgba(0,0,0,.05);
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  font-family:'Plus Jakarta Sans',sans-serif;
+  font-family:'Inter',sans-serif;
   background:var(--bg);
   color:var(--text);
   min-height:100vh;
-  overflow-x:hidden;
+  font-size:14px;
+  line-height:1.5;
 }
-
-/* ─── KEYFRAMES ─────────────────────────────────── */
-@keyframes gradientFlow{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-@keyframes fadeInUp{
-  from{opacity:0;transform:translateY(24px)}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px)}
   to{opacity:1;transform:translateY(0)}
 }
-@keyframes fadeInDown{
-  from{opacity:0;transform:translateY(-16px)}
+@keyframes slidePanel{
+  from{opacity:0;transform:translateY(8px)}
   to{opacity:1;transform:translateY(0)}
 }
-@keyframes fadeInLeft{
-  from{opacity:0;transform:translateX(-24px)}
-  to{opacity:1;transform:translateX(0)}
-}
-@keyframes fadeInRight{
-  from{opacity:0;transform:translateX(24px)}
-  to{opacity:1;transform:translateX(0)}
-}
-@keyframes scaleIn{
-  from{opacity:0;transform:scale(.88)}
-  to{opacity:1;transform:scale(1)}
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.7;transform:scale(.96)}
-}
-@keyframes shimmer{
-  from{background-position:-200% 0}
-  to{background-position:200% 0}
-}
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-@keyframes slideInRight{
-  from{opacity:0;transform:translateX(40px)}
-  to{opacity:1;transform:translateX(0)}
-}
-@keyframes badgePop{
-  0%{transform:scale(0)}
-  70%{transform:scale(1.15)}
-  100%{transform:scale(1)}
-}
-@keyframes waveLine{
-  0%,100%{d:path("M0,15 Q30,5 60,15 Q90,25 120,15 Q150,5 180,15 Q210,25 240,15")}
-  50%{d:path("M0,15 Q30,25 60,15 Q90,5 120,15 Q150,25 180,15 Q210,5 240,15")}
-}
-@keyframes numberUp{
-  from{opacity:0;transform:translateY(12px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes glowPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(255,205,0,.3)}
-  50%{box-shadow:0 0 0 10px rgba(255,205,0,0)}
-}
-@keyframes dotBlink{
-  0%,100%{opacity:1}
-  50%{opacity:.2}
-}
-@keyframes cardEntrance{
-  from{opacity:0;transform:translateY(30px) scale(.96)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-@keyframes progressFill{
-  from{width:0}
-  to{width:var(--target)}
-}
-@keyframes borderSpin{
-  to{transform:rotate(360deg)}
-}
 
-/* ─── HEADER ─────────────────────────────────────── */
-header{
-  background:linear-gradient(135deg,#001f5c 0%,#003189 40%,#004fcb 70%,#1a4aad 100%);
-  background-size:300% 300%;
-  animation:gradientFlow 12s ease infinite;
-  padding:0;
-  position:relative;
-  overflow:hidden;
+/* HEADER */
+.header{
+  background:var(--brand-dark);
+  border-bottom:3px solid var(--gold);
+  padding:0 32px;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
-header::before{
-  content:'';
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse at 20% 50%,rgba(255,205,0,.12) 0%,transparent 60%),
-             radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.06) 0%,transparent 50%);
-  pointer-events:none;
-}
-.header-wave{
-  position:absolute;bottom:-1px;left:0;width:100%;
-  line-height:0;
-}
-.header-wave svg{width:100%;height:48px}
-
 .header-inner{
-  max-width:1200px;margin:0 auto;
-  padding:32px 24px 56px;
-  display:flex;flex-direction:column;gap:20px;
-  animation:fadeInDown .6s ease;
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:60px;
 }
-.header-top{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;
-}
-.brand{display:flex;align-items:center;gap:14px}
-.brand-logo{
-  width:44px;height:44px;border-radius:10px;
+.logo-block{display:flex;align-items:center;gap:12px}
+.logo-badge{
+  width:38px;height:38px;
   background:var(--gold);
+  border-radius:8px;
   display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--blue-dark);
-  animation:glowPulse 3s ease infinite;
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:13px;
+  color:var(--brand-dark);
+  letter-spacing:.5px;
   flex-shrink:0;
 }
-.brand-text{display:flex;flex-direction:column;gap:2px}
-.brand-name{
-  font-family:'Syne',sans-serif;
-  font-size:18px;font-weight:700;
-  color:#fff;letter-spacing:.3px;
-}
-.brand-sub{font-size:12px;color:rgba(255,255,255,.65);letter-spacing:.6px;text-transform:uppercase}
-
-.header-badge{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.2);
-  border-radius:100px;
-  padding:8px 16px;
-  font-size:13px;color:rgba(255,255,255,.9);
-}
-.header-badge-dot{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--gold);
-  animation:dotBlink 2s ease infinite;
-}
-
-.header-hero{text-align:center;padding:12px 0 8px}
-.hero-title{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(28px,5vw,48px);
-  font-weight:800;
-  color:#fff;
+.logo-text{
+  display:flex;flex-direction:column;
   line-height:1.1;
-  letter-spacing:-.5px;
-  margin-bottom:10px;
 }
-.hero-title span{color:var(--gold)}
-.hero-sub{
-  font-size:clamp(13px,2vw,16px);
-  color:rgba(255,255,255,.7);
-  max-width:500px;margin:0 auto;
-  line-height:1.6;
-}
-
-/* ─── STATS BAR ──────────────────────────────────── */
-.stats-bar{
-  max-width:1200px;margin:-28px auto 0;
-  padding:0 24px;
-  position:relative;z-index:10;
-}
-.stats-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:12px;
-}
-.stat-card{
-  background:var(--surface);
-  border-radius:var(--radius);
-  padding:18px 20px;
-  box-shadow:var(--shadow-md);
-  display:flex;flex-direction:column;gap:4px;
-  animation:fadeInUp .5s ease both;
-  border-top:3px solid transparent;
-  transition:transform .2s,box-shadow .2s;
-}
-.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.stat-card:nth-child(1){border-color:var(--c-conquete);animation-delay:.05s}
-.stat-card:nth-child(2){border-color:var(--c-epargne);animation-delay:.1s}
-.stat-card:nth-child(3){border-color:var(--c-ludique);animation-delay:.15s}
-.stat-card:nth-child(4){border-color:var(--gold);animation-delay:.2s}
-.stat-num{
+.logo-title{
   font-family:'Syne',sans-serif;
-  font-size:28px;font-weight:800;
-  color:var(--blue);
-  animation:numberUp .6s ease both;
+  font-weight:700;font-size:16px;
+  color:#FFFFFF;letter-spacing:.3px;
 }
-.stat-label{font-size:12px;color:var(--muted);font-weight:500;line-height:1.3}
-
-/* ─── MAIN LAYOUT ────────────────────────────────── */
-main{max-width:1200px;margin:0 auto;padding:32px 24px 64px}
-
-/* ─── SECTION HEADERS ────────────────────────────── */
-.section-title{
+.logo-sub{
+  font-size:11px;color:rgba(255,255,255,.55);
+  font-weight:400;letter-spacing:.2px;
+}
+.header-meta{
+  display:flex;align-items:center;gap:20px;
+}
+.header-stat{
+  display:flex;flex-direction:column;align-items:flex-end;
+  line-height:1.2;
+}
+.header-stat-val{
   font-family:'Syne',sans-serif;
-  font-size:22px;font-weight:700;
-  color:var(--text);
-  margin-bottom:4px;
+  font-weight:700;font-size:18px;color:#FFFFFF;
 }
-.section-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
+.header-stat-lbl{
+  font-size:10px;color:rgba(255,255,255,.5);
+  text-transform:uppercase;letter-spacing:.6px;
+}
+.header-divider{
+  width:1px;height:28px;background:rgba(255,255,255,.12);
+}
 
-/* ─── TEAM SECTION ───────────────────────────────── */
-.team-section{
+/* TABS */
+.tabs-bar{
   background:var(--surface);
-  border-radius:var(--radius);
-  padding:28px;
-  box-shadow:var(--shadow);
-  margin-bottom:28px;
-  animation:fadeInUp .5s ease .2s both;
+  border-bottom:1px solid var(--border);
 }
-.team-header{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;
-  margin-bottom:24px;
-}
-.team-label{
-  display:inline-flex;align-items:center;gap:6px;
-  background:linear-gradient(135deg,var(--blue),var(--blue-light));
-  color:#fff;
-  font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
-  padding:5px 12px;border-radius:100px;
-}
-.team-group{margin-bottom:24px}
-.team-group-title{
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--soft);margin-bottom:14px;
-  display:flex;align-items:center;gap:8px;
-}
-.team-group-title::after{
-  content:'';flex:1;height:1px;background:var(--border);
-}
-
-.adc-grid{
-  display:flex;flex-wrap:wrap;gap:12px;
-}
-.adc-card{
-  display:flex;align-items:center;gap:12px;
-  background:var(--surface2);
-  border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);
-  padding:12px 16px;
-  cursor:pointer;
-  transition:all .22s ease;
-  animation:scaleIn .4s ease both;
-  flex:1;min-width:200px;
-  position:relative;overflow:hidden;
-}
-.adc-card::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--adc-color,var(--blue)),transparent);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .25s ease;
-}
-.adc-card:hover::before,.adc-card.active-adc::before{transform:scaleX(1)}
-.adc-card:hover,.adc-card.active-adc{
-  border-color:var(--adc-color,var(--blue));
-  background:var(--surface);
-  box-shadow:var(--shadow-md);
-  transform:translateY(-2px);
-}
-.adc-avatar{
-  width:40px;height:40px;border-radius:10px;
-  background:linear-gradient(135deg,var(--adc-color,var(--blue)),var(--adc-color2,var(--blue-light)));
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-size:14px;font-weight:700;
-  color:#fff;flex-shrink:0;
-  transition:transform .2s;
-}
-.adc-card:hover .adc-avatar,.adc-card.active-adc .adc-avatar{transform:scale(1.08)}
-.adc-info{flex:1;min-width:0}
-.adc-name{font-size:14px;font-weight:600;color:var(--text);line-height:1.2}
-.adc-role{font-size:11px;color:var(--muted);margin-top:2px}
-.adc-count{
-  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
-  color:var(--adc-color,var(--blue));
-  background:rgba(0,0,0,.04);
-  padding:3px 8px;border-radius:6px;
-  min-width:28px;text-align:center;
-}
-
-.leader-card{
-  display:flex;align-items:center;gap:16px;
-  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
-  border-radius:var(--radius);
-  padding:20px 24px;
-  margin-bottom:20px;
-  color:#fff;
-  position:relative;overflow:hidden;
-}
-.leader-card::after{
-  content:'';position:absolute;
-  right:-20px;top:-20px;
-  width:100px;height:100px;
-  border-radius:50%;
-  background:rgba(255,205,0,.1);
-}
-.leader-avatar{
-  width:52px;height:52px;border-radius:12px;
-  background:var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--blue-dark);flex-shrink:0;
-}
-.leader-info{}
-.leader-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:700}
-.leader-role{font-size:12px;opacity:.75;margin-top:3px}
-.leader-badge{
-  margin-left:auto;
-  background:var(--gold);
-  color:var(--blue-dark);
-  font-size:11px;font-weight:700;
-  padding:5px 12px;border-radius:100px;
-  white-space:nowrap;
-}
-
-/* ─── TABS ───────────────────────────────────────── */
-.tabs-row{
-  display:flex;gap:4px;
-  background:var(--surface);
-  border-radius:var(--radius);
-  padding:5px;
-  box-shadow:var(--shadow);
-  margin-bottom:20px;
-  animation:fadeInUp .5s ease .3s both;
+.tabs-inner{
+  max-width:1200px;margin:0 auto;
+  padding:0 32px;
+  display:flex;align-items:center;gap:4px;
 }
 .tab-btn{
-  flex:1;padding:12px 16px;
-  border:none;cursor:pointer;
-  border-radius:10px;
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:14px;font-weight:600;
-  transition:all .22s ease;
-  color:var(--muted);
-  background:transparent;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.tab-btn.active{
-  background:var(--blue);
-  color:#fff;
-  box-shadow:0 4px 12px rgba(0,49,137,.3);
-}
-.tab-btn:not(.active):hover{background:var(--bg);color:var(--text)}
-.tab-badge{
-  font-size:10px;font-weight:700;
-  background:var(--gold);color:var(--blue-dark);
-  padding:2px 7px;border-radius:100px;
-}
-.tab-btn.active .tab-badge{background:rgba(255,255,255,.25);color:#fff}
-
-/* ─── FILTERS ────────────────────────────────────── */
-.filters-row{
-  display:flex;gap:8px;flex-wrap:wrap;
-  margin-bottom:20px;
-  animation:fadeInUp .5s ease .35s both;
-}
-.filter-pill{
-  padding:7px 14px;border-radius:100px;
-  border:1.5px solid var(--border);
-  background:var(--surface);
+  padding:14px 20px;
+  border:none;background:none;cursor:pointer;
+  font-family:'Inter',sans-serif;
   font-size:13px;font-weight:500;
-  cursor:pointer;
-  transition:all .18s ease;
   color:var(--muted);
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  transition:color .15s,border-color .15s;
   white-space:nowrap;
 }
-.filter-pill:hover{border-color:var(--blue);color:var(--blue);background:rgba(0,49,137,.04)}
-.filter-pill.active{
-  background:var(--blue);
-  border-color:var(--blue);
-  color:#fff;
-  box-shadow:0 2px 8px rgba(0,49,137,.25);
-}
-.filter-dot{
-  display:inline-block;width:8px;height:8px;border-radius:50%;
-  margin-right:5px;vertical-align:middle;
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{
+  color:var(--brand);
+  border-bottom-color:var(--brand);
+  font-weight:600;
 }
 
-/* ─── ANIMATION GRID ─────────────────────────────── */
+/* MAIN LAYOUT */
+.main{max-width:1200px;margin:0 auto;padding:28px 32px 60px;}
+
+/* SECTION HEADER */
+.section-top{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:20px;gap:16px;
+}
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-weight:700;font-size:22px;
+  color:var(--text);line-height:1.2;
+}
+.section-sub{
+  font-size:13px;color:var(--muted);
+  margin-top:4px;font-weight:400;
+}
+.count-badge{
+  background:var(--brand);color:#fff;
+  font-size:11px;font-weight:600;
+  padding:3px 10px;border-radius:20px;
+  white-space:nowrap;flex-shrink:0;
+  margin-top:4px;
+}
+
+/* FILTER PILLS */
+.filters{
+  display:flex;flex-wrap:wrap;gap:6px;
+  margin-bottom:24px;
+}
+.pill{
+  padding:5px 14px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:var(--surface);
+  font-size:12px;font-weight:500;
+  color:var(--muted);
+  cursor:pointer;
+  transition:all .15s;
+}
+.pill:hover{border-color:var(--brand);color:var(--brand)}
+.pill.active{
+  background:var(--brand);color:#fff;
+  border-color:var(--brand);
+}
+.pill[data-theme="conquete"].active{background:var(--c-conquete);border-color:var(--c-conquete)}
+.pill[data-theme="fidelisation"].active{background:var(--c-fidelisation);border-color:var(--c-fidelisation)}
+.pill[data-theme="epargne"].active{background:var(--c-epargne);border-color:var(--c-epargne)}
+.pill[data-theme="assurance"].active{background:var(--c-assurance);border-color:var(--c-assurance)}
+.pill[data-theme="credit"].active{background:var(--c-credit);border-color:var(--c-credit)}
+.pill[data-theme="satisfaction"].active{background:var(--c-satisfaction);border-color:var(--c-satisfaction)}
+.pill[data-theme="competences"].active{background:var(--c-competences);border-color:var(--c-competences)}
+.pill[data-theme="collectif"].active{background:var(--c-collectif);border-color:var(--c-collectif)}
+.pill[data-theme="ludique"].active{background:var(--c-ludique);border-color:var(--c-ludique)}
+.pill[data-theme="evenement"].active{background:var(--c-evenement);border-color:var(--c-evenement)}
+
+/* GRID */
 .anim-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(275px,1fr));
-  gap:16px;
-  margin-bottom:24px;
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:14px;
 }
 .anim-card{
   background:var(--surface);
+  border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:20px;
+  border-left:3px solid var(--c-theme, var(--border));
+  padding:16px 18px;
   cursor:pointer;
-  transition:all .22s ease;
-  box-shadow:var(--shadow);
-  border:1.5px solid transparent;
-  position:relative;overflow:hidden;
-  animation:cardEntrance .45s ease both;
-}
-.anim-card::before{
-  content:'';
-  position:absolute;
-  left:0;top:0;bottom:0;width:4px;
-  background:var(--theme-color,var(--blue));
-  border-radius:4px 0 0 4px;
+  transition:box-shadow .15s,transform .15s;
+  animation:fadeUp .3s ease both;
 }
 .anim-card:hover{
-  border-color:var(--theme-color,var(--blue));
   box-shadow:var(--shadow-md);
-  transform:translateY(-4px);
+  transform:translateY(-2px);
 }
-.anim-card.selected{
-  border-color:var(--theme-color,var(--blue));
-  box-shadow:0 0 0 3px rgba(0,49,137,.1),var(--shadow-md);
+.anim-card-head{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:8px;margin-bottom:8px;
 }
-.card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
-.card-emoji{
-  font-size:28px;line-height:1;
-  animation:float 4s ease infinite;
-  flex-shrink:0;
+.anim-name{
+  font-weight:600;font-size:14px;
+  color:var(--text);line-height:1.3;
 }
-.card-meta{flex:1;min-width:0}
-.card-theme{
-  font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
-  color:var(--theme-color,var(--blue));
-  margin-bottom:4px;
+.theme-tag{
+  font-size:10px;font-weight:600;
+  padding:2px 8px;border-radius:12px;
+  white-space:nowrap;flex-shrink:0;
+  letter-spacing:.3px;
+  text-transform:uppercase;
 }
-.card-title{
-  font-family:'Syne',sans-serif;
-  font-size:16px;font-weight:700;
-  color:var(--text);line-height:1.2;
-}
-.card-body{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:14px}
-.card-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:8px;
-}
-.card-adc{
-  display:flex;align-items:center;gap:7px;
-  font-size:12px;font-weight:600;color:var(--text);
-}
-.mini-avatar{
-  width:24px;height:24px;border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:9px;font-weight:700;color:#fff;
-  background:linear-gradient(135deg,var(--adc-color,var(--blue)),var(--adc-color2,var(--blue-light)));
-}
-.card-duree{
-  font-size:11px;font-weight:600;
-  background:var(--surface2);
-  color:var(--muted);
-  padding:3px 9px;border-radius:6px;
-  border:1px solid var(--border);
-}
-
-/* ─── DETAIL PANEL ───────────────────────────────── */
-#detail{
-  display:none;
-  background:var(--surface);
-  border-radius:var(--radius);
-  padding:0;
-  box-shadow:var(--shadow-lg);
-  margin-bottom:24px;
+.anim-desc{
+  font-size:12px;color:var(--muted);
+  line-height:1.5;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
   overflow:hidden;
-  animation:slideInRight .35s ease;
 }
-.detail-header{
-  background:linear-gradient(135deg,var(--detail-color,var(--blue)),var(--detail-color2,var(--blue-light)));
-  padding:28px 28px 24px;
-  color:#fff;
-  position:relative;overflow:hidden;
+.anim-meta{
+  display:flex;align-items:center;gap:10px;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
 }
-.detail-header::before{
-  content:'';position:absolute;
-  right:-40px;bottom:-40px;
-  width:160px;height:160px;
-  border-radius:50%;
-  background:rgba(255,255,255,.08);
-}
-.detail-emoji{font-size:40px;margin-bottom:10px;display:block;animation:float 3s ease infinite}
-.detail-theme-tag{
-  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  background:rgba(255,255,255,.2);
-  padding:4px 10px;border-radius:100px;
-  display:inline-block;margin-bottom:10px;
-}
-.detail-title{
-  font-family:'Syne',sans-serif;font-size:24px;font-weight:800;
-  line-height:1.15;margin-bottom:8px;
-}
-.detail-meta{
-  display:flex;gap:10px;flex-wrap:wrap;
-  font-size:12px;opacity:.85;
-}
-.detail-meta span{
+.meta-chip{
+  font-size:11px;color:var(--muted);
   display:flex;align-items:center;gap:4px;
-  background:rgba(255,255,255,.15);
-  padding:4px 10px;border-radius:100px;
 }
-.detail-body{padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
-@media(max-width:640px){.detail-body{grid-template-columns:1fr}}
-.detail-block{}
-.detail-block-title{
-  font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
-  color:var(--muted);margin-bottom:10px;
-  display:flex;align-items:center;gap:6px;
-}
-.detail-block-title::before{
-  content:'';width:3px;height:14px;border-radius:2px;
-  background:var(--detail-color,var(--blue));
-}
-.detail-text{font-size:14px;color:var(--text);line-height:1.65}
-.detail-rules-list{
-  list-style:none;display:flex;flex-direction:column;gap:7px;
-}
-.detail-rules-list li{
-  font-size:13px;color:var(--text);line-height:1.5;
-  display:flex;align-items:flex-start;gap:8px;
-  padding:8px 12px;
-  background:var(--surface2);
-  border-radius:var(--radius-sm);
-  border-left:3px solid var(--detail-color,var(--blue));
-}
-.detail-rules-list li::before{content:'→';color:var(--detail-color,var(--blue));font-weight:700;flex-shrink:0}
-.reward-box{
-  display:flex;gap:8px;flex-wrap:wrap;
-}
-.reward-item{
-  display:flex;align-items:center;gap:6px;
-  background:linear-gradient(135deg,#fffbea,#fff8d6);
-  border:1.5px solid var(--gold);
-  border-radius:var(--radius-sm);
-  padding:8px 14px;
-  font-size:13px;font-weight:600;color:#7a5c00;
-  flex:1;min-width:180px;
-}
-.close-btn{
-  position:absolute;top:16px;right:16px;
-  width:32px;height:32px;border-radius:8px;
-  background:rgba(255,255,255,.2);
-  border:none;cursor:pointer;
-  color:#fff;font-size:16px;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s;
-}
-.close-btn:hover{background:rgba(255,255,255,.35)}
+.meta-chip span{color:var(--subtle)}
 
-/* ─── EMPTY ──────────────────────────────────────── */
-.empty{
-  text-align:center;padding:60px 24px;
-  color:var(--muted);
-  animation:fadeInUp .4s ease;
+/* DETAIL PANEL */
+.detail-panel{
+  display:none;
+  margin-top:24px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow-md);
+  animation:slidePanel .25s ease;
 }
-.empty-icon{font-size:48px;display:block;margin-bottom:12px;opacity:.4}
-.empty p{font-size:15px}
-
-/* ─── RESSOURCES ─────────────────────────────────── */
-#res-panel{display:none}
-.res-filters{
-  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;
-}
-.res-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+.detail-panel.open{display:block}
+.detail-head{
+  background:var(--brand-dark);
+  color:#fff;
+  padding:20px 24px;
+  display:flex;align-items:flex-start;justify-content:space-between;
   gap:16px;
+}
+.detail-head-info{}
+.detail-head-name{
+  font-family:'Syne',sans-serif;
+  font-weight:700;font-size:20px;
+  line-height:1.2;margin-bottom:4px;
+}
+.detail-head-theme{
+  font-size:12px;color:rgba(255,255,255,.6);
+  font-weight:500;
+}
+.detail-close{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff;
+  width:32px;height:32px;border-radius:6px;
+  cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .15s;
+}
+.detail-close:hover{background:rgba(255,255,255,.2)}
+.detail-body{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.detail-section{}
+.detail-label{
+  font-size:10px;font-weight:700;
+  color:var(--subtle);
+  text-transform:uppercase;letter-spacing:.8px;
+  margin-bottom:6px;
+}
+.detail-value{
+  font-size:13px;color:var(--text);
+  line-height:1.6;
+}
+.detail-rewards{
+  grid-column:1/-1;
+  background:var(--gold-bg);
+  border:1px solid #E8D870;
+  border-radius:8px;
+  padding:14px 16px;
+}
+.detail-rewards .detail-label{color:#8A6D00}
+.detail-rewards .detail-value{color:#5C4900;font-size:13px}
+
+/* TEAM SECTION */
+.team-section{margin-bottom:40px;}
+.team-group-label{
+  font-size:11px;font-weight:700;
+  color:var(--subtle);
+  text-transform:uppercase;letter-spacing:.8px;
+  margin:20px 0 10px;
+}
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:10px;
+}
+.team-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+  animation:fadeUp .3s ease both;
+}
+.team-avatar{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px;color:#fff;
+  flex-shrink:0;letter-spacing:.5px;
+}
+.team-info{}
+.team-name{font-weight:600;font-size:13px;color:var(--text);line-height:1.2;}
+.team-role{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* STATS ROW */
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;
+  margin-bottom:28px;
+}
+.stat-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px 18px;
+  animation:fadeUp .3s ease both;
+}
+.stat-val{
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:26px;
+  color:var(--brand);line-height:1;
+}
+.stat-lbl{
+  font-size:11px;color:var(--muted);
+  margin-top:4px;font-weight:500;
+}
+
+/* RESSOURCES */
+.res-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:14px;
 }
 .res-card{
   background:var(--surface);
+  border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:0;
-  box-shadow:var(--shadow);
-  cursor:pointer;overflow:hidden;
-  transition:all .22s ease;
-  animation:cardEntrance .45s ease both;
-  border:1.5px solid transparent;
+  padding:16px 18px;
+  display:flex;align-items:flex-start;gap:14px;
+  animation:fadeUp .3s ease both;
+  transition:box-shadow .15s,transform .15s;
 }
-.res-card:hover{
-  box-shadow:var(--shadow-md);
-  transform:translateY(-3px);
-  border-color:var(--cat-color,var(--blue));
+.res-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.res-icon{
+  width:40px;height:40px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+  flex-shrink:0;
+  background:var(--surface-alt);
 }
-.res-card-top{
-  background:linear-gradient(135deg,var(--cat-color,var(--blue)),var(--cat-color2,var(--blue-light)));
-  padding:20px;
-  display:flex;align-items:center;gap:14px;
-  color:#fff;
-}
-.res-emoji{font-size:28px}
-.res-cat-tag{
-  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  background:rgba(255,255,255,.2);
-  padding:3px 9px;border-radius:100px;
-  margin-bottom:4px;display:inline-block;
-}
-.res-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
-.res-card-body{padding:18px 20px}
-.res-resume{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:14px}
-.res-points{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.res-points li{
-  font-size:12px;color:var(--text);
-  display:flex;align-items:flex-start;gap:6px;
-  line-height:1.4;
-}
-.res-points li::before{
-  content:'✓';
-  color:var(--cat-color,var(--c-epargne));
-  font-weight:700;flex-shrink:0;font-size:11px;margin-top:1px;
-}
-.res-accroche{
-  font-size:12px;font-style:italic;
-  color:var(--muted);
-  background:var(--surface2);
-  border-radius:var(--radius-sm);
-  padding:10px 14px;
-  border-left:3px solid var(--cat-color,var(--blue));
-  line-height:1.5;
-}
-
-/* ─── FOOTER ─────────────────────────────────────── */
-footer{
-  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
-  color:rgba(255,255,255,.6);
-  text-align:center;
-  padding:24px;
-  font-size:13px;
-}
-footer strong{color:#fff}
-
-/* ─── RESPONSIVE ─────────────────────────────────── */
-@media(max-width:768px){
-  .header-inner{padding:24px 16px 48px}
-  .hero-title{font-size:26px}
-  main{padding:24px 16px 48px}
-  .adc-grid{gap:8px}
-  .adc-card{min-width:160px}
-  .anim-grid{grid-template-columns:1fr}
-}
-/* ─── SCROLLBAR ──────────────────────────────────── */
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-
-/* ─── CHIP BADGE ─────────────────────────────────── */
-.count-chip{
+.res-info{flex:1;min-width:0;}
+.res-title{font-weight:600;font-size:13px;color:var(--text);line-height:1.3;margin-bottom:4px;}
+.res-cat{
   font-size:10px;font-weight:700;
-  background:var(--gold);color:var(--blue-dark);
-  padding:2px 7px;border-radius:100px;
+  text-transform:uppercase;letter-spacing:.6px;
+  color:var(--muted);margin-bottom:6px;
+}
+.res-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.res-link{
   display:inline-block;
-  animation:badgePop .4s ease both;
+  margin-top:10px;
+  font-size:12px;font-weight:600;
+  color:var(--brand);
+  text-decoration:none;
+  padding:4px 12px;
+  border:1px solid var(--brand);
+  border-radius:6px;
+  transition:background .15s,color .15s;
+}
+.res-link:hover{background:var(--brand);color:#fff}
+
+/* FOOTER */
+.footer{
+  background:var(--brand-dark);
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:20px 32px;
+  text-align:center;
+}
+.footer-text{
+  font-size:12px;color:rgba(255,255,255,.4);
+  line-height:1.6;
+}
+.footer-text strong{color:rgba(255,255,255,.65);font-weight:600;}
+
+/* HIDDEN */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .header{padding:0 16px}
+  .main{padding:20px 16px 40px}
+  .tabs-inner{padding:0 16px}
+  .header-stat{display:none}
+  .header-divider{display:none}
+  .detail-body{grid-template-columns:1fr}
+  .anim-grid{grid-template-columns:1fr}
+  .res-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ═══════════════════════════════════════════════════ -->
-<header>
+<header class="header">
   <div class="header-inner">
-    <div class="header-top">
-      <div class="brand">
-        <div class="brand-logo">LBP</div>
-        <div class="brand-text">
-          <div class="brand-name">La Banque Postale</div>
-          <div class="brand-sub">Espace CNMR · Animations commerciales</div>
-        </div>
-      </div>
-      <div class="header-badge">
-        <span class="header-badge-dot"></span>
-        Animé par Adil MAJBOUR
+    <div class="logo-block">
+      <div class="logo-badge">LBP</div>
+      <div class="logo-text">
+        <span class="logo-title">Espace CNMR</span>
+        <span class="logo-sub">La Banque Postale — Animations Commerciales</span>
       </div>
     </div>
-    <div class="header-hero">
-      <h1 class="hero-title">Portail <span>CNMR</span><br>Animations & Ressources</h1>
-      <p class="hero-sub">Retrouvez toutes vos animations commerciales, fiches produits et outils de vente en un seul endroit.</p>
+    <div class="header-meta">
+      <div class="header-stat">
+        <span class="header-stat-val" id="hdr-anims">52</span>
+        <span class="header-stat-lbl">Animations</span>
+      </div>
+      <div class="header-divider"></div>
+      <div class="header-stat">
+        <span class="header-stat-val" id="hdr-res">23</span>
+        <span class="header-stat-lbl">Ressources</span>
+      </div>
     </div>
-  </div>
-  <div class="header-wave">
-    <svg viewBox="0 0 1200 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,48 L0,24 Q150,0 300,20 Q450,40 600,18 Q750,0 900,22 Q1050,40 1200,16 L1200,48 Z" fill="#F2F1EC"/>
-    </svg>
   </div>
 </header>
 
-<!-- ═══ STATS ═════════════════════════════════════════════════════ -->
-<div class="stats-bar">
-  <div class="stats-grid" id="statsGrid"></div>
+<div class="tabs-bar">
+  <div class="tabs-inner">
+    <button class="tab-btn active" onclick="switchTab('animations',this)">Animations</button>
+    <button class="tab-btn" onclick="switchTab('ressources',this)">Ressources</button>
+    <button class="tab-btn" onclick="switchTab('equipe',this)">Equipe</button>
+  </div>
 </div>
 
-<!-- ═══ MAIN ══════════════════════════════════════════════════════ -->
-<main>
+<main class="main">
 
-  <!-- TEAM -->
-  <div class="team-section">
-    <div class="team-header">
+  <!-- ANIMATIONS TAB -->
+  <div class="tab-content active" id="tab-animations">
+    <div class="section-top">
       <div>
-        <div class="section-title">L'équipe CNMR</div>
-        <div class="section-sub">Animateurs de développement commercial</div>
+        <div class="section-title">Animations commerciales</div>
+        <div class="section-sub">Catalogue des animations disponibles pour les conseillers</div>
       </div>
-      <span class="team-label">🏆 Saison 2025</span>
+      <span class="count-badge" id="anim-count">52 animations</span>
     </div>
+    <div class="filters" id="theme-filters"></div>
+    <div class="detail-panel" id="detail-panel"></div>
+    <div class="anim-grid" id="anim-grid"></div>
+  </div>
 
-    <div class="leader-card">
-      <div class="leader-avatar">AM</div>
-      <div class="leader-info">
-        <div class="leader-name">Adil MAJBOUR</div>
-        <div class="leader-role">Responsable CNMR</div>
+  <!-- RESSOURCES TAB -->
+  <div class="tab-content" id="tab-ressources">
+    <div class="section-top">
+      <div>
+        <div class="section-title">Ressources</div>
+        <div class="section-sub">Documents, guides et supports pour les animations</div>
       </div>
-      <div class="leader-badge">👑 Responsable</div>
+      <span class="count-badge">23 ressources</span>
     </div>
-
-    <!-- Amadou + Marina -->
-    <div class="team-group">
-      <div class="team-group-title">Coordination &amp; Alternance</div>
-      <div class="adc-grid" id="coordGrid"></div>
-    </div>
-
-    <!-- ADCs princ -->
-    <div class="team-group">
-      <div class="team-group-title">ADCs — Secteur principal</div>
-      <div class="adc-grid" id="mainGrid"></div>
-    </div>
-
-    <!-- Châlons -->
-    <div class="team-group">
-      <div class="team-group-title">ADCs — Châlons</div>
-      <div class="adc-grid" id="chalonsGrid"></div>
-    </div>
+    <div class="res-grid" id="res-grid"></div>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs-row">
-    <button class="tab-btn active" onclick="setTab('anim',this)">
-      🎯 Animations
-      <span class="tab-badge" id="animTabBadge">52</span>
-    </button>
-    <button class="tab-btn" onclick="setTab('res',this)">
-      📚 Ressources
-      <span class="tab-badge" id="resTabBadge">23</span>
-    </button>
-  </div>
-
-  <!-- ── ANIMATIONS PANEL ─────────────────────────────────────── -->
-  <div id="anim-panel">
-    <div class="filters-row" id="themeFilters"></div>
-    <div class="filters-row" id="adcFilters"></div>
-    <div id="detail"></div>
-    <div class="anim-grid" id="animGrid"></div>
-  </div>
-
-  <!-- ── RESSOURCES PANEL ─────────────────────────────────────── -->
-  <div id="res-panel">
-    <div class="res-filters" id="resFilters"></div>
-    <div class="res-grid" id="resGrid"></div>
+  <!-- EQUIPE TAB -->
+  <div class="tab-content" id="tab-equipe">
+    <div class="section-top">
+      <div>
+        <div class="section-title">L'equipe CNMR</div>
+        <div class="section-sub">Animateurs et coordinateurs du reseau</div>
+      </div>
+    </div>
+    <div class="stats-row" id="stats-row"></div>
+    <div class="team-section" id="team-section"></div>
   </div>
 
 </main>
 
-<footer>
-  <strong>Espace CNMR — La Banque Postale</strong> · Saison 2025<br>
-  Responsable : Adil MAJBOUR · Coordination : Amadou NIANG · Alternante : Marina DEMOLIN
+<footer class="footer">
+  <div class="footer-text">
+    <strong>Espace CNMR — La Banque Postale</strong><br>
+    Usage interne — Animations commerciales reseau<br>
+    Mis a jour 2025
+  </div>
 </footer>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   DATA
-════════════════════════════════════════════════════════════════ */
-const THEME_COLORS = {
-  "Conquête client":      {c:"#3B82F6",c2:"#1D4ED8"},
-  "Fidélisation":         {c:"#8B5CF6",c2:"#6D28D9"},
-  "Épargne":              {c:"#10B981",c2:"#059669"},
-  "Assurance":            {c:"#F97316",c2:"#EA580C"},
-  "Crédit":               {c:"#EF4444",c2:"#DC2626"},
-  "Satisfaction client":  {c:"#EC4899",c2:"#DB2777"},
-  "Montée en compétences":{c:"#14B8A6",c2:"#0D9488"},
-  "Challenge collectif":  {c:"#F59E0B",c2:"#D97706"},
-  "Animation Ludique":    {c:"#A855F7",c2:"#7C3AED"},
-  "Événement spécial":    {c:"#06B6D4",c2:"#0891B2"},
+const THEMES = {
+  conquete:    { label:"Conquete",     color:"#2563EB" },
+  fidelisation:{ label:"Fidelisation", color:"#7C3AED" },
+  epargne:     { label:"Epargne",      color:"#059669" },
+  assurance:   { label:"Assurance",    color:"#EA580C" },
+  credit:      { label:"Credit",       color:"#DC2626" },
+  satisfaction:{ label:"Satisfaction", color:"#BE185D" },
+  competences: { label:"Competences",  color:"#0D9488" },
+  collectif:   { label:"Collectif",    color:"#D97706" },
+  ludique:     { label:"Ludique",      color:"#9333EA" },
+  evenement:   { label:"Evenement",    color:"#0891B2" },
 };
 
-const CAT_COLORS = {
-  "Fiches produits":  {c:"#10B981",c2:"#059669"},
-  "Guides de vente":  {c:"#3B82F6",c2:"#1D4ED8"},
-  "Fiches objections":{c:"#EF4444",c2:"#DC2626"},
-  "Scripts & Emails": {c:"#F97316",c2:"#EA580C"},
-};
-
-const ADCs = [
-  // coord
-  {id:"amadou",  name:"Amadou NIANG",         initials:"AN", role:"ADC Coordinateur",  group:"coord",  c:"#003189",c2:"#1a4aad"},
-  {id:"marina",  name:"Marina DEMOLIN",        initials:"MD", role:"Alternante ADC",    group:"coord",  c:"#06B6D4",c2:"#0891B2"},
-  // main
-  {id:"atika",   name:"Atika BACHIRI",         initials:"AB", role:"ADC",               group:"main",   c:"#8B5CF6",c2:"#6D28D9"},
-  {id:"magalie", name:"Magalie BARGES",        initials:"MB", role:"ADC",               group:"main",   c:"#EC4899",c2:"#DB2777"},
-  {id:"catherine",name:"Catherine PAPUT",      initials:"CP", role:"ADC",               group:"main",   c:"#3B82F6",c2:"#1D4ED8"},
-  {id:"delphine",name:"Delphine SAINTE BEUVE", initials:"DS", role:"ADC",               group:"main",   c:"#10B981",c2:"#059669"},
-  // chalons
-  {id:"maxence", name:"Maxence",               initials:"MX", role:"ADC Châlons",       group:"chalons",c:"#F97316",c2:"#EA580C"},
-  {id:"carine",  name:"Carine",                initials:"CA", role:"ADC Châlons",       group:"chalons",c:"#EF4444",c2:"#DC2626"},
-  {id:"laurette",name:"Laurette",              initials:"LA", role:"ADC Châlons",       group:"chalons",c:"#14B8A6",c2:"#0D9488"},
-  {id:"gregoire",name:"Grégoire",              initials:"GR", role:"ADC Châlons",       group:"chalons",c:"#F59E0B",c2:"#D97706"},
+const TEAM = [
+  { id:"amadou",    name:"Amadou NIANG",         initials:"AN", role:"Alternant ADC",  group:"coord",   c:"#003189" },
+  { id:"marina",    name:"Marina DEMOLIN",        initials:"MD", role:"Alternante ADC", group:"coord",   c:"#0284C7" },
+  { id:"atika",     name:"Atika BACHIRI",         initials:"AB", role:"ADC",            group:"main",    c:"#7C3AED" },
+  { id:"magalie",   name:"Magalie BARGES",        initials:"MB", role:"ADC",            group:"main",    c:"#DB2777" },
+  { id:"catherine", name:"Catherine PAPUT",       initials:"CP", role:"ADC",            group:"main",    c:"#2563EB" },
+  { id:"delphine",  name:"Delphine SAINTE BEUVE", initials:"DS", role:"ADC",            group:"main",    c:"#059669" },
+  { id:"maxence",   name:"Maxence",               initials:"MX", role:"ADC Chalons",    group:"chalons", c:"#D97706" },
+  { id:"carine",    name:"Carine",                initials:"CA", role:"ADC Chalons",    group:"chalons", c:"#DC2626" },
+  { id:"laurette",  name:"Laurette",              initials:"LA", role:"ADC Chalons",    group:"chalons", c:"#0D9488" },
+  { id:"gregoire",  name:"Gregoire",              initials:"GR", role:"ADC Chalons",    group:"chalons", c:"#B45309" },
 ];
 
-function adc(id){return ADCs.find(a=>a.id===id)||{initials:"?",name:"?",c:"#999",c2:"#666"}}
-
-const animations = [
-  /* ── ORIGINAL 28 ─────────────────────────────────────────── */
-  {id:1, emoji:"⚡",titre:"Le Sprint Commercial",       theme:"Conquête client",     adcId:"atika",    duree:"1 semaine",
-   objectif:"Augmenter massivement les prises de contact clients et les RDV fixés sur une courte période.",
-   importance:"La conquête client est le moteur n°1 de la croissance de l'agence.",
-   regles:"1 pt par appel abouti · 3 pts par RDV fixé. Décompte chaque vendredi à 17h.",
-   recompenses:"🥇 Bon cadeau 50€ · 🥈 After-work offert · 🥉 Accessoire bureau."},
-  {id:2, emoji:"🎤",titre:"Mon Pitch en 2 minutes",     theme:"Conquête client",     adcId:"delphine", duree:"1 journée",
-   objectif:"Affûter le discours commercial de chaque conseiller pour rendre l'approche client plus percutante.",
-   importance:"Un bon pitch fait la différence entre un RDV et un refus.",
-   regles:"Pitch de 2 min sur un produit ou situation client. Vote anonyme.",
-   recompenses:"🥇 Bon cadeau 20€ + référent pitch du mois."},
-  {id:3, emoji:"🎯",titre:"Chasseur de Leads",           theme:"Conquête client",     adcId:"magalie",  duree:"2 semaines",
-   objectif:"Identifier et qualifier un maximum de leads froids dans le portefeuille non actif.",
-   importance:"Le portefeuille endormi est une mine d'or inexploitée.",
-   regles:"Lead qualifié = 2 pts. RDV généré depuis un lead = 5 pts.",
-   recompenses:"🥇 Bon cadeau 40€. Équipe : bonus collectif surprise."},
-  {id:4, emoji:"📞",titre:"Semaine des Appels Sortants",  theme:"Conquête client",     adcId:"catherine",duree:"1 semaine",
-   objectif:"Créer un réflexe d'appels sortants quotidiens et mesurer l'impact direct sur le flux de RDV.",
-   importance:"Les conseillers proactifs génèrent 3× plus de RDV.",
-   regles:"Objectif : 10 appels sortants minimum/jour. Classement mis à jour chaque matin.",
-   recompenses:"🥇 Journée off + bon cadeau 30€."},
-  {id:5, emoji:"🔄",titre:"Réactiver & Reconquérir",    theme:"Fidélisation",         adcId:"catherine",duree:"2 semaines",
-   objectif:"Relancer les clients inactifs ou en risque de départ.",
-   importance:"Fidéliser coûte 5× moins cher que conquérir.",
-   regles:"Contact abouti=1pt · RDV planifié=3pts · Client réactivé=7pts.",
-   recompenses:"🥇 Bon cadeau 35€. Bonus collectif si 20+ clients réactivés."},
-  {id:6, emoji:"🔗",titre:"Multi-Détention Challenge",   theme:"Fidélisation",         adcId:"delphine", duree:"1 mois",
-   objectif:"Augmenter le taux de multi-détention en proposant un 2e ou 3e produit.",
-   importance:"Un client multi-équipé est 4× moins susceptible de partir.",
-   regles:"Nouveau produit ouvert à un client déjà équipé = 3 pts.",
-   recompenses:"🥇 Bon cadeau 45€ + trophée."},
-  {id:7, emoji:"🎂",titre:"Opération Anniversaire",      theme:"Fidélisation",         adcId:"atika",    duree:"1 mois",
-   objectif:"Contacter les clients dont c'est l'anniversaire pour créer un moment chaleureux.",
-   importance:"Un appel d'anniversaire est inattendu et mémorable.",
-   regles:"Appel=1pt · Bilan réalisé=3pts · Nouveau produit=5pts.",
-   recompenses:"🥇 Bon cadeau 25€ + mention spéciale."},
-  {id:8, emoji:"💰",titre:"Challenge Épargne de Mai",    theme:"Épargne",              adcId:"magalie",  duree:"1 mois",
-   objectif:"Accroître la collecte sur les produits d'épargne en ciblant les clients sous-équipés.",
-   importance:"L'épargne est un pilier de la relation bancaire durable.",
-   regles:"Livret A=1pt · LDD=2pts · PEL=3pts · Assurance-vie=5pts.",
-   recompenses:"🥇 Télétravail bonus + carte cadeau 30€."},
-  {id:9, emoji:"🏗️",titre:"Épargne Projet : Détecte & Place",theme:"Épargne",          adcId:"atika",    duree:"2 semaines",
-   objectif:"Identifier les projets de vie des clients et proposer le produit d'épargne adapté.",
-   importance:"Un client qui épargne pour un projet reste dans la banque.",
-   regles:"Projet détecté=1pt · Produit ouvert=4pts.",
-   recompenses:"🥇 Bon cadeau 35€."},
-  {id:10,emoji:"⚔️",titre:"Battle Épargne",              theme:"Épargne",              adcId:"catherine",duree:"3 semaines",
-   objectif:"Créer une émulation entre conseillers avec un format bracket compétitif.",
-   importance:"La compétition saine stimule la performance.",
-   regles:"4 duels sem.1 · 2 demi-finales sem.2 · Grande finale sem.3.",
-   recompenses:"🥇 Champion : bon cadeau 60€ + trophée."},
-  {id:11,emoji:"🛡️",titre:"Tournoi Assurance",           theme:"Assurance",            adcId:"atika",    duree:"3 semaines",
-   objectif:"Développer les ventes d'assurance auprès de la clientèle existante.",
-   importance:"L'assurance renforce la multi-détention et protège le client.",
-   regles:"Poules de 2. Celui avec le plus de contrats avance. Finale sem.3.",
-   recompenses:"🥇 Trophée + bon cadeau 80€. 🥈 Bon cadeau 40€."},
-  {id:12,emoji:"🔒",titre:"Semaine 100% Assurance",      theme:"Assurance",            adcId:"magalie",  duree:"1 semaine",
-   objectif:"Intégrer systématiquement l'assurance dans chaque entretien client.",
-   importance:"L'assurance est trop souvent oubliée. Une semaine dédiée crée le réflexe.",
-   regles:"Entretien avec mention assurance=1pt · Contrat signé=5pts.",
-   recompenses:"🥇 Bon cadeau 35€. Équipe à 100%: bonus collectif."},
-  {id:13,emoji:"❤️",titre:"Opération Prévoyance",        theme:"Assurance",            adcId:"delphine", duree:"2 semaines",
-   objectif:"Sensibiliser les clients aux risques et augmenter les souscriptions prévoyance.",
-   importance:"La prévoyance est le sujet le plus impactant.",
-   regles:"Entretien prévoyance=2pts · Contrat souscrit=6pts.",
-   recompenses:"🥇 Bon cadeau 40€ + formation avancée. Équipe : journée cohésion."},
-  {id:14,emoji:"🏠",titre:"Défi Crédit 30 jours",        theme:"Crédit",               adcId:"magalie",  duree:"1 mois",
-   objectif:"Booster les dossiers de crédit immobilier et consommation instruits et financés.",
-   importance:"Le crédit est un moment clé de la vie du client.",
-   regles:"Dossier instruit=2pts · Financé=5pts · Bonus ×2 pour crédit immo.",
-   recompenses:"🥇 Journée off + bon cadeau 60€. Repas d'équipe."},
-  {id:15,emoji:"🛒",titre:"Détection Crédit Conso",      theme:"Crédit",               adcId:"catherine",duree:"2 semaines",
-   objectif:"Détecter et proposer le crédit conso lors des entretiens.",
-   importance:"Le crédit conso est sous-exploité.",
-   regles:"Besoin détecté=1pt · Instruit=3pts · Financé=7pts.",
-   recompenses:"🥇 Bon cadeau 40€. Top détecteur : titre + mention reporting."},
-  {id:16,emoji:"🏁",titre:"Race to 10 — Crédits",        theme:"Crédit",               adcId:"atika",    duree:"1 mois",
-   objectif:"Le premier conseiller à 10 dossiers instruits remporte le défi.",
-   importance:"Le format course crée une tension positive permanente.",
-   regles:"Compteur public en agence. Dossier instruit=+1. Arbitrage ADC.",
-   recompenses:"🥇 Premier à 10 : bon cadeau 70€ + formation au choix. 🥈 Bon cadeau 30€."},
-  {id:17,emoji:"⭐",titre:"Opération Satisfaction +",    theme:"Satisfaction client",  adcId:"delphine", duree:"2 semaines",
-   objectif:"Améliorer les scores NPS en encourageant des comportements orientés expérience client.",
-   importance:"Une agence avec un haut NPS attire et retient naturellement les clients.",
-   regles:"Suivi score hebdomadaire. Partage d'un geste remarquable en briefing.",
-   recompenses:"🥇 Tableau d'honneur + bon cadeau 25€. Bonus collectif si NPS +5pts."},
-  {id:18,emoji:"🌟",titre:"Le Geste Wow",                theme:"Satisfaction client",  adcId:"atika",    duree:"1 mois",
-   objectif:"Encourager au moins un geste inattendu par semaine créant une expérience mémorable.",
-   importance:"Les clients se souviennent des émotions, pas des transactions.",
-   regles:"Geste documenté=3pts. Vote équipe chaque semaine.",
-   recompenses:"🥇 Geste de la semaine : carte à gratter. Top du mois : bon cadeau 30€."},
-  {id:19,emoji:"🎖️",titre:"Zéro Réclamation",           theme:"Satisfaction client",  adcId:"magalie",  duree:"1 mois",
-   objectif:"Réduire les réclamations en adoptant des gestes préventifs au quotidien.",
-   importance:"Chaque réclamation coûte du temps et abîme la relation.",
-   regles:"Bilan hebdo. Semaine sans réclamation=bonus collectif.",
-   recompenses:"Semaine sans réclamation : 1 crédit bonus. Mois : sortie équipe."},
-  {id:20,emoji:"❓",titre:"Quiz Produit Express",        theme:"Montée en compétences",adcId:"catherine",duree:"30 min",
-   objectif:"Renforcer la connaissance produits de façon ludique et mémorable.",
-   importance:"Un conseiller bien formé inspire confiance.",
-   regles:"10 questions produits. 30 secondes/question. 1 pt par bonne réponse.",
-   recompenses:"🥇 Cadeau mystère. Tous : bon café offert."},
-  {id:21,emoji:"🥊",titre:"L'Atelier Objection",         theme:"Montée en compétences",adcId:"delphine", duree:"1h30",
-   objectif:"Entraîner les conseillers à répondre aux 10 objections les plus fréquentes.",
-   importance:"Les objections mal gérées font rater des ventes.",
-   regles:"Jeu de rôle en binôme. Rotation. Feedback ADC.",
-   recompenses:"Meilleure réponse : bon cadeau 15€. Tous : fiche récap plastifiée."},
-  {id:22,emoji:"🔁",titre:"Je Te Forme, Tu Me Formes",  theme:"Montée en compétences",adcId:"atika",    duree:"1 mois",
-   objectif:"Chaque conseiller devient formateur d'un collègue.",
-   importance:"Enseigner est la meilleure façon d'apprendre.",
-   regles:"Mini-formation de 15 min. Évaluation par l'apprenant.",
-   recompenses:"Meilleure mini-formation : bon cadeau 20€. Tous : attestation."},
-  {id:23,emoji:"📂",titre:"Le Cas Client de la Semaine", theme:"Montée en compétences",adcId:"magalie",  duree:"Récurrent",
-   objectif:"Analyser chaque semaine un cas client réel ou fictif.",
-   importance:"Un conseiller qui a 'déjà vu' le cas est plus efficace.",
-   regles:"Cas présenté chaque lundi. Chaque conseiller propose sa solution. Discussion collective.",
-   recompenses:"Meilleure analyse : mention spéciale. Cumul mensuel : bon cadeau 20€."},
-  {id:24,emoji:"🤝",titre:"Objectif Commun : On Gagne Ensemble",theme:"Challenge collectif",adcId:"catherine",duree:"1 mois",
-   objectif:"Fédérer toute l'équipe autour d'un objectif commercial collectif unique.",
-   importance:"Un objectif collectif crée de l'entraide.",
-   regles:"Thermomètre visible en agence. Point quotidien 5 min.",
-   recompenses:"Objectif atteint : sortie équipe. Dépassé de 10% : budget doublé."},
-  {id:25,emoji:"🎨",titre:"La Semaine Thématique",       theme:"Challenge collectif",  adcId:"delphine", duree:"1 semaine",
-   objectif:"Concentrer toute l'énergie sur un seul thème pendant 5 jours.",
-   importance:"La focalisation produit des résultats.",
-   regles:"Thème choisi en avance. Score collectif mis à jour chaque soir.",
-   recompenses:"Objectif collectif : déjeuner payé. Meilleur score : bon cadeau 30€."},
-  {id:26,emoji:"🏆",titre:"Le Grand Prix CNMR",          theme:"Challenge collectif",  adcId:"atika",    duree:"1 trimestre",
-   objectif:"Animation phare du trimestre : classement général combinant tous les indicateurs clés.",
-   importance:"Un challenge longue durée donne du sens à la performance quotidienne.",
-   regles:"Score composite : RDV 30% + Produits 30% + Satisfaction 20% + Crédit/Épargne 20%.",
-   recompenses:"🥇 Voyage/week-end 200€. 🥈 Bon cadeau 80€. 🥉 Bon cadeau 40€."},
-  {id:27,emoji:"🔐",titre:"Escape Room Produit",         theme:"Challenge collectif",  adcId:"magalie",  duree:"1h",
-   objectif:"Faire résoudre à l'équipe des énigmes basées sur les produits LBP.",
-   importance:"Apprendre en s'amusant renforce compétences et cohésion.",
-   regles:"Équipes de 3-4. Chrono. Gagne celui qui finit premier.",
-   recompenses:"Équipe gagnante : bon cadeau 20€/personne. Tous : snacks offerts."},
-  {id:28,emoji:"👥",titre:"Parrainage Interne",          theme:"Challenge collectif",  adcId:"catherine",duree:"1 mois",
-   objectif:"Chaque conseiller expérimenté parraine un junior avec des objectifs communs.",
-   importance:"Le parrainage crée une transmission naturelle des bonnes pratiques.",
-   regles:"Binômes définis par l'ADC. Objectif partagé. Bilan mensuel.",
-   recompenses:"Binôme ayant atteint : bon cadeau 25€ chacun. Meilleur binôme : dîner offert."},
-
-  /* ── NOUVELLES ANIMATIONS LUDIQUES ──────────────────────────── */
-  {id:29,emoji:"🎴",titre:"Mille Bornes",                theme:"Animation Ludique",   adcId:"maxence",  duree:"1h30",
-   objectif:"Transformer un jeu de cartes culte en challenge commercial : chaque 'borne' représente un objectif atteint.",
-   importance:"Le jeu détendu libère la créativité et soude l'équipe.",
-   regles:"Chaque conseiller joue sa 'main commerciale'. Bornes = actions réalisées (appels, RDV, produits). Cartes 'accident' = obstacles du mois.",
-   recompenses:"🥇 Bon cadeau 30€ + titre 'Pilote du mois'. Tous : goûter partagé."},
-  {id:30,emoji:"🎮",titre:"Mario Kart Challenge",        theme:"Animation Ludique",   adcId:"carine",   duree:"2h",
-   objectif:"Animer une session Mario Kart pour célébrer les résultats du mois et renforcer la cohésion.",
-   importance:"Récompenser les performances autrement que par l'argent crée des souvenirs durables.",
-   regles:"Top 3 du classement mensuel accède à la finale. Tournoi en équipes. Arbitrage neutre.",
-   recompenses:"🥇 Trophée personnalisé + bon cadeau 40€. Podium : afterwork offert."},
-  {id:31,emoji:"⚓",titre:"Bataille Navale Commerciale", theme:"Animation Ludique",   adcId:"laurette", duree:"1h",
-   objectif:"Chaque conseiller 'cache' ses objectifs et tente de 'couler' ses collègues en réalisant plus qu'eux.",
-   importance:"La surprise du classement final maintient la motivation jusqu'au bout.",
-   regles:"Objectifs secrets. Révélation hebdo. Celui qui 'coule' le plus de bateaux gagne.",
-   recompenses:"🥇 Bon cadeau 35€ + fanion 'Amiral du mois'. 🥈 Bon cadeau 15€."},
-  {id:32,emoji:"🧺",titre:"Pèse en Filet Garni",        theme:"Animation Ludique",   adcId:"gregoire", duree:"1 mois",
-   objectif:"Chaque produit ouvert ajoute un 'article' au panier. L'équipe avec le filet le plus garni gagne.",
-   importance:"Visualiser les ventes comme un panier rempli rend l'objectif concret et motivant.",
-   regles:"Grille produits affichée. Chaque ouverture = 1 article dessiné. Comptage public chaque semaine.",
-   recompenses:"🥇 Équipe gagnante : panier garni réel 🧺. Meilleur individuel : bon cadeau 25€."},
-  {id:33,emoji:"🔴",titre:"Puissance 4 des Ventes",     theme:"Animation Ludique",   adcId:"marina",   duree:"1 mois",
-   objectif:"Aligner 4 produits de catégories différentes dans le portefeuille d'un même client.",
-   importance:"L'alignement de 4 produits = client ultra-fidèle et résistant à la concurrence.",
-   regles:"Tableau Puissance 4 géant en agence. Chaque 'pion' = produit ouvert. Alignement = victoire.",
-   recompenses:"🥇 Premier à aligner 4 : bon cadeau 50€. Tous : pizza party si objectif collectif atteint."},
-  {id:34,emoji:"🃏",titre:"Jeu des Paires Produits",    theme:"Animation Ludique",   adcId:"atika",    duree:"30 min",
-   objectif:"Retrouver les paires entre un produit et sa description/accroche commerciale.",
-   importance:"Mémoriser les accroches produits de façon ludique.",
-   regles:"32 cartes retournées. Chaque bonne paire = 1 pt. Le plus rapide gagne. Format éliminatoire.",
-   recompenses:"🥇 Champion : bon café + carte cadeau 15€. Tous : fiche produit illustrée."},
-  {id:35,emoji:"🎰",titre:"Le Jeu du Pendule",          theme:"Animation Ludique",   adcId:"magalie",  duree:"45 min",
-   objectif:"Deviner un produit ou une technique de vente décrite par l'ADC mot par mot.",
-   importance:"Apprendre le vocabulaire commercial de manière mémorable.",
-   regles:"L'ADC donne des indices un à un. Celui qui devine en moins d'indices gagne. Tournoi par équipes.",
-   recompenses:"🥇 Bon cadeau 20€. Équipe gagnante : apéro offert."},
-  {id:36,emoji:"🔤",titre:"Le Rébus Commercial",        theme:"Animation Ludique",   adcId:"catherine",duree:"1h",
-   objectif:"Résoudre des rébus dont les solutions sont des termes commerciaux ou noms de produits.",
-   importance:"L'association image/mot ancre les termes dans la mémoire long terme.",
-   regles:"10 rébus préparés par l'ADC. 1 pt par bonne réponse. Chrono de 30 sec/rébus.",
-   recompenses:"🥇 Maître du Rébus : bon cadeau 20€. Tous : fiche vocabulaire illustrée."},
-  {id:37,emoji:"🎾",titre:"Roland Garros des Conseillers",theme:"Animation Ludique",  adcId:"delphine", duree:"3 semaines",
-   objectif:"Format tournoi en 3 tours (1er tour · demi-finale · finale) calqué sur Roland Garros.",
-   importance:"Le format éliminatoire crée une tension sportive positive et de l'émulation.",
-   regles:"Matchs en duel hebdo sur critère défini (RDV, appels, produits). Tirage au sort. Grand slam si top sur tous les critères.",
-   recompenses:"🥇 Vainqueur du Grand Chelem : bon cadeau 70€ + trophée Roland Garros. 🥈 40€."},
-  {id:38,emoji:"💣",titre:"La Bomba !",                 theme:"Animation Ludique",   adcId:"maxence",  duree:"30 min",
-   objectif:"Quiz chrono : chaque mauvaise réponse 'allume' une mèche. Éviter l'explosion !",
-   importance:"La pression du temps stimule la mémorisation rapide.",
-   regles:"Question produit → réponse en 10 sec. Mauvaise réponse = mèche. 5 mauvaises = explosion (éliminé). Dernier debout gagne.",
-   recompenses:"🥇 Survivant final : bon cadeau 25€. Tous : snack offert."},
-  {id:39,emoji:"⚽",titre:"Coupe du Monde LBP",         theme:"Animation Ludique",   adcId:"carine",   duree:"1 mois",
-   objectif:"Tournoi de groupes puis phases finales calqué sur la Coupe du Monde.",
-   importance:"Tout le monde connaît le format — l'adhésion est immédiate.",
-   regles:"Groupes de 4 tirés au sort. 2 qualifiés par groupe. 1/4, 1/2, Finale. Critère : meilleur score produits.",
-   recompenses:"🥇 Champion du Monde : bon cadeau 80€ + maillot équipe. 🥈 50€. 🥉 25€."},
-  {id:40,emoji:"🎱",titre:"Bingo / Loto des Ventes",   theme:"Animation Ludique",   adcId:"laurette", duree:"1 mois",
-   objectif:"Chaque ouverture de produit fait 'tirer' une boule. Le premier à compléter sa grille gagne.",
-   importance:"Le hasard contrôlé motive même les conseillers moins compétitifs.",
-   regles:"Grille 5×5 personnalisée par conseiller. Chaque vente = tirage. Quine et carton complet récompensés.",
-   recompenses:"🎰 Quine : bon cadeau 20€. Carton : bon cadeau 50€ + titre."},
-  {id:41,emoji:"🎵",titre:"Blind Test & Micro d'Or",   theme:"Animation Ludique",   adcId:"gregoire", duree:"2h",
-   objectif:"Blind test musical + questions sur les produits LBP façon 'N'oubliez pas les paroles'.",
-   importance:"Mêler culture pop et formation rend l'apprentissage irrésistible.",
-   regles:"3 manches : Blind Test musical · Questions produits · Karaoké commercial. Points par manche.",
-   recompenses:"🎤 Micro d'Or : bon cadeau 35€ + micro trophée. MVP : mention dans le reporting."},
-  {id:42,emoji:"🎯",titre:"Les Fléchettes — Visez Juste !",theme:"Animation Ludique",adcId:"marina",  duree:"1h",
-   objectif:"Chaque action commerciale réalisée donne droit à un lancer. La cible centrale = bonus maximum.",
-   importance:"La récompense aléatoire (variable ratio) est le mécanisme de motivation le plus puissant.",
-   regles:"Tableau de fléchettes. Zones colorées = niveaux de récompense. 1 lancer par objectif atteint dans la semaine.",
-   recompenses:"🎯 Centre : bon cadeau 30€. Zone 2 : 15€. Zone 3 : café offert."},
-  {id:43,emoji:"🍔",titre:"Burger Quiz Commercial",     theme:"Animation Ludique",   adcId:"atika",    duree:"2h",
-   objectif:"Format Burger Quiz avec 4 équipes, boutons et questions sur les produits, techniques et actualité LBP.",
-   importance:"Le format TV connu lève les inhibitions et maximise la participation.",
-   regles:"4 équipes. Buzzer pour répondre. Manches : Produits · Situations clients · Chiffres clés · Double ou quitte.",
-   recompenses:"🏆 Équipe championne : burger géant offert + bon cadeau 20€/personne."},
-  {id:44,emoji:"🔍",titre:"Jeu des 7 Erreurs",         theme:"Animation Ludique",   adcId:"magalie",  duree:"45 min",
-   objectif:"Trouver les 7 erreurs dans un entretien commercial ou une fiche produit reconstituée.",
-   importance:"Identifier les erreurs des autres ancre les bonnes pratiques.",
-   regles:"Vidéo ou script d'entretien avec 7 erreurs volontaires. Chrono de 5 min. Celui qui trouve le plus gagne.",
-   recompenses:"🥇 Détective commercial : bon cadeau 20€. Podium : fiche 'les erreurs à éviter' collector."},
-  {id:45,emoji:"🎙️",titre:"N'oubliez pas les Paroles !",theme:"Animation Ludique",  adcId:"catherine",duree:"1h",
-   objectif:"Connaître les accroches, scripts et argumentaires par cœur — version karaoké commercial.",
-   importance:"Maîtriser ses scripts libère l'attention pour écouter le client.",
-   regles:"L'ADC lit un script en s'arrêtant. Le conseiller doit compléter. Points si mot exact. Bonus si ton juste.",
-   recompenses:"🎤 Champion du script : bon cadeau 25€. Tous : livret scripts collector."},
-  {id:46,emoji:"👨",titre:"La Moustache Mystérieuse",  theme:"Événement spécial",   adcId:"delphine", duree:"Novembre",
-   objectif:"Animation Movember : chaque conseiller affiche une moustache (vraie ou accessoire) et réalise des ventes 'Prévoyance' pendant tout le mois.",
-   importance:"Lier une cause (santé masculine) à une action commerciale donne du sens et booste la motivation.",
-   regles:"Prévoyance ouverte = 2pts. Photo moustache partagée en réunion = 1pt. Meilleur déguisement : vote équipe.",
-   recompenses:"🥇 Grand Moustachu : bon cadeau 40€ + châpeau. Équipe : don caritatif LGT + apéro."},
-  {id:47,emoji:"🃏",titre:"UNO des Objectifs",         theme:"Animation Ludique",   adcId:"maxence",  duree:"1h",
-   objectif:"Chaque carte UNO représente un objectif ou une action à réaliser cette semaine.",
-   importance:"Le hasard des cartes crée un sentiment d'équité et de nouveauté.",
-   regles:"Distribution de 7 cartes objectifs. Le premier à 'vider sa main' (tous ses objectifs atteints) gagne. Cartes +2 : objectif bonus.",
-   recompenses:"🃏 Premier UNO : bon cadeau 20€. Tous : goûter en équipe."},
-  {id:48,emoji:"📝",titre:"Mot Mystère Produits",      theme:"Animation Ludique",   adcId:"carine",   duree:"30 min",
-   objectif:"Trouver le mot mystère (nom de produit, technique) caché dans une grille de lettres.",
-   importance:"La recherche active améliore la mémorisation des termes techniques.",
-   regles:"Grille 15×15 avec 10 mots cachés liés aux produits LBP. Chrono 10 min. Le plus de mots trouvés gagne.",
-   recompenses:"🥇 Champion des mots : bon cadeau 15€ + stylo collector. Podium : fiche produit illustrée."},
-  {id:49,emoji:"🌀",titre:"Kaleido Quoi !",            theme:"Animation Ludique",   adcId:"laurette", duree:"1h30",
-   objectif:"Animation créative où chaque conseiller 'réassemble' des éléments d'une situation client pour trouver la meilleure solution.",
-   importance:"La pensée latérale améliore la capacité à s'adapter aux situations complexes.",
-   regles:"Situations clients découpées en fragments. Reconstituer la situation + proposer la solution optimale. Vote collectif.",
-   recompenses:"🥇 Meilleur architecte client : bon cadeau 25€. Équipe : atelier cohésion offert."},
-  {id:50,emoji:"💜",titre:"Journée de la Femme",       theme:"Événement spécial",   adcId:"gregoire", duree:"8 Mars",
-   objectif:"Célébrer les collaboratrices et porter un focus sur la clientèle féminine avec des approches adaptées.",
-   importance:"La diversité et l'inclusion sont des valeurs LBP. Valoriser cela renforce la cohésion.",
-   regles:"Actions dédiées clientèle féminine comptent double ce jour. Animation interne : quiz parité + débat. Décoration agence.",
-   recompenses:"🌸 Toute l'équipe : bouquet offert + déjeuner spécial. Meilleure action : mise en avant CNMR."},
-  {id:51,emoji:"🎓",titre:"Question pour un Champion",  theme:"Animation Ludique",  adcId:"marina",   duree:"1h",
-   objectif:"Quiz éliminatoire façon TV sur les produits, réglementation et techniques commerciales.",
-   importance:"Le format compétitif et reconnu crée une émulation immédiate.",
-   regles:"Questions de 3 niveaux (Bronze · Argent · Or). 1 erreur = retour au niveau précédent. Podium final.",
-   recompenses:"🏆 Champion : bon cadeau 50€ + trophy. 🥈 25€. 🥉 10€. Tous : diplôme humoristique."},
-  {id:52,emoji:"📸",titre:"Photo Mystère — La Rentrée CNMR",theme:"Challenge collectif",adcId:"atika", duree:"Septembre",
-   objectif:"Chaque conseiller présente une photo mystère de son été liée à un produit ou situation commerciale. L'équipe doit deviner le lien !",
-   importance:"La rentrée doit être dynamique et fédératrice. Ce format brise la glace et réactive la motivation.",
-   regles:"5 min de présentation par conseiller. Vote pour la photo la plus créative et le lien le plus pertinent.",
-   recompenses:"🥇 Photo la plus créative : bon cadeau 30€. Tous : café d'accueil de rentrée offert."},
+const STATS = [
+  { val:52,  lbl:"Animations" },
+  { val:23,  lbl:"Ressources" },
+  { val:10,  lbl:"Membres equipe" },
+  { val:10,  lbl:"Categories" },
 ];
 
-const ressources = [
-  {id:"r1",cat:"Fiches produits",emoji:"💳",titre:"Livret A",
-   resume:"Produit d'épargne réglementé le plus connu de France. Taux fixé par l'État, disponibilité immédiate, exonération fiscale totale.",
-   points:["Taux réglementé et garanti par l'État","Disponibilité immédiate : retraits sans délai","Plafond : 22 950 € pour un particulier","Exonéré d'impôt et de prélèvements sociaux","Ouverture dès 1 €"],
-   accroche:"'Votre épargne est disponible à tout moment et totalement défiscalisée — c'est la sécurité absolue.'"},
-  {id:"r2",cat:"Fiches produits",emoji:"🌱",titre:"LDD Solidaire",
-   resume:"Finance les PME et la transition énergétique. Mêmes avantages fiscaux que le Livret A.",
-   points:["Taux identique au Livret A","Plafond : 12 000 €","Financement de l'économie verte","Exonéré d'impôt","Compatible avec Livret A"],
-   accroche:"'En faisant fructifier votre épargne, vous participez concrètement à la transition écologique.'"},
-  {id:"r3",cat:"Fiches produits",emoji:"🏡",titre:"PEL – Plan Épargne Logement",
-   resume:"Permet de se constituer une épargne en vue d'un projet immobilier avec un taux garanti.",
-   points:["Taux garanti à l'ouverture","Durée : 4 ans minimum","Versements réguliers obligatoires","Droit à prêt immobilier associé","Plafond : 61 200 €"],
-   accroche:"'Vous préparez votre achat immobilier avec un taux bloqué dès aujourd'hui.'"},
-  {id:"r4",cat:"Fiches produits",emoji:"📈",titre:"Assurance-Vie",
-   resume:"Produit d'épargne moyen/long terme alliant rendement, fiscalité avantageuse et transmission de patrimoine.",
-   points:["Fonds euros sécurisés + unités de compte","Fiscalité allégée après 8 ans","Transmission hors succession jusqu'à 152 500 €","Disponibilité des fonds possible","Adapté à tous les projets de vie"],
-   accroche:"'C'est l'outil le plus complet pour faire travailler votre épargne et protéger vos proches.'"},
-  {id:"r5",cat:"Fiches produits",emoji:"🛡️",titre:"Assurance Habitation",
-   resume:"Couverture multirisque habitation protégeant le logement et les biens contre les sinistres courants.",
-   points:["Incendie, dégâts des eaux, vol","Responsabilité civile incluse","Assistance 24h/24","Formules modulables","Souscription rapide en agence"],
-   accroche:"'Un sinistre peut arriver à tout moment — être bien couvert, c'est avoir l'esprit libre.'"},
-  {id:"r6",cat:"Fiches produits",emoji:"🚗",titre:"Assurance Auto",
-   resume:"Assurance auto adaptée à tous les profils, de la couverture minimale au tous risques.",
-   points:["Formules au tiers, intermédiaire, tous risques","Assistance 0 km","Protection du conducteur","Bonus/malus transparent","Gestion des sinistres simplifiée"],
-   accroche:"'Votre véhicule est au cœur de votre quotidien — protégez-le avec une formule taillée pour vous.'"},
-  {id:"r7",cat:"Fiches produits",emoji:"❤️",titre:"Prévoyance",
-   resume:"Couvre les risques liés à la vie : décès, invalidité, incapacité de travail, dépendance.",
-   points:["Capital décès versé aux bénéficiaires","Indemnités journalières en cas d'arrêt","Rente invalidité","Garantie dépendance","Déductible des impôts dans certains cas"],
-   accroche:"'Si demain vous ne pouvez plus travailler, votre famille sera protégée.'"},
-  {id:"r8",cat:"Fiches produits",emoji:"🏦",titre:"Crédit Immobilier",
-   resume:"Financement de l'acquisition d'un bien immobilier (résidence principale, secondaire ou investissement locatif).",
-   points:["Taux fixe ou variable","Durée jusqu'à 25 ans","Assurance emprunteur incluse","Modulation des échéances possible","Accompagnement dédié de A à Z"],
-   accroche:"'Votre projet immobilier est souvent le plus grand de votre vie — nous vous accompagnons à chaque étape.'"},
-  {id:"r9",cat:"Guides de vente",emoji:"🗺️",titre:"La méthode SONCASE",
-   resume:"Outil clé pour identifier les motivations d'achat d'un client et adapter son discours.",
-   points:["S = Sécurité : rassurer, garantir","O = Orgueil : valoriser, personnaliser","N = Nouveauté : innover, modernité","C = Confort : simplicité, praticité","A = Argent : rentabilité, économies","S = Sympathie : relation, confiance","E = Environnement : éthique, durable"],
-   accroche:"Écoute le client 80% du temps. Identifie son moteur principal AVANT de proposer."},
-  {id:"r10",cat:"Guides de vente",emoji:"🔄",titre:"Cycle de vente en 5 étapes",
-   resume:"Structure universelle pour conduire un entretien commercial de la prise de contact à la conclusion.",
-   points:["1. Accueil & mise en confiance (2 min)","2. Découverte des besoins (5-10 min)","3. Présentation de la solution (5 min)","4. Traitement des objections (3-5 min)","5. Conclusion & engagement (2 min)"],
-   accroche:"Ne jamais sauter l'étape découverte. Un client qui parle achète plus facilement."},
-  {id:"r11",cat:"Guides de vente",emoji:"🎯",titre:"Détection multi-équipement",
-   resume:"Technique pour identifier systématiquement les besoins complémentaires lors de chaque entretien.",
-   points:["Poser la question bilan à chaque RDV","Cartographier les produits détenus","Identifier les 'trous' dans l'équipement","Proposer 1 produit complémentaire par entretien","Tracer la proposition en CRM même si refus"],
-   accroche:"'Je vois que vous n'avez pas encore… avez-vous pensé à couvrir ce risque ?'"},
-  {id:"r12",cat:"Guides de vente",emoji:"⏰",titre:"Créer l'urgence positivement",
-   resume:"Techniques pour amener le client à prendre une décision sans pression excessive.",
-   points:["Taux : 'Ce taux est valable jusqu'à fin du mois'","Disponibilité : 'Peu de créneaux cette semaine'","Événement de vie : 'Votre enfant entre à l'université'","Offre promotionnelle limitée","Rappeler le coût de l'inaction"],
-   accroche:"L'urgence doit être réelle — ne jamais inventer une contrainte artificielle."},
-  {id:"r13",cat:"Fiches objections",emoji:"💬",titre:"'Je vais réfléchir'",
-   resume:"L'objection la plus fréquente. Souvent un prétexte cachant une vraie objection.",
-   points:["Accueillir : 'C'est tout à fait normal'","Creuser : 'Sur quel point souhaitez-vous réfléchir ?'","Reformuler la valeur et les bénéfices","Proposer une alternative","Fixer une date de suivi précise"],
-   accroche:"Ne jamais laisser partir le client sans avoir identifié ce qui bloque réellement."},
-  {id:"r14",cat:"Fiches objections",emoji:"💸",titre:"'C'est trop cher'",
-   resume:"Objection prix — souvent liée à une incompréhension de la valeur.",
-   points:["Ne pas baisser le prix immédiatement","Ramener au quotidien : 'Soit X€/mois'","Rappeler le coût du risque non couvert","Comparer à la concurrence avec des faits","Proposer une formule de départ"],
-   accroche:"'Par rapport à ce que ça vous protège, c'est en réalité très accessible.'"},
-  {id:"r15",cat:"Fiches objections",emoji:"🏦",titre:"'Je suis avec une autre banque'",
-   resume:"Objection de fidélité ou d'inertie.",
-   points:["Valoriser la complémentarité : 'Pas besoin de tout changer'","Mettre en avant un avantage spécifique LBP","Proposer un produit sans engagement fort","Semer : tracer en CRM","Recontacter dans 3 mois"],
-   accroche:"'Je ne vous demande pas de quitter votre banque. Juste de voir si on peut faire mieux sur ce point.'"},
-  {id:"r16",cat:"Fiches objections",emoji:"🕐",titre:"'Je n'ai pas le temps'",
-   resume:"Objection de timing. Le client n'est pas en mode réceptif.",
-   points:["Respecter : 'Je comprends tout à fait'","Proposer un RDV court : '15 minutes suffisent'","Envoyer une synthèse par email en amont","Rappeler l'enjeu","Ne pas insister — noter et relancer"],
-   accroche:"'Pas de problème. Je vous propose 15 min jeudi — je prépare tout à l'avance.'"},
-  {id:"r17",cat:"Fiches objections",emoji:"🤔",titre:"'Je dois en parler à mon conjoint'",
-   resume:"Objection de co-décision. Souvent légitime.",
-   points:["Valider : 'C'est une décision importante'","Proposer un RDV commun","Fournir un document à partager","Identifier le rôle de chacun","Fixer le prochain contact"],
-   accroche:"'Je peux vous préparer un récapitulatif clair — et vous recevoir tous les deux ?'"},
-  {id:"r18",cat:"Fiches objections",emoji:"📉",titre:"'Les placements c'est risqué'",
-   resume:"Objection risque sur les produits d'épargne.",
-   points:["Valider la prudence : 'C'est un bon réflexe'","Distinguer fonds euros et UC","Adapter au profil de risque","Expliquer la diversification","Rappeler l'inflation comme risque de l'inaction"],
-   accroche:"'Il existe des solutions totalement sécurisées. Le vrai risque, c'est parfois de ne rien faire.'"},
-  {id:"r19",cat:"Scripts & Emails",emoji:"📱",titre:"Script appel sortant — RDV bilan",
-   resume:"Script pour prendre un RDV bilan avec un client existant.",
-   points:["Accroche : 'Bonjour M./Mme, c'est [Prénom] de La Banque Postale.'","Motif : 'Je vous appelle pour faire le point.'","Valeur : 'En 20-30 min, on s'assure que tout est optimisé.'","Proposition : 'Mardi à 10h ou jeudi à 14h ?'","Confirmation + SMS de rappel"],
-   accroche:"Ton chaleureux et non intrusif. Objectif : obtenir le RDV, pas vendre au téléphone."},
-  {id:"r20",cat:"Scripts & Emails",emoji:"📧",titre:"Email de relance après RDV",
-   resume:"Email à envoyer dans les 24h après un entretien.",
-   points:["Objet : 'Suite à notre échange — [Prénom]'","Remercier + rappeler le projet discuté","Récapitulatif 1-2 points clés","Joindre document / simulation","Call to action clair"],
-   accroche:"Envoyer dans les 2h après le RDV. Court, clair, personnalisé."},
-  {id:"r21",cat:"Scripts & Emails",emoji:"🔔",titre:"Script de relance téléphonique",
-   resume:"Script pour relancer un client qui n'a pas donné suite.",
-   points:["'Je me permets de vous rappeler suite à notre entretien.'","'Avez-vous pu réfléchir à [sujet] ?'","'Y a-t-il un point que je peux éclaircir ?'","'Quand seriez-vous disponible ?'","Fixer une date ou une action précise"],
-   accroche:"Ne pas commencer par 'Je rappelle pour savoir si...' — apporter quelque chose de nouveau."},
-  {id:"r22",cat:"Scripts & Emails",emoji:"🎉",titre:"Email d'anniversaire client",
-   resume:"Email personnalisé à envoyer le jour de l'anniversaire du client.",
-   points:["Objet : 'Joyeux anniversaire, [Prénom] 🎂'","Message chaleureux de l'équipe LBP","Mentionner un projet si connu","Valeur douce : 'L'occasion de faire le point si vous le souhaitez.'","Ton humain, sans objectif commercial apparent"],
-   accroche:"Cet email ne doit PAS ressembler à un email commercial. La chaleur passe avant la vente."},
-  {id:"r23",cat:"Scripts & Emails",emoji:"🤝",titre:"Script accueil nouveau client",
-   resume:"Script pour accueillir chaleureusement un nouveau client.",
-   points:["'Bonjour et bienvenue ! Première visite ?'","'Je suis [Prénom], votre interlocuteur privilégié.'","'Pour bien vous accompagner, quelques questions ?'","Bilan express : situation, projets, besoins","'Je vous propose de nous revoir dans [délai] pour un bilan complet.'"],
-   accroche:"Le premier contact détermine toute la relation. 5 minutes de plus évitent des mois de relation froide."},
+const ANIMS = [
+  { id:1,  name:"Mille Bornes",            theme:"ludique",      duree:"30 min", participants:"2–6", desc:"Jeu de cartes emblematique adapte pour valoriser les etapes cles du parcours client. Chaque borne franchie correspond a un produit presente, renforçant la pedagogie par l'action.", recompenses:"1er: cheque cadeau 30 EUR | 2e: carte fnac 15 EUR" },
+  { id:2,  name:"Mario Kart Challenge",    theme:"ludique",      duree:"20 min", participants:"4–8", desc:"Simulation de course vehicule intégrant des questions produits comme checkpoints. L'equipe la plus reactive avance sur le circuit, creant une dynamique competitive et engageante.", recompenses:"Vainqueur: bon cadeau 25 EUR | Podium: goodies LBP" },
+  { id:3,  name:"Bataille Navale",         theme:"conquete",     duree:"25 min", participants:"2–4", desc:"Grille de jeu ou chaque case cache une question produit ou une simulation client. Le joueur qui decouvre la flotte adverse est celui qui maitrise le mieux son argumentaire.", recompenses:"Gagnant: cheque cadeau 20 EUR" },
+  { id:4,  name:"Puissance 4",             theme:"fidelisation", duree:"15 min", participants:"2",   desc:"Jeu d'alignement ou chaque pion pose correspond a une reponse correcte. Favorise la rapidite de reflexe et la memorisation des caracteristiques produits.", recompenses:"Gagnant: carte culture 15 EUR" },
+  { id:5,  name:"Jeu des paires",          theme:"competences",  duree:"20 min", participants:"2–6", desc:"Memory de correspondance entre produits LBP et leurs avantages cles. Consolide l'association mentale entre l'offre et les benefices client.", recompenses:"Meilleur score: bon Amazon 20 EUR" },
+  { id:6,  name:"Le Rebus",                theme:"competences",  duree:"20 min", participants:"2–8", desc:"Serie de rebuts visuels construits autour du vocabulaire financier et des produits LBP. Stimule la creativite tout en ancrant la terminologie metier.", recompenses:"Equipe gagnante: plateau goodies" },
+  { id:7,  name:"Roland Garros",           theme:"conquete",     duree:"30 min", participants:"2–4", desc:"Tournoi par elimination directe avec questions a la volee. Chaque echange correspond a un argument de vente a placer, evaluant la fluidite du discours commercial.", recompenses:"Finaliste: cheque cadeau 30 EUR | Vainqueur: 50 EUR" },
+  { id:8,  name:"La Bomba",                theme:"collectif",    duree:"15 min", participants:"4–12",desc:"Chrono serre, la bombe tourne, chacun repond avant qu'elle explose. Format d'echauffement ideal pour briefings ou demarrages de reunion sous tension positive.", recompenses:"Equipe survivante: goodies LBP" },
+  { id:9,  name:"Coupe du Monde",          theme:"collectif",    duree:"45 min", participants:"8–20",desc:"Tournoi d'equipes sur plusieurs semaines avec tableau de qualifications. Chaque match oppose deux groupes sur un theme produit different, creant une emulation collective durable.", recompenses:"Champion: trophee + cheque 50 EUR | Finaliste: 25 EUR" },
+  { id:10, name:"Bingo / Loto",            theme:"satisfaction", duree:"30 min", participants:"5–30",desc:"Format grand groupe ou les numeros sont remplaces par des notions produits ou des situations clients. Accessible a tous les niveaux et facilement adaptable aux temps forts commerciaux.", recompenses:"Bingo: coffret cadeau 40 EUR | Quine: bon 15 EUR" },
+  { id:11, name:"Blind Test Musical",      theme:"evenement",    duree:"30 min", participants:"4–20",desc:"Extraits musicaux associes a des univers produits ou des moments de vie client. Cree un cadre detendu propice a l'ouverture et a la memorisation par l'emotion.", recompenses:"Equipe gagnante: carte spotify + goodies" },
+  { id:12, name:"Micro d'Or",              theme:"satisfaction", duree:"30 min", participants:"4–12",desc:"Chaque participant incarne un conseiller qui presente un produit en 60 secondes. Le jury evalue clarte, conviction et pertinence de l'argumentaire. Renforce la prise de parole.", recompenses:"Meilleur orateur: cheque 30 EUR" },
+  { id:13, name:"Les Fléchettes",          theme:"conquete",     duree:"20 min", participants:"2–6", desc:"Cible divisee en zones produits: chaque flechette lancee declenche une question associee. Simple a mettre en place, efficace pour animer un moment de pause commercial.", recompenses:"Score max: bon cadeau 20 EUR" },
+  { id:14, name:"Burger Quiz",             theme:"competences",  duree:"25 min", participants:"4–8", desc:"Quizz par equipes avec manches thematiques sur les produits, la reglementation et le marche. Le format TV accelere est adapte pour maintenir l'attention sur toute la session.", recompenses:"Equipe championne: cheque 40 EUR" },
+  { id:15, name:"Jeu des 7 Erreurs",       theme:"competences",  duree:"20 min", participants:"2–6", desc:"Deux documents quasi-identiques avec sept differences a reperer dans les conditions contractuelles ou les fiches produits. Affute la lecture critique et la vigilance documentaire.", recompenses:"1er trouve tout: bon 20 EUR" },
+  { id:16, name:"N'Oubliez pas les Paroles",theme:"satisfaction",duree:"20 min", participants:"4–16",desc:"Les paroles sont remplacees par des phrases cles de l'argumentation LBP. L'animateur coupe la musique, le participant doit completer. Memorisation ludique de messages essentiels.", recompenses:"Meilleur score: carte cadeau 25 EUR" },
+  { id:17, name:"La Moustache Mysterieuse (Movember)",theme:"evenement",duree:"20 min",participants:"4–20",desc:"Animation de sensibilisation Movember associee a des questions sante et prevoyance LBP. Associe l'engagement RSE aux produits d'assurance vie et de protection.", recompenses:"Participant le plus implique: don caritatif en son nom" },
+  { id:18, name:"Uno",                     theme:"ludique",      duree:"20 min", participants:"2–8", desc:"Version personnalisee du jeu ou chaque carte d'action correspond a une situation commerciale. Penalites et bonus lierent a la connaissance produit. Format convivial haute adhesion.", recompenses:"Gagnant: goodies LBP" },
+  { id:19, name:"Mot Mystere",             theme:"competences",  duree:"20 min", participants:"2–6", desc:"Grille de mots croises thematique autour du vocabulaire LBP: produits, processus, sigles metier. Renforce le lexique professionnel de maniere autonome ou en competition.", recompenses:"Grille complete: bon culture 15 EUR" },
+  { id:20, name:"Kaleido Quoi",            theme:"ludique",      duree:"25 min", participants:"4–12",desc:"Jeu d'associations visuelles ou les participants relient images, chiffres et mots a des produits LBP. Stimule la pensee laterale et la memorisation iconographique.", recompenses:"Meilleure association: cheque 20 EUR" },
+  { id:21, name:"Journee de la Femme",     theme:"evenement",    duree:"30 min", participants:"4–20",desc:"Animation speciale 8 mars: questions autour de l'independance financiere, l'epargne feminine et les inegalites de retraite. Sensibilise aux enjeux de la clientele femme.", recompenses:"Participation: coffret bien-etre" },
+  { id:22, name:"Question pour un Champion",theme:"competences", duree:"30 min", participants:"3–6", desc:"Format televise iconic a buzzer: questions progressives du general au specifique sur les produits et l'actualite bancaire. Teste la culture generale financiere du reseau.", recompenses:"Champion: trophee + cheque 50 EUR" },
+  { id:23, name:"Photo Mystere",           theme:"evenement",    duree:"20 min", participants:"4–16",desc:"Images floues ou zoomees d'agences, de visuels campagne ou de produits LBP a identifier. Cree un sentiment d'appartenance et renforce la culture d'entreprise.", recompenses:"Meilleur score: bon Amazon 20 EUR" },
+  { id:24, name:"Escape Game Produits",    theme:"conquete",     duree:"45 min", participants:"4–8", desc:"Scenario d'escape room ou chaque enigme deverrouille une etape de la relation client. Travail collaboratif intense autour des produits phares de la banque.", recompenses:"Equipe evadee: cheque 60 EUR" },
+  { id:25, name:"Trivial Pursuit LBP",     theme:"competences",  duree:"45 min", participants:"3–6", desc:"Adaptation du jeu avec 6 categories: epargne, credit, assurance, reglementation, histoire LBP et actualite. Couvre l'ensemble du referentiel produit de maniere exhaustive.", recompenses:"Vainqueur: coffret cadeau 45 EUR" },
+  { id:26, name:"Speed Quiz",              theme:"ludique",      duree:"15 min", participants:"4–20",desc:"30 questions en 5 minutes. Format ultra-rapide pour demarrer une reunion avec energie. Les reponses sont donnees simultanement sur paper board.", recompenses:"Top scorer: goodies + bon 15 EUR" },
+  { id:27, name:"Le Pendu Financier",      theme:"competences",  duree:"15 min", participants:"2–6", desc:"Version classique du pendu avec du vocabulaire bancaire, des sigles produits et des noms de dispositifs. Ideal pour ancrer le vocabulaire metier sans lourdeur pedagogique.", recompenses:"Equipe sans faute: goodies LBP" },
+  { id:28, name:"Jeu de l'Oie Commercial", theme:"fidelisation", duree:"30 min", participants:"2–6", desc:"Plateau de jeu ou chaque case represente une etape du parcours client LBP. Cases bonus, penalites et defis integrent des mises en situation reelles de vente.", recompenses:"1er arrive: cheque cadeau 25 EUR" },
+  { id:29, name:"Charades Produits",       theme:"competences",  duree:"20 min", participants:"4–12",desc:"Serie de charades construites autour des noms de produits et de services LBP. Travail sur la decomposition semantique et la memorisation par la construction langagiere.", recompenses:"Meilleur charadeur: bon 15 EUR" },
+  { id:30, name:"Qui Veut Gagner des Millions",theme:"competences",duree:"30 min",participants:"1–4",desc:"Simulation du jeu televise avec jokers (appel equipe, vote, elimination). Questions a 15 niveaux de difficulte sur les produits et la regulation bancaire. Format spectaculaire.", recompenses:"Millionnaire: cheque 100 EUR | Paliers: 10 a 50 EUR" },
+  { id:31, name:"Le Mot le Plus Long",      theme:"ludique",     duree:"15 min", participants:"2–8", desc:"Variante du jeu televise avec des lettres tirees aleatoirement, les meilleurs mots etant lies a l'univers bancaire et financier. Renforce la creativite verbale.", recompenses:"Meilleur mot: bon librairie 15 EUR" },
+  { id:32, name:"Kahoot Produits",         theme:"competences",  duree:"20 min", participants:"5–30",desc:"QCM digital sur smartphone avec classement en direct. Couverture complete du catalogue LBP en format ludique. Tres adapte aux grandes reunions et lancements produits.", recompenses:"Top 3: goodies LBP progressifs" },
+  { id:33, name:"Pitch Commercial 60s",    theme:"conquete",     duree:"30 min", participants:"4–12",desc:"Chaque conseiller dispose de 60 secondes pour pitcher un produit tire au sort face a un faux client. Evaluate la pertinence, la clarté et la conviction du discours.", recompenses:"Meilleur pitch: cheque 30 EUR" },
+  { id:34, name:"Jeu des Definitions",     theme:"competences",  duree:"20 min", participants:"2–8", desc:"Un participant definit un terme financier sans le prononcer, les autres devinent. Renforce a la fois la maitrise du lexique et la capacite a vulgariser.", recompenses:"Equipe gagnante: plateau goodies" },
+  { id:35, name:"Football de Table",       theme:"collectif",    duree:"20 min", participants:"2–4", desc:"Tournoi de babyfoot avec questions produits entre chaque but marque. Combine activite physique et culture produit pour une pause energisante.", recompenses:"Champion: bon cinema 25 EUR" },
+  { id:36, name:"La Roue de la Fortune",   theme:"satisfaction", duree:"20 min", participants:"3–8", desc:"Roue personnalisee avec categories produits: le joueur doit resoudre une enigme dans la categorie indiquee. Format visuel fort, ideal pour les espaces communs.", recompenses:"Gagnant: cheque cadeau 30 EUR" },
+  { id:37, name:"Defi Photographique",     theme:"evenement",    duree:"60 min", participants:"4–20",desc:"Par equipes, realisation d'une serie de photos representant les valeurs LBP en agence. Developpe le sens de la communication visuelle et l'esprit d'equipe.", recompenses:"Meilleure serie: coffret experience" },
+  { id:38, name:"Le Grand Oral",           theme:"conquete",     duree:"45 min", participants:"4–8", desc:"Format de prise de parole formelle sur un produit tire au sort. Juges internes evaluent la structure, les arguments et la gestion du stress. Preparation a la vente consultative.", recompenses:"Meilleur orateur: cheque 40 EUR" },
+  { id:39, name:"Defi Maths Financieres",  theme:"epargne",      duree:"20 min", participants:"2–6", desc:"Calculs de rendements, taux d'interet composes et simulations de credit a la calculatrice. Renforce la maitrise numerique indispensable au conseil patrimonial.", recompenses:"Score parfait: bon 20 EUR" },
+  { id:40, name:"Quizz Reglementation",    theme:"credit",       duree:"20 min", participants:"2–8", desc:"Questions sur RGPD, loi Pacte, devoir de conseil et obligations documentaires. Assure une mise a jour des connaissances reglementaires de maniere non contraignante.", recompenses:"Meilleur score: bon formation" },
+  { id:41, name:"Jeu de Role Client",      theme:"fidelisation", duree:"45 min", participants:"2–4", desc:"Simulation d'entretien client complet avec profil fourni au conseiller. Debrief collectif sur les points forts et axes d'amelioration de la posture commerciale.", recompenses:"Meilleur conseiller: cheque 35 EUR" },
+  { id:42, name:"Enigmes Logiques",        theme:"competences",  duree:"20 min", participants:"2–6", desc:"Serie de problemes logiques a resoudre en equipe autour de situations bancaires. Develop la pensee structuree et la prise de decision collective.", recompenses:"Equipe la plus rapide: goodies LBP" },
+  { id:43, name:"Tombola Commerciale",     theme:"satisfaction", duree:"30 min", participants:"5–30",desc:"Tirage au sort parmi les conseillers ayant atteint leurs objectifs de la periode. Renforce la motivation individuelle et valorise la performance commercial.", recompenses:"Lot principal: cheque voyage 200 EUR" },
+  { id:44, name:"Animation Solaire",       theme:"epargne",      duree:"30 min", participants:"4–12",desc:"Sensibilisation a l'epargne verte et aux investissements ESG a travers des mises en situation eco-responsables. Aligne avec les engagements RSE de La Banque Postale.", recompenses:"Equipe plus verte: don caritatif" },
+  { id:45, name:"Jeu du Pendule",          theme:"ludique",      duree:"15 min", participants:"4–12",desc:"Oscillations d'un pendule designant des participants qui doivent repondre rapidement a des questions. Cree du suspense et une attention soutenue dans la salle.", recompenses:"Dernier en jeu: bon 20 EUR" },
+  { id:46, name:"Peche en Filet Garni",    theme:"conquete",     duree:"25 min", participants:"4–16",desc:"Animation de prospection ou chaque 'poisson peche' correspond a un profil client a qualifier. Travaille les reflexes de detection des besoins et les techniques d'accroche.", recompenses:"Plus grand peche: cheque 25 EUR" },
+  { id:47, name:"Quizz Films et Cinema",   theme:"evenement",    duree:"25 min", participants:"4–16",desc:"Questions sur les films en lien avec la finance, l'entreprise et les grandes decisions de vie. Cree une entree ludique vers les produits epargne et prevoyance.", recompenses:"Meilleur cinephile: carte UGC duo" },
+  { id:48, name:"Tops Flops",              theme:"satisfaction", duree:"20 min", participants:"4–12",desc:"Chaque participant partage un top et un flop de sa semaine commerciale. Format bienveillant qui ouvre le dialogue sur les pratiques et favorise le partage d'experience.", recompenses:"Participation active: reconnaissance collective" },
+  { id:49, name:"Defi Reel Instagram",     theme:"evenement",    duree:"30 min", participants:"4–12",desc:"Creation d'un mini-reel video de 30 secondes presentant un produit LBP. Developpe les competences digitales et la communication video, compétence clé en 2025.", recompenses:"Meilleur reel: bon 30 EUR + diffusion interne" },
+  { id:50, name:"Le Dico de l'Agence",     theme:"collectif",    duree:"20 min", participants:"4–12",desc:"Construction collective d'un lexique propre a l'agence: termes, abreviations, expressions. Renforce la cohesion et cree un referentiel commun de communication interne.", recompenses:"Contribution remarquee: reconnaissance manager" },
+  { id:51, name:"Hackathon Produit",       theme:"conquete",     duree:"120 min",participants:"4–12",desc:"Par equipes, creation d'une proposition de valeur originale autour d'un produit LBP existant: nouveau packaging, argument cible, canal de distribution. Stimule l'innovation.", recompenses:"Meilleure proposition: presentation direction" },
+  { id:52, name:"Tableau de Bord Live",    theme:"collectif",    duree:"15 min", participants:"4–20",desc:"Affichage en temps reel des indicateurs commerciaux de l'agence avec commentaires collectifs. Cree un rituel de pilotage transparent et responsabilisant.", recompenses:"Equipe la plus performante: bonus recognition" },
 ];
 
-/* ═══════════════════════════════════════════════════════════════
-   STATE
-════════════════════════════════════════════════════════════════ */
-const state={tab:'anim',theme:'',adcFilter:'',selAnim:null,resCat:''};
+const RESSOURCES = [
+  { id:1,  title:"Kit Animation Mille Bornes",        cat:"Kit animation", desc:"Regles, cartes imprimables et guide animateur pour l'animation Mille Bornes adaptee LBP.", icon:"1" },
+  { id:2,  title:"Guide Maitre de Jeu",               cat:"Guide",         desc:"Methodologie complete pour animer une session de jeu: preparation, deroulement, debrief.", icon:"2" },
+  { id:3,  title:"Fiches Produits Condensees",        cat:"Produit",       desc:"Fiches de synthese une page par produit LBP pour integration dans les animations.", icon:"3" },
+  { id:4,  title:"Modele de Quizz PowerPoint",        cat:"Modele",        desc:"Template PowerPoint reutilisable pour tout format de quizz interne.", icon:"4" },
+  { id:5,  title:"Regles Bataille Navale LBP",        cat:"Kit animation", desc:"Version personnalisee de la Bataille Navale avec grilles produits et guide de jeu.", icon:"5" },
+  { id:6,  title:"Calendrier Animations 2025",        cat:"Planning",      desc:"Calendrier annuel des animations par agence avec dates, themes et responsables.", icon:"6" },
+  { id:7,  title:"Grilles d'Evaluation Conseiller",   cat:"Evaluation",    desc:"Grilles d'observation pour evaluer la maitrise produit et la posture de vente.", icon:"7" },
+  { id:8,  title:"Supports Coupe du Monde",           cat:"Kit animation", desc:"Tableau de qualification, regles du tournoi et supports visuels de suivi.", icon:"8" },
+  { id:9,  title:"Base Questions Kahoot",             cat:"Numerique",     desc:"Banque de 200 questions QCM pret a l'emploi sur la plateforme Kahoot.", icon:"9" },
+  { id:10, title:"Guide Jeu de Role Client",          cat:"Guide",         desc:"Scenarios de mise en situation client avec grilles de debrief structurees.", icon:"10" },
+  { id:11, title:"Kit Blind Test Musical",            cat:"Kit animation", desc:"Playlist thematique, reponses et systeme de scoring pour le blind test.", icon:"11" },
+  { id:12, title:"Charte Graphique Animations",       cat:"Design",        desc:"Guide visuel pour la creation de supports coherents avec l'identite LBP.", icon:"12" },
+  { id:13, title:"Tableau de Bord Animation",         cat:"Suivi",         desc:"Fichier Excel de suivi des animations: participation, scores et feedback.", icon:"13" },
+  { id:14, title:"Regles Puissance 4 LBP",            cat:"Kit animation", desc:"Version produits du Puissance 4 avec questions par couleur de pion.", icon:"14" },
+  { id:15, title:"Formation Maitre de Jeu",           cat:"Formation",     desc:"Module e-learning de 45 minutes pour former les animateurs en agence.", icon:"15" },
+  { id:16, title:"Catalogue Recompenses",             cat:"Incentive",     desc:"Liste des lots disponibles avec conditions d'attribution et demandes RH.", icon:"16" },
+  { id:17, title:"Kit Journee de la Femme",           cat:"Kit animation", desc:"Supports, statistiques et questions pour l'animation du 8 mars.", icon:"17" },
+  { id:18, title:"Guide Debrief Pedagogique",         cat:"Guide",         desc:"Methode pour transformer une animation en apprentissage durable.", icon:"18" },
+  { id:19, title:"Banque Images Libres de Droits",    cat:"Design",        desc:"Bibliotheque de 500 images utilisables pour vos supports d'animation.", icon:"19" },
+  { id:20, title:"FAQ Reglementation Jeux",           cat:"Juridique",     desc:"Reponses aux questions juridiques sur l'organisation de jeux en contexte professionnel.", icon:"20" },
+  { id:21, title:"Modele Bilan Animation",            cat:"Suivi",         desc:"Template de compte-rendu post-animation pour le reporting mensuel.", icon:"21" },
+  { id:22, title:"Guide Motivation Equipe",           cat:"Management",    desc:"Techniques d'animation managériales pour maintenir l'engagement sur la duree.", icon:"22" },
+  { id:23, title:"Ressources Movember",               cat:"Kit animation", desc:"Supports de sensibilisation, visuels et questions pour l'animation Movember.", icon:"23" },
+];
 
-/* ═══════════════════════════════════════════════════════════════
-   RENDER STATS
-════════════════════════════════════════════════════════════════ */
-function renderStats(){
-  const themes=[...new Set(animations.map(a=>a.theme))].length;
-  const adcCount=ADCs.length;
-  document.getElementById('statsGrid').innerHTML=`
-    <div class="stat-card"><div class="stat-num">${animations.length}</div><div class="stat-label">Animations disponibles</div></div>
-    <div class="stat-card"><div class="stat-num">${ressources.length}</div><div class="stat-label">Fiches ressources</div></div>
-    <div class="stat-card"><div class="stat-num">${themes}</div><div class="stat-label">Thèmes couverts</div></div>
-    <div class="stat-card"><div class="stat-num">${adcCount}</div><div class="stat-label">Membres de l'équipe</div></div>
-  `;
+let currentTheme = null;
+let currentAnim  = null;
+
+function switchTab(name, btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RENDER TEAM
-════════════════════════════════════════════════════════════════ */
-function adcAnimCount(id){return animations.filter(a=>a.adcId===id).length}
-
-function adcCardHTML(a,delay=0){
-  const n=adcAnimCount(a.id);
-  return `<div class="adc-card ${state.adcFilter===a.id?'active-adc':''}"
-    style="--adc-color:${a.c};--adc-color2:${a.c2};animation-delay:${delay}s"
-    onclick="filterAdc('${a.id}')">
-    <div class="adc-avatar">${a.initials}</div>
-    <div class="adc-info">
-      <div class="adc-name">${a.name}</div>
-      <div class="adc-role">${a.role}</div>
-    </div>
-    <div class="adc-count">${n}</div>
-  </div>`;
-}
-
-function renderTeam(){
-  const coord=ADCs.filter(a=>a.group==='coord');
-  const main=ADCs.filter(a=>a.group==='main');
-  const chalons=ADCs.filter(a=>a.group==='chalons');
-  document.getElementById('coordGrid').innerHTML=coord.map((a,i)=>adcCardHTML(a,i*.07)).join('');
-  document.getElementById('mainGrid').innerHTML=main.map((a,i)=>adcCardHTML(a,i*.07)).join('');
-  document.getElementById('chalonsGrid').innerHTML=chalons.map((a,i)=>adcCardHTML(a,i*.07)).join('');
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   RENDER THEME FILTERS
-════════════════════════════════════════════════════════════════ */
 function renderThemeFilters(){
-  const themes=[...new Set(animations.map(a=>a.theme))];
-  const el=document.getElementById('themeFilters');
-  el.innerHTML=`<button class="filter-pill ${!state.theme?'active':''}" onclick="filterTheme('')">Tous</button>`
-    +themes.map(t=>{
-      const col=(THEME_COLORS[t]||{}).c||'#666';
-      return `<button class="filter-pill ${state.theme===t?'active':''}" onclick="filterTheme('${t}')">
-        <span class="filter-dot" style="background:${col}"></span>${t}
-      </button>`;
-    }).join('');
-}
-
-function renderAdcFilters(){
-  const el=document.getElementById('adcFilters');
-  el.innerHTML=`<button class="filter-pill ${!state.adcFilter?'active':''}" onclick="filterAdc('')">Tous les ADC</button>`
-    +ADCs.map(a=>`<button class="filter-pill ${state.adcFilter===a.id?'active':''}" onclick="filterAdc('${a.id}')"
-      style="${state.adcFilter===a.id?'background:'+a.c+';border-color:'+a.c+';':''}">
-      ${a.initials} ${a.name.split(' ')[0]}
-    </button>`).join('');
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   RENDER ANIMATION GRID
-════════════════════════════════════════════════════════════════ */
-function renderAnimGrid(){
-  let list=animations;
-  if(state.theme) list=list.filter(a=>a.theme===state.theme);
-  if(state.adcFilter) list=list.filter(a=>a.adcId===state.adcFilter);
-  const grid=document.getElementById('animGrid');
-  if(!list.length){
-    grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><span class="empty-icon">🔍</span><p>Aucune animation pour ce filtre.</p></div>`;
-    return;
+  const el = document.getElementById('theme-filters');
+  let html = '<button class="pill active" data-theme="all" onclick="filterTheme(\'all\',this)">Toutes</button>';
+  for(const [k,v] of Object.entries(THEMES)){
+    html += `<button class="pill" data-theme="${k}" onclick="filterTheme('${k}',this)">${v.label}</button>`;
   }
-  grid.innerHTML=list.map((a,i)=>{
-    const tc=(THEME_COLORS[a.theme]||{c:'#003189'});
-    const ad=adc(a.adcId);
-    return `<div class="anim-card ${state.selAnim===a.id?'selected':''}"
-      style="--theme-color:${tc.c};animation-delay:${(i%12)*.04}s"
-      onclick="selectAnim(${a.id})">
-      <div class="card-top">
-        <div class="card-emoji">${a.emoji}</div>
-        <div class="card-meta">
-          <div class="card-theme">${a.theme}</div>
-          <div class="card-title">${a.titre}</div>
-        </div>
+  el.innerHTML = html;
+}
+
+function filterTheme(theme, btn){
+  document.querySelectorAll('#theme-filters .pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  currentTheme = theme==='all'?null:theme;
+  closeDetail();
+  renderAnimGrid();
+}
+
+function getThemeColor(theme){
+  return THEMES[theme]?.color||'#64687A';
+}
+
+function renderAnimGrid(){
+  const filtered = currentTheme ? ANIMS.filter(a=>a.theme===currentTheme) : ANIMS;
+  const el = document.getElementById('anim-grid');
+  const countEl = document.getElementById('anim-count');
+  countEl.textContent = filtered.length+' animation'+(filtered.length>1?'s':'');
+  el.innerHTML = filtered.map((a,i)=>{
+    const tc = getThemeColor(a.theme);
+    const tl = THEMES[a.theme]?.label||a.theme;
+    return `<div class="anim-card" style="--c-theme:${tc};animation-delay:${i*0.03}s" onclick="selectAnim(${a.id})">
+      <div class="anim-card-head">
+        <div class="anim-name">${a.name}</div>
+        <span class="theme-tag" style="background:${tc}18;color:${tc}">${tl}</span>
       </div>
-      <div class="card-body">${a.objectif}</div>
-      <div class="card-footer">
-        <div class="card-adc">
-          <div class="mini-avatar" style="--adc-color:${ad.c};--adc-color2:${ad.c2}">${ad.initials}</div>
-          ${ad.name.split(' ').slice(0,2).join(' ')}
-        </div>
-        <div class="card-duree">⏱ ${a.duree}</div>
+      <div class="anim-desc">${a.desc}</div>
+      <div class="anim-meta">
+        <span class="meta-chip"><span>Duree:</span> ${a.duree}</span>
+        <span class="meta-chip"><span>Participants:</span> ${a.participants}</span>
       </div>
     </div>`;
   }).join('');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   DETAIL PANEL
-════════════════════════════════════════════════════════════════ */
 function selectAnim(id){
-  const same=state.selAnim===id;
-  state.selAnim=same?null:id;
-  renderAnimGrid();
-  const panel=document.getElementById('detail');
-  if(!state.selAnim){panel.style.display='none';return;}
-  const a=animations.find(x=>x.id===id);
-  const tc=THEME_COLORS[a.theme]||{c:'#003189',c2:'#1a4aad'};
-  const ad=adc(a.adcId);
-  const rules=a.regles.split('·').map(r=>r.trim()).filter(Boolean);
-  const rewards=a.recompenses.split('·').map(r=>r.trim()).filter(Boolean);
-  panel.style.cssText=`display:block;--detail-color:${tc.c};--detail-color2:${tc.c2}`;
-  panel.innerHTML=`
-    <div class="detail-header" style="position:relative">
-      <button class="close-btn" onclick="selectAnim(${id})">✕</button>
-      <span class="detail-emoji">${a.emoji}</span>
-      <div class="detail-theme-tag">${a.theme}</div>
-      <div class="detail-title">${a.titre}</div>
-      <div class="detail-meta">
-        <span>⏱ ${a.duree}</span>
-        <span>👤 ${ad.name}</span>
+  const a = ANIMS.find(x=>x.id===id);
+  if(!a) return;
+  const panel = document.getElementById('detail-panel');
+  if(currentAnim===id && panel.classList.contains('open')){
+    closeDetail();return;
+  }
+  currentAnim = id;
+  const tc = getThemeColor(a.theme);
+  const tl = THEMES[a.theme]?.label||a.theme;
+  panel.innerHTML = `
+    <div class="detail-head" style="border-top:4px solid ${tc}">
+      <div class="detail-head-info">
+        <div class="detail-head-name">${a.name}</div>
+        <div class="detail-head-theme" style="color:${tc}88">${tl} — ${a.duree}</div>
       </div>
+      <button class="detail-close" onclick="closeDetail()">x</button>
     </div>
     <div class="detail-body">
-      <div class="detail-block">
-        <div class="detail-block-title">Objectif</div>
-        <div class="detail-text">${a.objectif}</div>
-        <br>
-        <div class="detail-block-title">Pourquoi cette animation ?</div>
-        <div class="detail-text">${a.importance}</div>
+      <div class="detail-section">
+        <div class="detail-label">Description</div>
+        <div class="detail-value">${a.desc}</div>
       </div>
-      <div class="detail-block">
-        <div class="detail-block-title">Règles du jeu</div>
-        <ul class="detail-rules-list">${rules.map(r=>`<li>${r}</li>`).join('')}</ul>
-        <br>
-        <div class="detail-block-title">Récompenses</div>
-        <div class="reward-box">${rewards.map(r=>`<div class="reward-item">🎁 ${r}</div>`).join('')}</div>
+      <div class="detail-section">
+        <div class="detail-label">Participants</div>
+        <div class="detail-value">${a.participants}</div>
       </div>
-    </div>`;
-  panel.scrollIntoView({behavior:'smooth',block:'start'});
+      <div class="detail-rewards">
+        <div class="detail-label">Recompenses</div>
+        <div class="detail-value">${a.recompenses}</div>
+      </div>
+    </div>
+  `;
+  panel.classList.add('open');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESSOURCES
-════════════════════════════════════════════════════════════════ */
-function renderResFilters(){
-  const cats=[...new Set(ressources.map(r=>r.cat))];
-  document.getElementById('resFilters').innerHTML=
-    `<button class="filter-pill ${!state.resCat?'active':''}" onclick="filterRes('')">Toutes</button>`
-    +cats.map(c=>{
-      const col=(CAT_COLORS[c]||{}).c||'#666';
-      return `<button class="filter-pill ${state.resCat===c?'active':''}" onclick="filterRes('${c}')">
-        <span class="filter-dot" style="background:${col}"></span>${c}
-      </button>`;
-    }).join('');
+function closeDetail(){
+  currentAnim = null;
+  const panel = document.getElementById('detail-panel');
+  panel.classList.remove('open');
 }
 
 function renderResGrid(){
-  let list=ressources;
-  if(state.resCat) list=list.filter(r=>r.cat===state.resCat);
-  document.getElementById('resGrid').innerHTML=list.map((r,i)=>{
-    const cc=CAT_COLORS[r.cat]||{c:'#003189',c2:'#1a4aad'};
-    return `<div class="res-card" style="--cat-color:${cc.c};--cat-color2:${cc.c2};animation-delay:${(i%12)*.04}s">
-      <div class="res-card-top">
-        <div class="res-emoji">${r.emoji}</div>
-        <div>
-          <div class="res-cat-tag">${r.cat}</div>
-          <div class="res-title">${r.titre}</div>
-        </div>
-      </div>
-      <div class="res-card-body">
-        <div class="res-resume">${r.resume}</div>
-        <ul class="res-points">${r.points.map(p=>`<li>${p}</li>`).join('')}</ul>
-        <div class="res-accroche">${r.accroche}</div>
+  const el = document.getElementById('res-grid');
+  const colors = ['#2563EB','#7C3AED','#059669','#EA580C','#DC2626','#BE185D','#0D9488','#D97706','#9333EA','#0891B2'];
+  el.innerHTML = RESSOURCES.map((r,i)=>{
+    const c = colors[i%colors.length];
+    return `<div class="res-card" style="animation-delay:${i*0.04}s">
+      <div class="res-icon" style="background:${c}12;color:${c};font-size:14px;font-family:'Syne',sans-serif;font-weight:800">${r.id}</div>
+      <div class="res-info">
+        <div class="res-cat">${r.cat}</div>
+        <div class="res-title">${r.title}</div>
+        <div class="res-desc">${r.desc}</div>
+        <a href="#" class="res-link" onclick="return false">Acceder</a>
       </div>
     </div>`;
   }).join('');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   TABS & FILTERS
-════════════════════════════════════════════════════════════════ */
-function setTab(tab,btn){
-  state.tab=tab;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('anim-panel').style.display=tab==='anim'?'':'none';
-  document.getElementById('res-panel').style.display=tab==='res'?'':'none';
-  if(tab==='res'){renderResFilters();renderResGrid();}
+function renderStats(){
+  const el = document.getElementById('stats-row');
+  el.innerHTML = STATS.map((s,i)=>`
+    <div class="stat-card" style="animation-delay:${i*0.08}s">
+      <div class="stat-val">${s.val}</div>
+      <div class="stat-lbl">${s.lbl}</div>
+    </div>`).join('');
 }
 
-function filterTheme(t){
-  state.theme=t;state.selAnim=null;
-  renderThemeFilters();renderAnimGrid();
-  document.getElementById('detail').style.display='none';
-}
-function filterAdc(id){
-  state.adcFilter=id;state.selAnim=null;
-  renderAdcFilters();renderTeam();renderAnimGrid();
-  document.getElementById('detail').style.display='none';
-}
-function filterRes(c){
-  state.resCat=c;
-  renderResFilters();renderResGrid();
+function renderTeam(){
+  const el = document.getElementById('team-section');
+  const groups = {
+    coord:   { label:"Coordinateurs CNMR" },
+    main:    { label:"ADC — Reims" },
+    chalons: { label:"ADC — Chalons-en-Champagne" },
+  };
+  let html = '';
+  for(const [gk,gv] of Object.entries(groups)){
+    const members = TEAM.filter(m=>m.group===gk);
+    if(!members.length) continue;
+    html += `<div class="team-group-label">${gv.label}</div>
+    <div class="team-grid">
+      ${members.map((m,i)=>`<div class="team-card" style="animation-delay:${i*0.06}s">
+        <div class="team-avatar" style="background:${m.c}">${m.initials}</div>
+        <div class="team-info">
+          <div class="team-name">${m.name}</div>
+          <div class="team-role">${m.role}</div>
+        </div>
+      </div>`).join('')}
+    </div>`;
+  }
+  el.innerHTML = html;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   INIT
-════════════════════════════════════════════════════════════════ */
-document.getElementById('animTabBadge').textContent=animations.length;
-document.getElementById('resTabBadge').textContent=ressources.length;
-renderStats();
-renderTeam();
-renderThemeFilters();
-renderAdcFilters();
-renderAnimGrid();
+document.addEventListener('DOMContentLoaded',()=>{
+  renderThemeFilters();
+  renderAnimGrid();
+  renderResGrid();
+  renderStats();
+  renderTeam();
+});
 </script>
 </body>
 </html>
