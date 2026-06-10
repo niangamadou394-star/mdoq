@@ -8,440 +8,162 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --brand:#003189;
-  --brand-mid:#1A4AAD;
-  --brand-dark:#001D58;
-  --gold:#C9A800;
-  --gold-bg:#FDF7DC;
-  --bg:#F0EFE9;
-  --surface:#FFFFFF;
-  --surface-alt:#F7F6F2;
-  --border:#DDD9D0;
-  --text:#1C1C2A;
-  --muted:#64687A;
-  --subtle:#A0A3AF;
-  --c-conquete:#2563EB;
-  --c-fidelisation:#7C3AED;
-  --c-epargne:#059669;
-  --c-assurance:#EA580C;
-  --c-credit:#DC2626;
-  --c-satisfaction:#BE185D;
-  --c-competences:#0D9488;
-  --c-collectif:#D97706;
-  --c-ludique:#9333EA;
-  --c-evenement:#0891B2;
-  --radius:10px;
-  --shadow-sm:0 1px 4px rgba(0,0,0,.06);
-  --shadow:0 2px 10px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.04);
-  --shadow-md:0 6px 24px rgba(0,0,0,.09),0 2px 6px rgba(0,0,0,.05);
+  --navy:#0B1D40;--navy-mid:#152D5E;--navy-light:#1E3A72;
+  --gold:#C9A800;--gold-bg:#FFFBEA;
+  --bg:#F5F4F0;--surface:#FFFFFF;--surface-2:#F9F8F6;
+  --border:rgba(0,0,0,.08);--border-strong:rgba(0,0,0,.14);
+  --text:#0D0E14;--text-2:#3D3F4E;--muted:#6B7280;--subtle:#9CA3AF;
+  --c-conquete:#2563EB;--c-fidelisation:#7C3AED;--c-epargne:#059669;
+  --c-assurance:#EA580C;--c-credit:#DC2626;--c-satisfaction:#BE185D;
+  --c-competences:#0D9488;--c-collectif:#D97706;--c-ludique:#9333EA;--c-evenement:#0891B2;
+  --r:12px;--r-lg:16px;--r-sm:8px;
+  --ease:.2s cubic-bezier(.4,0,.2,1);
+  --sh:0 4px 16px rgba(0,0,0,.07),0 1px 4px rgba(0,0,0,.04);
+  --sh-lg:0 12px 40px rgba(0,0,0,.12),0 4px 12px rgba(0,0,0,.06);
 }
-*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  font-size:14px;
-  line-height:1.5;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(14px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes slidePanel{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
-}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideRight{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
 
 /* HEADER */
-.header{
-  background:var(--brand-dark);
-  border-bottom:3px solid var(--gold);
-  padding:0 32px;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-.header-inner{
-  max-width:1200px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:60px;
-}
-.logo-block{display:flex;align-items:center;gap:12px}
-.logo-badge{
-  width:38px;height:38px;
-  background:var(--gold);
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;
-  font-weight:800;font-size:13px;
-  color:var(--brand-dark);
-  letter-spacing:.5px;
-  flex-shrink:0;
-}
-.logo-text{
-  display:flex;flex-direction:column;
-  line-height:1.1;
-}
-.logo-title{
-  font-family:'Syne',sans-serif;
-  font-weight:700;font-size:16px;
-  color:#FFFFFF;letter-spacing:.3px;
-}
-.logo-sub{
-  font-size:11px;color:rgba(255,255,255,.55);
-  font-weight:400;letter-spacing:.2px;
-}
-.header-meta{
-  display:flex;align-items:center;gap:20px;
-}
-.header-stat{
-  display:flex;flex-direction:column;align-items:flex-end;
-  line-height:1.2;
-}
-.header-stat-val{
-  font-family:'Syne',sans-serif;
-  font-weight:700;font-size:18px;color:#FFFFFF;
-}
-.header-stat-lbl{
-  font-size:10px;color:rgba(255,255,255,.5);
-  text-transform:uppercase;letter-spacing:.6px;
-}
-.header-divider{
-  width:1px;height:28px;background:rgba(255,255,255,.12);
-}
+.header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);padding:0 40px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.2)}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent 60%)}
+.header-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo-block{display:flex;align-items:center;gap:14px}
+.logo-mark{width:42px;height:42px;background:linear-gradient(135deg,var(--gold) 0%,#A87D00 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--navy);box-shadow:0 2px 8px rgba(201,168,0,.3);flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1.15}
+.logo-name{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff;letter-spacing:.2px}
+.logo-org{font-size:11px;color:rgba(255,255,255,.45)}
+.header-kpis{display:flex;align-items:center;gap:10px}
+.hdr-kpi{display:flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px}
+.hdr-kpi-val{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#fff}
+.hdr-kpi-lbl{font-size:11px;color:rgba(255,255,255,.45)}
+.hdr-sep{width:1px;height:20px;background:rgba(255,255,255,.1)}
 
-/* TABS */
-.tabs-bar{
-  background:var(--surface);
-  border-bottom:1px solid var(--border);
-}
-.tabs-inner{
-  max-width:1200px;margin:0 auto;
-  padding:0 32px;
-  display:flex;align-items:center;gap:4px;
-}
-.tab-btn{
-  padding:14px 20px;
-  border:none;background:none;cursor:pointer;
-  font-family:'Inter',sans-serif;
-  font-size:13px;font-weight:500;
-  color:var(--muted);
-  border-bottom:2px solid transparent;
-  margin-bottom:-1px;
-  transition:color .15s,border-color .15s;
-  white-space:nowrap;
-}
-.tab-btn:hover{color:var(--text)}
-.tab-btn.active{
-  color:var(--brand);
-  border-bottom-color:var(--brand);
-  font-weight:600;
-}
+/* NAV */
+.nav-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 40px}
+.nav-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:2px}
+.nav-tab{padding:15px 22px;border:none;background:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color var(--ease),border-color var(--ease)}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
 
-/* MAIN LAYOUT */
-.main{max-width:1200px;margin:0 auto;padding:28px 32px 60px;}
+/* LAYOUT */
+.main{max-width:1240px;margin:0 auto;padding:36px 40px 80px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
 
-/* SECTION HEADER */
-.section-top{
-  display:flex;align-items:flex-start;justify-content:space-between;
-  margin-bottom:20px;gap:16px;
-}
-.section-title{
-  font-family:'Syne',sans-serif;
-  font-weight:700;font-size:22px;
-  color:var(--text);line-height:1.2;
-}
-.section-sub{
-  font-size:13px;color:var(--muted);
-  margin-top:4px;font-weight:400;
-}
-.count-badge{
-  background:var(--brand);color:#fff;
-  font-size:11px;font-weight:600;
-  padding:3px 10px;border-radius:20px;
-  white-space:nowrap;flex-shrink:0;
-  margin-top:4px;
-}
+/* PAGE HEADER */
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:28px}
+.page-title{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--text);line-height:1.15}
+.page-sub{font-size:13px;color:var(--muted);margin-top:5px}
+.count-badge{flex-shrink:0;margin-top:4px;padding:4px 12px;background:var(--navy);color:#fff;font-size:11px;font-weight:600;border-radius:20px;letter-spacing:.3px}
 
-/* FILTER PILLS */
-.filters{
-  display:flex;flex-wrap:wrap;gap:6px;
-  margin-bottom:24px;
-}
-.pill{
-  padding:5px 14px;
-  border:1px solid var(--border);
-  border-radius:20px;
-  background:var(--surface);
-  font-size:12px;font-weight:500;
-  color:var(--muted);
-  cursor:pointer;
-  transition:all .15s;
-}
-.pill:hover{border-color:var(--brand);color:var(--brand)}
-.pill.active{
-  background:var(--brand);color:#fff;
-  border-color:var(--brand);
-}
-.pill[data-theme="conquete"].active{background:var(--c-conquete);border-color:var(--c-conquete)}
-.pill[data-theme="fidelisation"].active{background:var(--c-fidelisation);border-color:var(--c-fidelisation)}
-.pill[data-theme="epargne"].active{background:var(--c-epargne);border-color:var(--c-epargne)}
-.pill[data-theme="assurance"].active{background:var(--c-assurance);border-color:var(--c-assurance)}
-.pill[data-theme="credit"].active{background:var(--c-credit);border-color:var(--c-credit)}
-.pill[data-theme="satisfaction"].active{background:var(--c-satisfaction);border-color:var(--c-satisfaction)}
-.pill[data-theme="competences"].active{background:var(--c-competences);border-color:var(--c-competences)}
-.pill[data-theme="collectif"].active{background:var(--c-collectif);border-color:var(--c-collectif)}
-.pill[data-theme="ludique"].active{background:var(--c-ludique);border-color:var(--c-ludique)}
-.pill[data-theme="evenement"].active{background:var(--c-evenement);border-color:var(--c-evenement)}
+/* TOOLBAR */
+.toolbar{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.search-wrap{position:relative;flex:1;min-width:200px;max-width:320px}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--subtle);pointer-events:none;width:15px;height:15px}
+.search-input{width:100%;padding:8px 12px 8px 36px;border:1px solid var(--border-strong);border-radius:var(--r-sm);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;color:var(--text);outline:none;transition:border-color var(--ease),box-shadow var(--ease)}
+.search-input::placeholder{color:var(--subtle)}
+.search-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(11,29,64,.08)}
 
-/* GRID */
-.anim-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
-  gap:14px;
-}
-.anim-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  border-left:3px solid var(--c-theme, var(--border));
-  padding:16px 18px;
-  cursor:pointer;
-  transition:box-shadow .15s,transform .15s;
-  animation:fadeUp .3s ease both;
-}
-.anim-card:hover{
-  box-shadow:var(--shadow-md);
-  transform:translateY(-2px);
-}
-.anim-card-head{
-  display:flex;align-items:flex-start;justify-content:space-between;
-  gap:8px;margin-bottom:8px;
-}
-.anim-name{
-  font-weight:600;font-size:14px;
-  color:var(--text);line-height:1.3;
-}
-.theme-tag{
-  font-size:10px;font-weight:600;
-  padding:2px 8px;border-radius:12px;
-  white-space:nowrap;flex-shrink:0;
-  letter-spacing:.3px;
-  text-transform:uppercase;
-}
-.anim-desc{
-  font-size:12px;color:var(--muted);
-  line-height:1.5;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-.anim-meta{
-  display:flex;align-items:center;gap:10px;
-  margin-top:10px;
-  padding-top:10px;
-  border-top:1px solid var(--border);
-}
-.meta-chip{
-  font-size:11px;color:var(--muted);
-  display:flex;align-items:center;gap:4px;
-}
-.meta-chip span{color:var(--subtle)}
+/* FILTERS */
+.filters-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.fpill{padding:5px 14px;border:1px solid var(--border-strong);border-radius:20px;background:var(--surface);font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:all var(--ease);white-space:nowrap}
+.fpill:hover{border-color:var(--navy);color:var(--navy)}
+.fpill.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.fpill[data-t="conquete"].on{background:var(--c-conquete);border-color:var(--c-conquete)}
+.fpill[data-t="fidelisation"].on{background:var(--c-fidelisation);border-color:var(--c-fidelisation)}
+.fpill[data-t="epargne"].on{background:var(--c-epargne);border-color:var(--c-epargne)}
+.fpill[data-t="assurance"].on{background:var(--c-assurance);border-color:var(--c-assurance)}
+.fpill[data-t="credit"].on{background:var(--c-credit);border-color:var(--c-credit)}
+.fpill[data-t="satisfaction"].on{background:var(--c-satisfaction);border-color:var(--c-satisfaction)}
+.fpill[data-t="competences"].on{background:var(--c-competences);border-color:var(--c-competences)}
+.fpill[data-t="collectif"].on{background:var(--c-collectif);border-color:var(--c-collectif)}
+.fpill[data-t="ludique"].on{background:var(--c-ludique);border-color:var(--c-ludique)}
+.fpill[data-t="evenement"].on{background:var(--c-evenement);border-color:var(--c-evenement)}
 
-/* DETAIL PANEL */
-.detail-panel{
-  display:none;
-  margin-top:24px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:var(--shadow-md);
-  animation:slidePanel .25s ease;
-}
-.detail-panel.open{display:block}
-.detail-head{
-  background:var(--brand-dark);
-  color:#fff;
-  padding:20px 24px;
-  display:flex;align-items:flex-start;justify-content:space-between;
-  gap:16px;
-}
-.detail-head-info{}
-.detail-head-name{
-  font-family:'Syne',sans-serif;
-  font-weight:700;font-size:20px;
-  line-height:1.2;margin-bottom:4px;
-}
-.detail-head-theme{
-  font-size:12px;color:rgba(255,255,255,.6);
-  font-weight:500;
-}
-.detail-close{
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.15);
-  color:#fff;
-  width:32px;height:32px;border-radius:6px;
-  cursor:pointer;font-size:16px;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:background .15s;
-}
-.detail-close:hover{background:rgba(255,255,255,.2)}
-.detail-body{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.detail-section{}
-.detail-label{
-  font-size:10px;font-weight:700;
-  color:var(--subtle);
-  text-transform:uppercase;letter-spacing:.8px;
-  margin-bottom:6px;
-}
-.detail-value{
-  font-size:13px;color:var(--text);
-  line-height:1.6;
-}
-.detail-rewards{
-  grid-column:1/-1;
-  background:var(--gold-bg);
-  border:1px solid #E8D870;
-  border-radius:8px;
-  padding:14px 16px;
-}
-.detail-rewards .detail-label{color:#8A6D00}
-.detail-rewards .detail-value{color:#5C4900;font-size:13px}
+/* ANIM GRID */
+.anim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.anim-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:box-shadow var(--ease),transform var(--ease);animation:fadeUp .4s ease both}
+.anim-card::before{content:'';display:block;height:4px;background:var(--c-theme,var(--border))}
+.anim-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px)}
+.anim-card-body{padding:18px 20px 20px}
+.anim-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.anim-card-name{font-weight:700;font-size:15px;color:var(--text);line-height:1.3}
+.theme-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0;text-transform:uppercase;letter-spacing:.4px}
+.anim-card-desc{font-size:12.5px;color:var(--muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:14px}
+.anim-card-footer{display:flex;align-items:center;gap:14px;padding-top:14px;border-top:1px solid var(--border)}
+.anim-chip{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--muted)}
 
-/* TEAM SECTION */
-.team-section{margin-bottom:40px;}
-.team-group-label{
-  font-size:11px;font-weight:700;
-  color:var(--subtle);
-  text-transform:uppercase;letter-spacing:.8px;
-  margin:20px 0 10px;
-}
-.team-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:10px;
-}
-.team-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:14px 16px;
-  display:flex;align-items:center;gap:12px;
-  animation:fadeUp .3s ease both;
-}
-.team-avatar{
-  width:40px;height:40px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:13px;color:#fff;
-  flex-shrink:0;letter-spacing:.5px;
-}
-.team-info{}
-.team-name{font-weight:600;font-size:13px;color:var(--text);line-height:1.2;}
-.team-role{font-size:11px;color:var(--muted);margin-top:2px;}
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.45);backdrop-filter:blur(3px);animation:fadeIn .2s ease}
+.overlay.open{display:block}
+.modal{position:fixed;top:0;right:0;bottom:0;width:520px;max-width:100vw;background:var(--surface);overflow-y:auto;z-index:201;display:none;animation:slideRight .25s cubic-bezier(.4,0,.2,1);box-shadow:-24px 0 80px rgba(0,0,0,.15)}
+.modal.open{display:block}
+.modal-head{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);padding:28px 28px 24px;position:sticky;top:0;z-index:10}
+.modal-head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.modal-theme-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8)}
+.modal-close{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background var(--ease);line-height:1}
+.modal-close:hover{background:rgba(255,255,255,.2)}
+.modal-title{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:#fff;line-height:1.2}
+.modal-meta{display:flex;gap:20px;margin-top:12px}
+.modal-meta-item{font-size:12px;color:rgba(255,255,255,.5)}
+.modal-meta-item strong{color:rgba(255,255,255,.85);font-weight:600}
+.modal-body{padding:28px}
+.modal-section{margin-bottom:24px}
+.modal-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--subtle);margin-bottom:8px}
+.modal-text{font-size:13.5px;color:var(--text-2);line-height:1.75}
+.rewards-box{background:var(--gold-bg);border:1px solid rgba(201,168,0,.3);border-radius:var(--r);padding:16px 20px}
+.rewards-box .modal-label{color:#8A6D00}
+.rewards-box .modal-text{color:#5C4900}
 
-/* STATS ROW */
-.stats-row{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
-  gap:10px;
-  margin-bottom:28px;
-}
-.stat-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:16px 18px;
-  animation:fadeUp .3s ease both;
-}
-.stat-val{
-  font-family:'Syne',sans-serif;
-  font-weight:800;font-size:26px;
-  color:var(--brand);line-height:1;
-}
-.stat-lbl{
-  font-size:11px;color:var(--muted);
-  margin-top:4px;font-weight:500;
-}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:36px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px 24px;animation:fadeUp .4s ease both}
+.stat-val{font-family:'Syne',sans-serif;font-weight:800;font-size:34px;color:var(--navy);line-height:1}
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:6px;font-weight:500}
+
+/* TEAM */
+.team-group{margin-bottom:32px}
+.team-group-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--subtle);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.team-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;display:flex;align-items:center;gap:14px;animation:fadeUp .4s ease both;transition:box-shadow var(--ease),transform var(--ease)}
+.team-card:hover{box-shadow:var(--sh);transform:translateY(-2px)}
+.team-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0;letter-spacing:.5px}
+.team-name{font-weight:600;font-size:14px;color:var(--text)}
+.team-role{font-size:11px;color:var(--muted);margin-top:3px}
 
 /* RESSOURCES */
-.res-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:14px;
-}
-.res-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:16px 18px;
-  display:flex;align-items:flex-start;gap:14px;
-  animation:fadeUp .3s ease both;
-  transition:box-shadow .15s,transform .15s;
-}
-.res-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.res-icon{
-  width:40px;height:40px;
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;
-  flex-shrink:0;
-  background:var(--surface-alt);
-}
-.res-info{flex:1;min-width:0;}
-.res-title{font-weight:600;font-size:13px;color:var(--text);line-height:1.3;margin-bottom:4px;}
-.res-cat{
-  font-size:10px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.6px;
-  color:var(--muted);margin-bottom:6px;
-}
-.res-desc{font-size:12px;color:var(--muted);line-height:1.5;}
-.res-link{
-  display:inline-block;
-  margin-top:10px;
-  font-size:12px;font-weight:600;
-  color:var(--brand);
-  text-decoration:none;
-  padding:4px 12px;
-  border:1px solid var(--brand);
-  border-radius:6px;
-  transition:background .15s,color .15s;
-}
-.res-link:hover{background:var(--brand);color:#fff}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.res-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px 22px;display:flex;align-items:flex-start;gap:16px;animation:fadeUp .4s ease both;transition:box-shadow var(--ease),transform var(--ease)}
+.res-card:hover{box-shadow:var(--sh);transform:translateY(-2px)}
+.res-num{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:15px;flex-shrink:0}
+.res-body{flex:1;min-width:0}
+.res-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--subtle);margin-bottom:5px}
+.res-title{font-weight:700;font-size:14px;color:var(--text);line-height:1.3;margin-bottom:6px}
+.res-desc{font-size:12px;color:var(--muted);line-height:1.55}
+.res-action{display:inline-flex;align-items:center;gap:5px;margin-top:12px;font-size:12px;font-weight:600;color:var(--navy);text-decoration:none;padding:5px 14px;border:1px solid rgba(11,29,64,.2);border-radius:6px;transition:all var(--ease)}
+.res-action:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 
 /* FOOTER */
-.footer{
-  background:var(--brand-dark);
-  border-top:1px solid rgba(255,255,255,.08);
-  padding:20px 32px;
-  text-align:center;
-}
-.footer-text{
-  font-size:12px;color:rgba(255,255,255,.4);
-  line-height:1.6;
-}
-.footer-text strong{color:rgba(255,255,255,.65);font-weight:600;}
+.footer{background:var(--navy);padding:22px 40px}
+.footer-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.footer-l{font-size:13px;font-weight:600;color:rgba(255,255,255,.6)}
+.footer-r{font-size:12px;color:rgba(255,255,255,.3)}
 
-/* HIDDEN */
-.tab-content{display:none}
-.tab-content.active{display:block}
+/* EMPTY */
+.empty{grid-column:1/-1;padding:60px 0;text-align:center;color:var(--muted);font-size:14px}
 
-/* RESPONSIVE */
 @media(max-width:768px){
-  .header{padding:0 16px}
-  .main{padding:20px 16px 40px}
-  .tabs-inner{padding:0 16px}
-  .header-stat{display:none}
-  .header-divider{display:none}
-  .detail-body{grid-template-columns:1fr}
-  .anim-grid{grid-template-columns:1fr}
-  .res-grid{grid-template-columns:1fr}
+  .header,.nav-bar,.footer{padding-left:20px;padding-right:20px}
+  .main{padding:24px 20px 60px}
+  .footer-inner{flex-direction:column;gap:6px;text-align:center}
+  .hdr-kpis{display:none}
+  .modal{width:100vw}
+  .anim-grid,.res-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -450,315 +172,327 @@ body{
 <header class="header">
   <div class="header-inner">
     <div class="logo-block">
-      <div class="logo-badge">LBP</div>
+      <div class="logo-mark">LBP</div>
       <div class="logo-text">
-        <span class="logo-title">Espace CNMR</span>
-        <span class="logo-sub">La Banque Postale — Animations Commerciales</span>
+        <span class="logo-name">Espace CNMR</span>
+        <span class="logo-org">La Banque Postale</span>
       </div>
     </div>
-    <div class="header-meta">
-      <div class="header-stat">
-        <span class="header-stat-val" id="hdr-anims">52</span>
-        <span class="header-stat-lbl">Animations</span>
+    <div class="header-kpis">
+      <div class="hdr-kpi">
+        <span class="hdr-kpi-val">52</span>
+        <span class="hdr-kpi-lbl">animations</span>
       </div>
-      <div class="header-divider"></div>
-      <div class="header-stat">
-        <span class="header-stat-val" id="hdr-res">23</span>
-        <span class="header-stat-lbl">Ressources</span>
+      <div class="hdr-sep"></div>
+      <div class="hdr-kpi">
+        <span class="hdr-kpi-val">23</span>
+        <span class="hdr-kpi-lbl">ressources</span>
       </div>
     </div>
   </div>
 </header>
 
-<div class="tabs-bar">
-  <div class="tabs-inner">
-    <button class="tab-btn active" onclick="switchTab('animations',this)">Animations</button>
-    <button class="tab-btn" onclick="switchTab('ressources',this)">Ressources</button>
-    <button class="tab-btn" onclick="switchTab('equipe',this)">Equipe</button>
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="switchTab('animations',this)">Animations</button>
+    <button class="nav-tab" onclick="switchTab('ressources',this)">Ressources</button>
+    <button class="nav-tab" onclick="switchTab('equipe',this)">Equipe</button>
   </div>
-</div>
+</nav>
 
 <main class="main">
-
-  <!-- ANIMATIONS TAB -->
-  <div class="tab-content active" id="tab-animations">
-    <div class="section-top">
+  <div class="tab-pane active" id="tab-animations">
+    <div class="page-header">
       <div>
-        <div class="section-title">Animations commerciales</div>
-        <div class="section-sub">Catalogue des animations disponibles pour les conseillers</div>
+        <div class="page-title">Animations commerciales</div>
+        <div class="page-sub">Catalogue des animations disponibles pour les conseillers</div>
       </div>
-      <span class="count-badge" id="anim-count">52 animations</span>
+      <span class="count-badge" id="anim-badge">52 animations</span>
     </div>
-    <div class="filters" id="theme-filters"></div>
-    <div class="detail-panel" id="detail-panel"></div>
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="8.5" cy="8.5" r="5.5"/><path d="M14 14l3 3"/>
+        </svg>
+        <input class="search-input" type="text" id="search-input" placeholder="Rechercher une animation..." oninput="onSearch()">
+      </div>
+      <div class="filters-wrap" id="theme-filters"></div>
+    </div>
     <div class="anim-grid" id="anim-grid"></div>
   </div>
 
-  <!-- RESSOURCES TAB -->
-  <div class="tab-content" id="tab-ressources">
-    <div class="section-top">
+  <div class="tab-pane" id="tab-ressources">
+    <div class="page-header">
       <div>
-        <div class="section-title">Ressources</div>
-        <div class="section-sub">Documents, guides et supports pour les animations</div>
+        <div class="page-title">Ressources</div>
+        <div class="page-sub">Documents, guides et supports pour les animations</div>
       </div>
       <span class="count-badge">23 ressources</span>
     </div>
     <div class="res-grid" id="res-grid"></div>
   </div>
 
-  <!-- EQUIPE TAB -->
-  <div class="tab-content" id="tab-equipe">
-    <div class="section-top">
+  <div class="tab-pane" id="tab-equipe">
+    <div class="page-header">
       <div>
-        <div class="section-title">L'equipe CNMR</div>
-        <div class="section-sub">Animateurs et coordinateurs du reseau</div>
+        <div class="page-title">Equipe CNMR</div>
+        <div class="page-sub">Animateurs et correspondants du reseau</div>
       </div>
     </div>
-    <div class="stats-row" id="stats-row"></div>
-    <div class="team-section" id="team-section"></div>
+    <div class="stats-grid" id="stats-grid"></div>
+    <div id="team-section"></div>
   </div>
-
 </main>
 
+<div class="overlay" id="overlay" onclick="closeModal()"></div>
+<div class="modal" id="modal"></div>
+
 <footer class="footer">
-  <div class="footer-text">
-    <strong>Espace CNMR — La Banque Postale</strong><br>
-    Usage interne — Animations commerciales reseau<br>
-    Mis a jour 2025
+  <div class="footer-inner">
+    <span class="footer-l">Espace CNMR — La Banque Postale</span>
+    <span class="footer-r">Usage interne — Animations commerciales reseau — 2025</span>
   </div>
 </footer>
 
 <script>
-const THEMES = {
-  conquete:    { label:"Conquete",     color:"#2563EB" },
-  fidelisation:{ label:"Fidelisation", color:"#7C3AED" },
-  epargne:     { label:"Epargne",      color:"#059669" },
-  assurance:   { label:"Assurance",    color:"#EA580C" },
-  credit:      { label:"Credit",       color:"#DC2626" },
-  satisfaction:{ label:"Satisfaction", color:"#BE185D" },
-  competences: { label:"Competences",  color:"#0D9488" },
-  collectif:   { label:"Collectif",    color:"#D97706" },
-  ludique:     { label:"Ludique",      color:"#9333EA" },
-  evenement:   { label:"Evenement",    color:"#0891B2" },
+const THEMES={
+  conquete:    {label:"Conquete",    color:"#2563EB"},
+  fidelisation:{label:"Fidelisation",color:"#7C3AED"},
+  epargne:     {label:"Epargne",     color:"#059669"},
+  assurance:   {label:"Assurance",   color:"#EA580C"},
+  credit:      {label:"Credit",      color:"#DC2626"},
+  satisfaction:{label:"Satisfaction",color:"#BE185D"},
+  competences: {label:"Competences", color:"#0D9488"},
+  collectif:   {label:"Collectif",   color:"#D97706"},
+  ludique:     {label:"Ludique",     color:"#9333EA"},
+  evenement:   {label:"Evenement",   color:"#0891B2"},
 };
 
-const TEAM = [
-  { id:"amadou",    name:"Amadou NIANG",         initials:"AN", role:"Alternant ADC",  group:"coord",   c:"#003189" },
-  { id:"marina",    name:"Marina DEMOLIN",        initials:"MD", role:"Alternante ADC", group:"coord",   c:"#0284C7" },
-  { id:"atika",     name:"Atika BACHIRI",         initials:"AB", role:"ADC",            group:"main",    c:"#7C3AED" },
-  { id:"magalie",   name:"Magalie BARGES",        initials:"MB", role:"ADC",            group:"main",    c:"#DB2777" },
-  { id:"catherine", name:"Catherine PAPUT",       initials:"CP", role:"ADC",            group:"main",    c:"#2563EB" },
-  { id:"delphine",  name:"Delphine SAINTE BEUVE", initials:"DS", role:"ADC",            group:"main",    c:"#059669" },
-  { id:"maxence",   name:"Maxence",               initials:"MX", role:"ADC Chalons",    group:"chalons", c:"#D97706" },
-  { id:"carine",    name:"Carine",                initials:"CA", role:"ADC Chalons",    group:"chalons", c:"#DC2626" },
-  { id:"laurette",  name:"Laurette",              initials:"LA", role:"ADC Chalons",    group:"chalons", c:"#0D9488" },
-  { id:"gregoire",  name:"Gregoire",              initials:"GR", role:"ADC Chalons",    group:"chalons", c:"#B45309" },
+const TEAM=[
+  {name:"Amadou",  initials:"AM",role:"Alternant ADC",  group:"alternants",c:"#003189"},
+  {name:"Marina",  initials:"MR",role:"Alternante ADC", group:"alternants",c:"#0284C7"},
+  {name:"Atika",   initials:"AT",role:"ADC",            group:"clermont",  c:"#7C3AED"},
+  {name:"Magalie", initials:"MG",role:"ADC",            group:"clermont",  c:"#DB2777"},
+  {name:"Catherine",initials:"CT",role:"ADC",           group:"clermont",  c:"#2563EB"},
+  {name:"Delphine",initials:"DP",role:"ADC",            group:"clermont",  c:"#059669"},
+  {name:"Maxence", initials:"MX",role:"ADC",            group:"chalons",   c:"#D97706"},
+  {name:"Carine",  initials:"CR",role:"ADC",            group:"chalons",   c:"#DC2626"},
+  {name:"Laurette",initials:"LT",role:"ADC",            group:"chalons",   c:"#0D9488"},
+  {name:"Gregoire",initials:"GR",role:"ADC",            group:"chalons",   c:"#B45309"},
 ];
 
-const STATS = [
-  { val:52,  lbl:"Animations" },
-  { val:23,  lbl:"Ressources" },
-  { val:10,  lbl:"Membres equipe" },
-  { val:10,  lbl:"Categories" },
+const GROUPS={
+  alternants:"Alternants ADC",
+  clermont:  "ADC — Clermont-Ferrand",
+  chalons:   "ADC — Chalons-en-Champagne",
+};
+
+const STATS=[
+  {val:52,lbl:"Animations"},
+  {val:23,lbl:"Ressources"},
+  {val:10,lbl:"Membres"},
+  {val:10,lbl:"Categories"},
 ];
 
-const ANIMS = [
-  { id:1,  name:"Mille Bornes",            theme:"ludique",      duree:"30 min", participants:"2–6", desc:"Jeu de cartes emblematique adapte pour valoriser les etapes cles du parcours client. Chaque borne franchie correspond a un produit presente, renforçant la pedagogie par l'action.", recompenses:"1er: cheque cadeau 30 EUR | 2e: carte fnac 15 EUR" },
-  { id:2,  name:"Mario Kart Challenge",    theme:"ludique",      duree:"20 min", participants:"4–8", desc:"Simulation de course vehicule intégrant des questions produits comme checkpoints. L'equipe la plus reactive avance sur le circuit, creant une dynamique competitive et engageante.", recompenses:"Vainqueur: bon cadeau 25 EUR | Podium: goodies LBP" },
-  { id:3,  name:"Bataille Navale",         theme:"conquete",     duree:"25 min", participants:"2–4", desc:"Grille de jeu ou chaque case cache une question produit ou une simulation client. Le joueur qui decouvre la flotte adverse est celui qui maitrise le mieux son argumentaire.", recompenses:"Gagnant: cheque cadeau 20 EUR" },
-  { id:4,  name:"Puissance 4",             theme:"fidelisation", duree:"15 min", participants:"2",   desc:"Jeu d'alignement ou chaque pion pose correspond a une reponse correcte. Favorise la rapidite de reflexe et la memorisation des caracteristiques produits.", recompenses:"Gagnant: carte culture 15 EUR" },
-  { id:5,  name:"Jeu des paires",          theme:"competences",  duree:"20 min", participants:"2–6", desc:"Memory de correspondance entre produits LBP et leurs avantages cles. Consolide l'association mentale entre l'offre et les benefices client.", recompenses:"Meilleur score: bon Amazon 20 EUR" },
-  { id:6,  name:"Le Rebus",                theme:"competences",  duree:"20 min", participants:"2–8", desc:"Serie de rebuts visuels construits autour du vocabulaire financier et des produits LBP. Stimule la creativite tout en ancrant la terminologie metier.", recompenses:"Equipe gagnante: plateau goodies" },
-  { id:7,  name:"Roland Garros",           theme:"conquete",     duree:"30 min", participants:"2–4", desc:"Tournoi par elimination directe avec questions a la volee. Chaque echange correspond a un argument de vente a placer, evaluant la fluidite du discours commercial.", recompenses:"Finaliste: cheque cadeau 30 EUR | Vainqueur: 50 EUR" },
-  { id:8,  name:"La Bomba",                theme:"collectif",    duree:"15 min", participants:"4–12",desc:"Chrono serre, la bombe tourne, chacun repond avant qu'elle explose. Format d'echauffement ideal pour briefings ou demarrages de reunion sous tension positive.", recompenses:"Equipe survivante: goodies LBP" },
-  { id:9,  name:"Coupe du Monde",          theme:"collectif",    duree:"45 min", participants:"8–20",desc:"Tournoi d'equipes sur plusieurs semaines avec tableau de qualifications. Chaque match oppose deux groupes sur un theme produit different, creant une emulation collective durable.", recompenses:"Champion: trophee + cheque 50 EUR | Finaliste: 25 EUR" },
-  { id:10, name:"Bingo / Loto",            theme:"satisfaction", duree:"30 min", participants:"5–30",desc:"Format grand groupe ou les numeros sont remplaces par des notions produits ou des situations clients. Accessible a tous les niveaux et facilement adaptable aux temps forts commerciaux.", recompenses:"Bingo: coffret cadeau 40 EUR | Quine: bon 15 EUR" },
-  { id:11, name:"Blind Test Musical",      theme:"evenement",    duree:"30 min", participants:"4–20",desc:"Extraits musicaux associes a des univers produits ou des moments de vie client. Cree un cadre detendu propice a l'ouverture et a la memorisation par l'emotion.", recompenses:"Equipe gagnante: carte spotify + goodies" },
-  { id:12, name:"Micro d'Or",              theme:"satisfaction", duree:"30 min", participants:"4–12",desc:"Chaque participant incarne un conseiller qui presente un produit en 60 secondes. Le jury evalue clarte, conviction et pertinence de l'argumentaire. Renforce la prise de parole.", recompenses:"Meilleur orateur: cheque 30 EUR" },
-  { id:13, name:"Les Fléchettes",          theme:"conquete",     duree:"20 min", participants:"2–6", desc:"Cible divisee en zones produits: chaque flechette lancee declenche une question associee. Simple a mettre en place, efficace pour animer un moment de pause commercial.", recompenses:"Score max: bon cadeau 20 EUR" },
-  { id:14, name:"Burger Quiz",             theme:"competences",  duree:"25 min", participants:"4–8", desc:"Quizz par equipes avec manches thematiques sur les produits, la reglementation et le marche. Le format TV accelere est adapte pour maintenir l'attention sur toute la session.", recompenses:"Equipe championne: cheque 40 EUR" },
-  { id:15, name:"Jeu des 7 Erreurs",       theme:"competences",  duree:"20 min", participants:"2–6", desc:"Deux documents quasi-identiques avec sept differences a reperer dans les conditions contractuelles ou les fiches produits. Affute la lecture critique et la vigilance documentaire.", recompenses:"1er trouve tout: bon 20 EUR" },
-  { id:16, name:"N'Oubliez pas les Paroles",theme:"satisfaction",duree:"20 min", participants:"4–16",desc:"Les paroles sont remplacees par des phrases cles de l'argumentation LBP. L'animateur coupe la musique, le participant doit completer. Memorisation ludique de messages essentiels.", recompenses:"Meilleur score: carte cadeau 25 EUR" },
-  { id:17, name:"La Moustache Mysterieuse (Movember)",theme:"evenement",duree:"20 min",participants:"4–20",desc:"Animation de sensibilisation Movember associee a des questions sante et prevoyance LBP. Associe l'engagement RSE aux produits d'assurance vie et de protection.", recompenses:"Participant le plus implique: don caritatif en son nom" },
-  { id:18, name:"Uno",                     theme:"ludique",      duree:"20 min", participants:"2–8", desc:"Version personnalisee du jeu ou chaque carte d'action correspond a une situation commerciale. Penalites et bonus lierent a la connaissance produit. Format convivial haute adhesion.", recompenses:"Gagnant: goodies LBP" },
-  { id:19, name:"Mot Mystere",             theme:"competences",  duree:"20 min", participants:"2–6", desc:"Grille de mots croises thematique autour du vocabulaire LBP: produits, processus, sigles metier. Renforce le lexique professionnel de maniere autonome ou en competition.", recompenses:"Grille complete: bon culture 15 EUR" },
-  { id:20, name:"Kaleido Quoi",            theme:"ludique",      duree:"25 min", participants:"4–12",desc:"Jeu d'associations visuelles ou les participants relient images, chiffres et mots a des produits LBP. Stimule la pensee laterale et la memorisation iconographique.", recompenses:"Meilleure association: cheque 20 EUR" },
-  { id:21, name:"Journee de la Femme",     theme:"evenement",    duree:"30 min", participants:"4–20",desc:"Animation speciale 8 mars: questions autour de l'independance financiere, l'epargne feminine et les inegalites de retraite. Sensibilise aux enjeux de la clientele femme.", recompenses:"Participation: coffret bien-etre" },
-  { id:22, name:"Question pour un Champion",theme:"competences", duree:"30 min", participants:"3–6", desc:"Format televise iconic a buzzer: questions progressives du general au specifique sur les produits et l'actualite bancaire. Teste la culture generale financiere du reseau.", recompenses:"Champion: trophee + cheque 50 EUR" },
-  { id:23, name:"Photo Mystere",           theme:"evenement",    duree:"20 min", participants:"4–16",desc:"Images floues ou zoomees d'agences, de visuels campagne ou de produits LBP a identifier. Cree un sentiment d'appartenance et renforce la culture d'entreprise.", recompenses:"Meilleur score: bon Amazon 20 EUR" },
-  { id:24, name:"Escape Game Produits",    theme:"conquete",     duree:"45 min", participants:"4–8", desc:"Scenario d'escape room ou chaque enigme deverrouille une etape de la relation client. Travail collaboratif intense autour des produits phares de la banque.", recompenses:"Equipe evadee: cheque 60 EUR" },
-  { id:25, name:"Trivial Pursuit LBP",     theme:"competences",  duree:"45 min", participants:"3–6", desc:"Adaptation du jeu avec 6 categories: epargne, credit, assurance, reglementation, histoire LBP et actualite. Couvre l'ensemble du referentiel produit de maniere exhaustive.", recompenses:"Vainqueur: coffret cadeau 45 EUR" },
-  { id:26, name:"Speed Quiz",              theme:"ludique",      duree:"15 min", participants:"4–20",desc:"30 questions en 5 minutes. Format ultra-rapide pour demarrer une reunion avec energie. Les reponses sont donnees simultanement sur paper board.", recompenses:"Top scorer: goodies + bon 15 EUR" },
-  { id:27, name:"Le Pendu Financier",      theme:"competences",  duree:"15 min", participants:"2–6", desc:"Version classique du pendu avec du vocabulaire bancaire, des sigles produits et des noms de dispositifs. Ideal pour ancrer le vocabulaire metier sans lourdeur pedagogique.", recompenses:"Equipe sans faute: goodies LBP" },
-  { id:28, name:"Jeu de l'Oie Commercial", theme:"fidelisation", duree:"30 min", participants:"2–6", desc:"Plateau de jeu ou chaque case represente une etape du parcours client LBP. Cases bonus, penalites et defis integrent des mises en situation reelles de vente.", recompenses:"1er arrive: cheque cadeau 25 EUR" },
-  { id:29, name:"Charades Produits",       theme:"competences",  duree:"20 min", participants:"4–12",desc:"Serie de charades construites autour des noms de produits et de services LBP. Travail sur la decomposition semantique et la memorisation par la construction langagiere.", recompenses:"Meilleur charadeur: bon 15 EUR" },
-  { id:30, name:"Qui Veut Gagner des Millions",theme:"competences",duree:"30 min",participants:"1–4",desc:"Simulation du jeu televise avec jokers (appel equipe, vote, elimination). Questions a 15 niveaux de difficulte sur les produits et la regulation bancaire. Format spectaculaire.", recompenses:"Millionnaire: cheque 100 EUR | Paliers: 10 a 50 EUR" },
-  { id:31, name:"Le Mot le Plus Long",      theme:"ludique",     duree:"15 min", participants:"2–8", desc:"Variante du jeu televise avec des lettres tirees aleatoirement, les meilleurs mots etant lies a l'univers bancaire et financier. Renforce la creativite verbale.", recompenses:"Meilleur mot: bon librairie 15 EUR" },
-  { id:32, name:"Kahoot Produits",         theme:"competences",  duree:"20 min", participants:"5–30",desc:"QCM digital sur smartphone avec classement en direct. Couverture complete du catalogue LBP en format ludique. Tres adapte aux grandes reunions et lancements produits.", recompenses:"Top 3: goodies LBP progressifs" },
-  { id:33, name:"Pitch Commercial 60s",    theme:"conquete",     duree:"30 min", participants:"4–12",desc:"Chaque conseiller dispose de 60 secondes pour pitcher un produit tire au sort face a un faux client. Evaluate la pertinence, la clarté et la conviction du discours.", recompenses:"Meilleur pitch: cheque 30 EUR" },
-  { id:34, name:"Jeu des Definitions",     theme:"competences",  duree:"20 min", participants:"2–8", desc:"Un participant definit un terme financier sans le prononcer, les autres devinent. Renforce a la fois la maitrise du lexique et la capacite a vulgariser.", recompenses:"Equipe gagnante: plateau goodies" },
-  { id:35, name:"Football de Table",       theme:"collectif",    duree:"20 min", participants:"2–4", desc:"Tournoi de babyfoot avec questions produits entre chaque but marque. Combine activite physique et culture produit pour une pause energisante.", recompenses:"Champion: bon cinema 25 EUR" },
-  { id:36, name:"La Roue de la Fortune",   theme:"satisfaction", duree:"20 min", participants:"3–8", desc:"Roue personnalisee avec categories produits: le joueur doit resoudre une enigme dans la categorie indiquee. Format visuel fort, ideal pour les espaces communs.", recompenses:"Gagnant: cheque cadeau 30 EUR" },
-  { id:37, name:"Defi Photographique",     theme:"evenement",    duree:"60 min", participants:"4–20",desc:"Par equipes, realisation d'une serie de photos representant les valeurs LBP en agence. Developpe le sens de la communication visuelle et l'esprit d'equipe.", recompenses:"Meilleure serie: coffret experience" },
-  { id:38, name:"Le Grand Oral",           theme:"conquete",     duree:"45 min", participants:"4–8", desc:"Format de prise de parole formelle sur un produit tire au sort. Juges internes evaluent la structure, les arguments et la gestion du stress. Preparation a la vente consultative.", recompenses:"Meilleur orateur: cheque 40 EUR" },
-  { id:39, name:"Defi Maths Financieres",  theme:"epargne",      duree:"20 min", participants:"2–6", desc:"Calculs de rendements, taux d'interet composes et simulations de credit a la calculatrice. Renforce la maitrise numerique indispensable au conseil patrimonial.", recompenses:"Score parfait: bon 20 EUR" },
-  { id:40, name:"Quizz Reglementation",    theme:"credit",       duree:"20 min", participants:"2–8", desc:"Questions sur RGPD, loi Pacte, devoir de conseil et obligations documentaires. Assure une mise a jour des connaissances reglementaires de maniere non contraignante.", recompenses:"Meilleur score: bon formation" },
-  { id:41, name:"Jeu de Role Client",      theme:"fidelisation", duree:"45 min", participants:"2–4", desc:"Simulation d'entretien client complet avec profil fourni au conseiller. Debrief collectif sur les points forts et axes d'amelioration de la posture commerciale.", recompenses:"Meilleur conseiller: cheque 35 EUR" },
-  { id:42, name:"Enigmes Logiques",        theme:"competences",  duree:"20 min", participants:"2–6", desc:"Serie de problemes logiques a resoudre en equipe autour de situations bancaires. Develop la pensee structuree et la prise de decision collective.", recompenses:"Equipe la plus rapide: goodies LBP" },
-  { id:43, name:"Tombola Commerciale",     theme:"satisfaction", duree:"30 min", participants:"5–30",desc:"Tirage au sort parmi les conseillers ayant atteint leurs objectifs de la periode. Renforce la motivation individuelle et valorise la performance commercial.", recompenses:"Lot principal: cheque voyage 200 EUR" },
-  { id:44, name:"Animation Solaire",       theme:"epargne",      duree:"30 min", participants:"4–12",desc:"Sensibilisation a l'epargne verte et aux investissements ESG a travers des mises en situation eco-responsables. Aligne avec les engagements RSE de La Banque Postale.", recompenses:"Equipe plus verte: don caritatif" },
-  { id:45, name:"Jeu du Pendule",          theme:"ludique",      duree:"15 min", participants:"4–12",desc:"Oscillations d'un pendule designant des participants qui doivent repondre rapidement a des questions. Cree du suspense et une attention soutenue dans la salle.", recompenses:"Dernier en jeu: bon 20 EUR" },
-  { id:46, name:"Peche en Filet Garni",    theme:"conquete",     duree:"25 min", participants:"4–16",desc:"Animation de prospection ou chaque 'poisson peche' correspond a un profil client a qualifier. Travaille les reflexes de detection des besoins et les techniques d'accroche.", recompenses:"Plus grand peche: cheque 25 EUR" },
-  { id:47, name:"Quizz Films et Cinema",   theme:"evenement",    duree:"25 min", participants:"4–16",desc:"Questions sur les films en lien avec la finance, l'entreprise et les grandes decisions de vie. Cree une entree ludique vers les produits epargne et prevoyance.", recompenses:"Meilleur cinephile: carte UGC duo" },
-  { id:48, name:"Tops Flops",              theme:"satisfaction", duree:"20 min", participants:"4–12",desc:"Chaque participant partage un top et un flop de sa semaine commerciale. Format bienveillant qui ouvre le dialogue sur les pratiques et favorise le partage d'experience.", recompenses:"Participation active: reconnaissance collective" },
-  { id:49, name:"Defi Reel Instagram",     theme:"evenement",    duree:"30 min", participants:"4–12",desc:"Creation d'un mini-reel video de 30 secondes presentant un produit LBP. Developpe les competences digitales et la communication video, compétence clé en 2025.", recompenses:"Meilleur reel: bon 30 EUR + diffusion interne" },
-  { id:50, name:"Le Dico de l'Agence",     theme:"collectif",    duree:"20 min", participants:"4–12",desc:"Construction collective d'un lexique propre a l'agence: termes, abreviations, expressions. Renforce la cohesion et cree un referentiel commun de communication interne.", recompenses:"Contribution remarquee: reconnaissance manager" },
-  { id:51, name:"Hackathon Produit",       theme:"conquete",     duree:"120 min",participants:"4–12",desc:"Par equipes, creation d'une proposition de valeur originale autour d'un produit LBP existant: nouveau packaging, argument cible, canal de distribution. Stimule l'innovation.", recompenses:"Meilleure proposition: presentation direction" },
-  { id:52, name:"Tableau de Bord Live",    theme:"collectif",    duree:"15 min", participants:"4–20",desc:"Affichage en temps reel des indicateurs commerciaux de l'agence avec commentaires collectifs. Cree un rituel de pilotage transparent et responsabilisant.", recompenses:"Equipe la plus performante: bonus recognition" },
+const ANIMS=[
+  {id:1, name:"Mille Bornes",              theme:"ludique",      duree:"30 min",  participants:"2-6",  desc:"Jeu de cartes emblematique adapte pour valoriser les etapes cles du parcours client. Chaque borne franchie correspond a un produit presente, renforçant la pedagogie par l'action.",recompenses:"1er: cheque cadeau 30 EUR — 2e: carte fnac 15 EUR"},
+  {id:2, name:"Mario Kart Challenge",      theme:"ludique",      duree:"20 min",  participants:"4-8",  desc:"Simulation de course avec questions produits en guise de checkpoints. L'equipe la plus reactive avance sur le circuit, creant une dynamique competitive et engageante.",recompenses:"Vainqueur: bon cadeau 25 EUR — Podium: goodies LBP"},
+  {id:3, name:"Bataille Navale",           theme:"conquete",     duree:"25 min",  participants:"2-4",  desc:"Grille de jeu ou chaque case cache une question produit ou une simulation client. Le joueur qui decouvre la flotte adverse est celui qui maitrise le mieux son argumentaire.",recompenses:"Gagnant: cheque cadeau 20 EUR"},
+  {id:4, name:"Puissance 4",              theme:"fidelisation",  duree:"15 min",  participants:"2",    desc:"Jeu d'alignement ou chaque pion pose correspond a une reponse correcte. Favorise la rapidite de reflexe et la memorisation des caracteristiques produits.",recompenses:"Gagnant: carte culture 15 EUR"},
+  {id:5, name:"Jeu des paires",            theme:"competences",  duree:"20 min",  participants:"2-6",  desc:"Memory de correspondance entre produits LBP et leurs avantages cles. Consolide l'association mentale entre l'offre et les benefices client.",recompenses:"Meilleur score: bon Amazon 20 EUR"},
+  {id:6, name:"Le Rebus",                  theme:"competences",  duree:"20 min",  participants:"2-8",  desc:"Serie de rebuts visuels construits autour du vocabulaire financier et des produits LBP. Stimule la creativite tout en ancrant la terminologie metier.",recompenses:"Equipe gagnante: plateau goodies"},
+  {id:7, name:"Roland Garros",             theme:"conquete",     duree:"30 min",  participants:"2-4",  desc:"Tournoi par elimination directe avec questions a la volee. Chaque echange correspond a un argument de vente a placer, evaluant la fluidite du discours commercial.",recompenses:"Finaliste: cheque 30 EUR — Vainqueur: cheque 50 EUR"},
+  {id:8, name:"La Bomba",                  theme:"collectif",    duree:"15 min",  participants:"4-12", desc:"Chrono serre, la bombe tourne, chacun repond avant qu'elle explose. Format d'echauffement ideal pour briefings ou demarrages de reunion sous tension positive.",recompenses:"Equipe survivante: goodies LBP"},
+  {id:9, name:"Coupe du Monde",            theme:"collectif",    duree:"45 min",  participants:"8-20", desc:"Tournoi d'equipes sur plusieurs semaines avec tableau de qualifications. Chaque match oppose deux groupes sur un theme produit different, creant une emulation collective durable.",recompenses:"Champion: trophee + cheque 50 EUR — Finaliste: cheque 25 EUR"},
+  {id:10,name:"Bingo / Loto",              theme:"satisfaction", duree:"30 min",  participants:"5-30", desc:"Format grand groupe ou les numeros sont remplaces par des notions produits ou des situations clients. Accessible a tous les niveaux et facilement adaptable aux temps forts commerciaux.",recompenses:"Bingo: coffret cadeau 40 EUR — Quine: bon 15 EUR"},
+  {id:11,name:"Blind Test Musical",        theme:"evenement",    duree:"30 min",  participants:"4-20", desc:"Extraits musicaux associes a des univers produits ou des moments de vie client. Cree un cadre detendu propice a l'ouverture et a la memorisation par l'emotion.",recompenses:"Equipe gagnante: carte Spotify + goodies"},
+  {id:12,name:"Micro d'Or",                theme:"satisfaction", duree:"30 min",  participants:"4-12", desc:"Chaque participant incarne un conseiller qui presente un produit en 60 secondes. Le jury evalue clarte, conviction et pertinence de l'argumentaire. Renforce la prise de parole.",recompenses:"Meilleur orateur: cheque 30 EUR"},
+  {id:13,name:"Les Flechettes",            theme:"conquete",     duree:"20 min",  participants:"2-6",  desc:"Cible divisee en zones produits: chaque flechette lancee declenche une question associee. Simple a mettre en place, efficace pour animer un moment de pause commercial.",recompenses:"Score max: bon cadeau 20 EUR"},
+  {id:14,name:"Burger Quiz",               theme:"competences",  duree:"25 min",  participants:"4-8",  desc:"Quizz par equipes avec manches thematiques sur les produits, la reglementation et le marche. Le format TV accelere maintient l'attention sur toute la session.",recompenses:"Equipe championne: cheque 40 EUR"},
+  {id:15,name:"Jeu des 7 Erreurs",         theme:"competences",  duree:"20 min",  participants:"2-6",  desc:"Deux documents quasi-identiques avec sept differences a reperer dans les conditions contractuelles ou les fiches produits. Affute la lecture critique et la vigilance documentaire.",recompenses:"1er qui trouve tout: bon 20 EUR"},
+  {id:16,name:"N'Oubliez pas les Paroles", theme:"satisfaction", duree:"20 min",  participants:"4-16", desc:"Les paroles sont remplacees par des phrases cles de l'argumentation LBP. L'animateur coupe la musique, le participant doit completer. Memorisation ludique de messages essentiels.",recompenses:"Meilleur score: carte cadeau 25 EUR"},
+  {id:17,name:"La Moustache Mysterieuse (Movember)",theme:"evenement",duree:"20 min",participants:"4-20",desc:"Animation de sensibilisation Movember associee a des questions sante et prevoyance LBP. Associe l'engagement RSE aux produits d'assurance vie et de protection.",recompenses:"Participant le plus implique: don caritatif en son nom"},
+  {id:18,name:"Uno",                       theme:"ludique",      duree:"20 min",  participants:"2-8",  desc:"Version personnalisee du jeu ou chaque carte d'action correspond a une situation commerciale. Penalites et bonus lies a la connaissance produit. Format convivial haute adhesion.",recompenses:"Gagnant: goodies LBP"},
+  {id:19,name:"Mot Mystere",               theme:"competences",  duree:"20 min",  participants:"2-6",  desc:"Grille de mots croises thematique autour du vocabulaire LBP: produits, processus, sigles metier. Renforce le lexique professionnel de maniere autonome ou en competition.",recompenses:"Grille complete: bon culture 15 EUR"},
+  {id:20,name:"Kaleido Quoi",              theme:"ludique",      duree:"25 min",  participants:"4-12", desc:"Jeu d'associations visuelles ou les participants relient images, chiffres et mots a des produits LBP. Stimule la pensee laterale et la memorisation iconographique.",recompenses:"Meilleure association: cheque 20 EUR"},
+  {id:21,name:"Journee de la Femme",       theme:"evenement",    duree:"30 min",  participants:"4-20", desc:"Animation speciale 8 mars: questions autour de l'independance financiere, l'epargne feminine et les inegalites de retraite. Sensibilise aux enjeux de la clientele femme.",recompenses:"Participation: coffret bien-etre"},
+  {id:22,name:"Question pour un Champion", theme:"competences",  duree:"30 min",  participants:"3-6",  desc:"Format televise iconic a buzzer: questions progressives du general au specifique sur les produits et l'actualite bancaire. Teste la culture generale financiere du reseau.",recompenses:"Champion: trophee + cheque 50 EUR"},
+  {id:23,name:"Photo Mystere",             theme:"evenement",    duree:"20 min",  participants:"4-16", desc:"Images floues ou zoomees d'agences, de visuels campagne ou de produits LBP a identifier. Cree un sentiment d'appartenance et renforce la culture d'entreprise.",recompenses:"Meilleur score: bon Amazon 20 EUR"},
+  {id:24,name:"Escape Game Produits",      theme:"conquete",     duree:"45 min",  participants:"4-8",  desc:"Scenario d'escape room ou chaque enigme deverrouille une etape de la relation client. Travail collaboratif intense autour des produits phares de la banque.",recompenses:"Equipe evadee: cheque 60 EUR"},
+  {id:25,name:"Trivial Pursuit LBP",       theme:"competences",  duree:"45 min",  participants:"3-6",  desc:"Adaptation du jeu avec 6 categories: epargne, credit, assurance, reglementation, histoire LBP et actualite. Couvre l'ensemble du referentiel produit.",recompenses:"Vainqueur: coffret cadeau 45 EUR"},
+  {id:26,name:"Speed Quiz",                theme:"ludique",      duree:"15 min",  participants:"4-20", desc:"30 questions en 5 minutes. Format ultra-rapide pour demarrer une reunion avec energie. Les reponses sont donnees simultanement sur paper board.",recompenses:"Top scorer: goodies + bon 15 EUR"},
+  {id:27,name:"Le Pendu Financier",        theme:"competences",  duree:"15 min",  participants:"2-6",  desc:"Version classique du pendu avec du vocabulaire bancaire, des sigles produits et des noms de dispositifs. Ideal pour ancrer le vocabulaire metier sans lourdeur pedagogique.",recompenses:"Equipe sans faute: goodies LBP"},
+  {id:28,name:"Jeu de l'Oie Commercial",   theme:"fidelisation", duree:"30 min",  participants:"2-6",  desc:"Plateau de jeu ou chaque case represente une etape du parcours client LBP. Cases bonus, penalites et defis integrent des mises en situation reelles de vente.",recompenses:"1er arrive: cheque cadeau 25 EUR"},
+  {id:29,name:"Charades Produits",         theme:"competences",  duree:"20 min",  participants:"4-12", desc:"Serie de charades construites autour des noms de produits et de services LBP. Travail sur la decomposition semantique et la memorisation par construction langagiere.",recompenses:"Meilleur charadeur: bon 15 EUR"},
+  {id:30,name:"Qui Veut Gagner des Millions",theme:"competences",duree:"30 min",  participants:"1-4",  desc:"Simulation du jeu televise avec jokers. Questions a 15 niveaux de difficulte sur les produits et la regulation bancaire. Format spectaculaire et engageant.",recompenses:"Millionnaire: cheque 100 EUR — Paliers: de 10 a 50 EUR"},
+  {id:31,name:"Le Mot le Plus Long",       theme:"ludique",      duree:"15 min",  participants:"2-8",  desc:"Variante du jeu televise avec des lettres tirees aleatoirement, les meilleurs mots etant lies a l'univers bancaire et financier. Renforce la creativite verbale.",recompenses:"Meilleur mot: bon librairie 15 EUR"},
+  {id:32,name:"Kahoot Produits",           theme:"competences",  duree:"20 min",  participants:"5-30", desc:"QCM digital sur smartphone avec classement en direct. Couverture complete du catalogue LBP en format ludique. Tres adapte aux grandes reunions et lancements produits.",recompenses:"Top 3: goodies LBP progressifs"},
+  {id:33,name:"Pitch Commercial 60s",      theme:"conquete",     duree:"30 min",  participants:"4-12", desc:"Chaque conseiller dispose de 60 secondes pour pitcher un produit tire au sort face a un faux client. Evalue la pertinence, la clarte et la conviction du discours.",recompenses:"Meilleur pitch: cheque 30 EUR"},
+  {id:34,name:"Jeu des Definitions",       theme:"competences",  duree:"20 min",  participants:"2-8",  desc:"Un participant definit un terme financier sans le prononcer, les autres devinent. Renforce la maitrise du lexique et la capacite a vulgariser.",recompenses:"Equipe gagnante: plateau goodies"},
+  {id:35,name:"Football de Table",         theme:"collectif",    duree:"20 min",  participants:"2-4",  desc:"Tournoi de babyfoot avec questions produits entre chaque but marque. Combine activite physique et culture produit pour une pause energisante.",recompenses:"Champion: bon cinema 25 EUR"},
+  {id:36,name:"La Roue de la Fortune",     theme:"satisfaction", duree:"20 min",  participants:"3-8",  desc:"Roue personnalisee avec categories produits: le joueur doit resoudre une enigme dans la categorie indiquee. Format visuel fort, ideal pour les espaces communs.",recompenses:"Gagnant: cheque cadeau 30 EUR"},
+  {id:37,name:"Defi Photographique",       theme:"evenement",    duree:"60 min",  participants:"4-20", desc:"Par equipes, realisation d'une serie de photos representant les valeurs LBP en agence. Developpe le sens de la communication visuelle et l'esprit d'equipe.",recompenses:"Meilleure serie: coffret experience"},
+  {id:38,name:"Le Grand Oral",             theme:"conquete",     duree:"45 min",  participants:"4-8",  desc:"Format de prise de parole formelle sur un produit tire au sort. Juges internes evaluent structure, arguments et gestion du stress. Preparation a la vente consultative.",recompenses:"Meilleur orateur: cheque 40 EUR"},
+  {id:39,name:"Defi Maths Financieres",    theme:"epargne",      duree:"20 min",  participants:"2-6",  desc:"Calculs de rendements, taux d'interet composes et simulations de credit a la calculatrice. Renforce la maitrise numerique indispensable au conseil patrimonial.",recompenses:"Score parfait: bon 20 EUR"},
+  {id:40,name:"Quizz Reglementation",      theme:"credit",       duree:"20 min",  participants:"2-8",  desc:"Questions sur RGPD, loi Pacte, devoir de conseil et obligations documentaires. Assure une mise a jour des connaissances reglementaires de maniere non contraignante.",recompenses:"Meilleur score: bon formation"},
+  {id:41,name:"Jeu de Role Client",        theme:"fidelisation", duree:"45 min",  participants:"2-4",  desc:"Simulation d'entretien client complet avec profil fourni au conseiller. Debrief collectif sur les points forts et axes d'amelioration de la posture commerciale.",recompenses:"Meilleur conseiller: cheque 35 EUR"},
+  {id:42,name:"Enigmes Logiques",          theme:"competences",  duree:"20 min",  participants:"2-6",  desc:"Serie de problemes logiques a resoudre en equipe autour de situations bancaires. Developpe la pensee structuree et la prise de decision collective.",recompenses:"Equipe la plus rapide: goodies LBP"},
+  {id:43,name:"Tombola Commerciale",       theme:"satisfaction", duree:"30 min",  participants:"5-30", desc:"Tirage au sort parmi les conseillers ayant atteint leurs objectifs de la periode. Renforce la motivation individuelle et valorise la performance commerciale.",recompenses:"Lot principal: cheque voyage 200 EUR"},
+  {id:44,name:"Animation Solaire",         theme:"epargne",      duree:"30 min",  participants:"4-12", desc:"Sensibilisation a l'epargne verte et aux investissements ESG a travers des mises en situation eco-responsables. Aligne avec les engagements RSE de La Banque Postale.",recompenses:"Equipe la plus verte: don caritatif"},
+  {id:45,name:"Jeu du Pendule",            theme:"ludique",      duree:"15 min",  participants:"4-12", desc:"Oscillations d'un pendule designant des participants qui doivent repondre rapidement a des questions. Cree du suspense et une attention soutenue dans la salle.",recompenses:"Dernier en jeu: bon 20 EUR"},
+  {id:46,name:"Peche en Filet Garni",      theme:"conquete",     duree:"25 min",  participants:"4-16", desc:"Animation de prospection ou chaque profil client peche doit etre qualifie. Travaille les reflexes de detection des besoins et les techniques d'accroche.",recompenses:"Plus grand peche: cheque 25 EUR"},
+  {id:47,name:"Quizz Films et Cinema",     theme:"evenement",    duree:"25 min",  participants:"4-16", desc:"Questions sur les films en lien avec la finance, l'entreprise et les grandes decisions de vie. Cree une entree ludique vers les produits epargne et prevoyance.",recompenses:"Meilleur cinephile: carte UGC duo"},
+  {id:48,name:"Tops Flops",                theme:"satisfaction", duree:"20 min",  participants:"4-12", desc:"Chaque participant partage un top et un flop de sa semaine commerciale. Format bienveillant qui ouvre le dialogue sur les pratiques et favorise le partage d'experience.",recompenses:"Participation active: reconnaissance collective"},
+  {id:49,name:"Defi Reel Instagram",       theme:"evenement",    duree:"30 min",  participants:"4-12", desc:"Creation d'un mini-reel video de 30 secondes presentant un produit LBP. Developpe les competences digitales et la communication video.",recompenses:"Meilleur reel: bon 30 EUR + diffusion interne"},
+  {id:50,name:"Le Dico de l'Agence",       theme:"collectif",    duree:"20 min",  participants:"4-12", desc:"Construction collective d'un lexique propre a l'agence: termes, abreviations, expressions. Renforce la cohesion et cree un referentiel commun de communication interne.",recompenses:"Contribution remarquee: reconnaissance manager"},
+  {id:51,name:"Hackathon Produit",         theme:"conquete",     duree:"120 min", participants:"4-12", desc:"Par equipes, creation d'une proposition de valeur originale autour d'un produit LBP existant. Nouveau packaging, argument cible, canal de distribution. Stimule l'innovation.",recompenses:"Meilleure proposition: presentation direction"},
+  {id:52,name:"Tableau de Bord Live",      theme:"collectif",    duree:"15 min",  participants:"4-20", desc:"Affichage en temps reel des indicateurs commerciaux de l'agence avec commentaires collectifs. Cree un rituel de pilotage transparent et responsabilisant.",recompenses:"Equipe la plus performante: bonus recognition"},
 ];
 
-const RESSOURCES = [
-  { id:1,  title:"Kit Animation Mille Bornes",        cat:"Kit animation", desc:"Regles, cartes imprimables et guide animateur pour l'animation Mille Bornes adaptee LBP.", icon:"1" },
-  { id:2,  title:"Guide Maitre de Jeu",               cat:"Guide",         desc:"Methodologie complete pour animer une session de jeu: preparation, deroulement, debrief.", icon:"2" },
-  { id:3,  title:"Fiches Produits Condensees",        cat:"Produit",       desc:"Fiches de synthese une page par produit LBP pour integration dans les animations.", icon:"3" },
-  { id:4,  title:"Modele de Quizz PowerPoint",        cat:"Modele",        desc:"Template PowerPoint reutilisable pour tout format de quizz interne.", icon:"4" },
-  { id:5,  title:"Regles Bataille Navale LBP",        cat:"Kit animation", desc:"Version personnalisee de la Bataille Navale avec grilles produits et guide de jeu.", icon:"5" },
-  { id:6,  title:"Calendrier Animations 2025",        cat:"Planning",      desc:"Calendrier annuel des animations par agence avec dates, themes et responsables.", icon:"6" },
-  { id:7,  title:"Grilles d'Evaluation Conseiller",   cat:"Evaluation",    desc:"Grilles d'observation pour evaluer la maitrise produit et la posture de vente.", icon:"7" },
-  { id:8,  title:"Supports Coupe du Monde",           cat:"Kit animation", desc:"Tableau de qualification, regles du tournoi et supports visuels de suivi.", icon:"8" },
-  { id:9,  title:"Base Questions Kahoot",             cat:"Numerique",     desc:"Banque de 200 questions QCM pret a l'emploi sur la plateforme Kahoot.", icon:"9" },
-  { id:10, title:"Guide Jeu de Role Client",          cat:"Guide",         desc:"Scenarios de mise en situation client avec grilles de debrief structurees.", icon:"10" },
-  { id:11, title:"Kit Blind Test Musical",            cat:"Kit animation", desc:"Playlist thematique, reponses et systeme de scoring pour le blind test.", icon:"11" },
-  { id:12, title:"Charte Graphique Animations",       cat:"Design",        desc:"Guide visuel pour la creation de supports coherents avec l'identite LBP.", icon:"12" },
-  { id:13, title:"Tableau de Bord Animation",         cat:"Suivi",         desc:"Fichier Excel de suivi des animations: participation, scores et feedback.", icon:"13" },
-  { id:14, title:"Regles Puissance 4 LBP",            cat:"Kit animation", desc:"Version produits du Puissance 4 avec questions par couleur de pion.", icon:"14" },
-  { id:15, title:"Formation Maitre de Jeu",           cat:"Formation",     desc:"Module e-learning de 45 minutes pour former les animateurs en agence.", icon:"15" },
-  { id:16, title:"Catalogue Recompenses",             cat:"Incentive",     desc:"Liste des lots disponibles avec conditions d'attribution et demandes RH.", icon:"16" },
-  { id:17, title:"Kit Journee de la Femme",           cat:"Kit animation", desc:"Supports, statistiques et questions pour l'animation du 8 mars.", icon:"17" },
-  { id:18, title:"Guide Debrief Pedagogique",         cat:"Guide",         desc:"Methode pour transformer une animation en apprentissage durable.", icon:"18" },
-  { id:19, title:"Banque Images Libres de Droits",    cat:"Design",        desc:"Bibliotheque de 500 images utilisables pour vos supports d'animation.", icon:"19" },
-  { id:20, title:"FAQ Reglementation Jeux",           cat:"Juridique",     desc:"Reponses aux questions juridiques sur l'organisation de jeux en contexte professionnel.", icon:"20" },
-  { id:21, title:"Modele Bilan Animation",            cat:"Suivi",         desc:"Template de compte-rendu post-animation pour le reporting mensuel.", icon:"21" },
-  { id:22, title:"Guide Motivation Equipe",           cat:"Management",    desc:"Techniques d'animation managériales pour maintenir l'engagement sur la duree.", icon:"22" },
-  { id:23, title:"Ressources Movember",               cat:"Kit animation", desc:"Supports de sensibilisation, visuels et questions pour l'animation Movember.", icon:"23" },
+const RESSOURCES=[
+  {id:1, title:"Kit Animation Mille Bornes",     cat:"Kit animation",c:"#2563EB",desc:"Regles, cartes imprimables et guide animateur pour l'animation Mille Bornes adaptee LBP."},
+  {id:2, title:"Guide Maitre de Jeu",            cat:"Guide",        c:"#7C3AED",desc:"Methodologie complete pour animer une session de jeu: preparation, deroulement, debrief."},
+  {id:3, title:"Fiches Produits Condensees",     cat:"Produit",      c:"#059669",desc:"Fiches de synthese une page par produit LBP pour integration dans les animations."},
+  {id:4, title:"Modele de Quizz PowerPoint",     cat:"Modele",       c:"#EA580C",desc:"Template PowerPoint reutilisable pour tout format de quizz interne."},
+  {id:5, title:"Regles Bataille Navale LBP",     cat:"Kit animation",c:"#DC2626",desc:"Version personnalisee de la Bataille Navale avec grilles produits et guide de jeu."},
+  {id:6, title:"Calendrier Animations 2025",     cat:"Planning",     c:"#BE185D",desc:"Calendrier annuel des animations par agence avec dates, themes et responsables."},
+  {id:7, title:"Grilles d'Evaluation Conseiller",cat:"Evaluation",   c:"#0D9488",desc:"Grilles d'observation pour evaluer la maitrise produit et la posture de vente."},
+  {id:8, title:"Supports Coupe du Monde",        cat:"Kit animation",c:"#D97706",desc:"Tableau de qualification, regles du tournoi et supports visuels de suivi."},
+  {id:9, title:"Base Questions Kahoot",          cat:"Numerique",    c:"#9333EA",desc:"Banque de 200 questions QCM pret a l'emploi sur la plateforme Kahoot."},
+  {id:10,title:"Guide Jeu de Role Client",       cat:"Guide",        c:"#0891B2",desc:"Scenarios de mise en situation client avec grilles de debrief structurees."},
+  {id:11,title:"Kit Blind Test Musical",         cat:"Kit animation",c:"#2563EB",desc:"Playlist thematique, reponses et systeme de scoring pour le blind test."},
+  {id:12,title:"Charte Graphique Animations",    cat:"Design",       c:"#7C3AED",desc:"Guide visuel pour la creation de supports coherents avec l'identite LBP."},
+  {id:13,title:"Tableau de Bord Animation",      cat:"Suivi",        c:"#059669",desc:"Fichier Excel de suivi des animations: participation, scores et feedback."},
+  {id:14,title:"Regles Puissance 4 LBP",         cat:"Kit animation",c:"#EA580C",desc:"Version produits du Puissance 4 avec questions par couleur de pion."},
+  {id:15,title:"Formation Maitre de Jeu",        cat:"Formation",    c:"#DC2626",desc:"Module e-learning de 45 minutes pour former les animateurs en agence."},
+  {id:16,title:"Catalogue Recompenses",          cat:"Incentive",    c:"#BE185D",desc:"Liste des lots disponibles avec conditions d'attribution et demandes RH."},
+  {id:17,title:"Kit Journee de la Femme",        cat:"Kit animation",c:"#0D9488",desc:"Supports, statistiques et questions pour l'animation du 8 mars."},
+  {id:18,title:"Guide Debrief Pedagogique",      cat:"Guide",        c:"#D97706",desc:"Methode pour transformer une animation en apprentissage durable."},
+  {id:19,title:"Banque Images Libres de Droits", cat:"Design",       c:"#9333EA",desc:"Bibliotheque de 500 images utilisables pour vos supports d'animation."},
+  {id:20,title:"FAQ Reglementation Jeux",        cat:"Juridique",    c:"#0891B2",desc:"Reponses aux questions juridiques sur l'organisation de jeux en contexte professionnel."},
+  {id:21,title:"Modele Bilan Animation",         cat:"Suivi",        c:"#2563EB",desc:"Template de compte-rendu post-animation pour le reporting mensuel."},
+  {id:22,title:"Guide Motivation Equipe",        cat:"Management",   c:"#7C3AED",desc:"Techniques d'animation manageriales pour maintenir l'engagement sur la duree."},
+  {id:23,title:"Ressources Movember",            cat:"Kit animation",c:"#059669",desc:"Supports de sensibilisation, visuels et questions pour l'animation Movember."},
 ];
 
-let currentTheme = null;
-let currentAnim  = null;
+let activeTheme=null,searchVal='';
 
-function switchTab(name, btn){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+function tc(t){return THEMES[t]?.color||'#64687A'}
+function tl(t){return THEMES[t]?.label||t}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
 }
 
 function renderThemeFilters(){
-  const el = document.getElementById('theme-filters');
-  let html = '<button class="pill active" data-theme="all" onclick="filterTheme(\'all\',this)">Toutes</button>';
-  for(const [k,v] of Object.entries(THEMES)){
-    html += `<button class="pill" data-theme="${k}" onclick="filterTheme('${k}',this)">${v.label}</button>`;
-  }
-  el.innerHTML = html;
+  const el=document.getElementById('theme-filters');
+  let h=`<button class="fpill on" data-t="all" onclick="filterTheme('all',this)">Toutes</button>`;
+  for(const [k,v] of Object.entries(THEMES))
+    h+=`<button class="fpill" data-t="${k}" onclick="filterTheme('${k}',this)">${v.label}</button>`;
+  el.innerHTML=h;
 }
 
-function filterTheme(theme, btn){
-  document.querySelectorAll('#theme-filters .pill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  currentTheme = theme==='all'?null:theme;
-  closeDetail();
+function filterTheme(theme,btn){
+  document.querySelectorAll('.fpill').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  activeTheme=theme==='all'?null:theme;
+  closeModal();renderAnimGrid();
+}
+
+function onSearch(){
+  searchVal=document.getElementById('search-input').value.toLowerCase();
   renderAnimGrid();
 }
 
-function getThemeColor(theme){
-  return THEMES[theme]?.color||'#64687A';
+function renderAnimGrid(){
+  let list=ANIMS;
+  if(activeTheme) list=list.filter(a=>a.theme===activeTheme);
+  if(searchVal) list=list.filter(a=>a.name.toLowerCase().includes(searchVal)||a.desc.toLowerCase().includes(searchVal));
+  document.getElementById('anim-badge').textContent=list.length+' animation'+(list.length>1?'s':'');
+  const clk=id=>`onclick="openModal(${id})"`;
+  document.getElementById('anim-grid').innerHTML=list.length
+    ?list.map((a,i)=>{
+      const color=tc(a.theme),label=tl(a.theme);
+      return `<div class="anim-card" style="--c-theme:${color};animation-delay:${Math.min(i,12)*0.04}s" onclick="openModal(${a.id})">
+        <div class="anim-card-body">
+          <div class="anim-card-head">
+            <div class="anim-card-name">${a.name}</div>
+            <span class="theme-badge" style="background:${color}18;color:${color}">${label}</span>
+          </div>
+          <div class="anim-card-desc">${a.desc}</div>
+          <div class="anim-card-footer">
+            <span class="anim-chip">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l2.5 2.5"/></svg>
+              ${a.duree}
+            </span>
+            <span class="anim-chip">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M5 17a5 5 0 0 1 10 0"/></svg>
+              ${a.participants}
+            </span>
+          </div>
+        </div>
+      </div>`;
+    }).join('')
+    :`<div class="empty">Aucune animation trouvee pour cette recherche.</div>`;
 }
 
-function renderAnimGrid(){
-  const filtered = currentTheme ? ANIMS.filter(a=>a.theme===currentTheme) : ANIMS;
-  const el = document.getElementById('anim-grid');
-  const countEl = document.getElementById('anim-count');
-  countEl.textContent = filtered.length+' animation'+(filtered.length>1?'s':'');
-  el.innerHTML = filtered.map((a,i)=>{
-    const tc = getThemeColor(a.theme);
-    const tl = THEMES[a.theme]?.label||a.theme;
-    return `<div class="anim-card" style="--c-theme:${tc};animation-delay:${i*0.03}s" onclick="selectAnim(${a.id})">
-      <div class="anim-card-head">
-        <div class="anim-name">${a.name}</div>
-        <span class="theme-tag" style="background:${tc}18;color:${tc}">${tl}</span>
+function openModal(id){
+  const a=ANIMS.find(x=>x.id===id);if(!a)return;
+  const color=tc(a.theme),label=tl(a.theme);
+  const modal=document.getElementById('modal');
+  modal.innerHTML=`
+    <div class="modal-head" style="border-top:4px solid ${color}">
+      <div class="modal-head-top">
+        <span class="modal-theme-tag">${label}</span>
+        <button class="modal-close" onclick="closeModal()">&#x2715;</button>
       </div>
-      <div class="anim-desc">${a.desc}</div>
-      <div class="anim-meta">
-        <span class="meta-chip"><span>Duree:</span> ${a.duree}</span>
-        <span class="meta-chip"><span>Participants:</span> ${a.participants}</span>
+      <div class="modal-title">${a.name}</div>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><strong>${a.duree}</strong></div>
+        <div class="modal-meta-item"><strong>${a.participants}</strong> participants</div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-label">Description</div>
+        <div class="modal-text">${a.desc}</div>
+      </div>
+      <div class="modal-section rewards-box">
+        <div class="modal-label">Dotations et recompenses</div>
+        <div class="modal-text">${a.recompenses}</div>
       </div>
     </div>`;
-  }).join('');
+  modal.classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
 }
 
-function selectAnim(id){
-  const a = ANIMS.find(x=>x.id===id);
-  if(!a) return;
-  const panel = document.getElementById('detail-panel');
-  if(currentAnim===id && panel.classList.contains('open')){
-    closeDetail();return;
-  }
-  currentAnim = id;
-  const tc = getThemeColor(a.theme);
-  const tl = THEMES[a.theme]?.label||a.theme;
-  panel.innerHTML = `
-    <div class="detail-head" style="border-top:4px solid ${tc}">
-      <div class="detail-head-info">
-        <div class="detail-head-name">${a.name}</div>
-        <div class="detail-head-theme" style="color:${tc}88">${tl} — ${a.duree}</div>
-      </div>
-      <button class="detail-close" onclick="closeDetail()">x</button>
-    </div>
-    <div class="detail-body">
-      <div class="detail-section">
-        <div class="detail-label">Description</div>
-        <div class="detail-value">${a.desc}</div>
-      </div>
-      <div class="detail-section">
-        <div class="detail-label">Participants</div>
-        <div class="detail-value">${a.participants}</div>
-      </div>
-      <div class="detail-rewards">
-        <div class="detail-label">Recompenses</div>
-        <div class="detail-value">${a.recompenses}</div>
-      </div>
-    </div>
-  `;
-  panel.classList.add('open');
-  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
 }
 
-function closeDetail(){
-  currentAnim = null;
-  const panel = document.getElementById('detail-panel');
-  panel.classList.remove('open');
-}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
 function renderResGrid(){
-  const el = document.getElementById('res-grid');
-  const colors = ['#2563EB','#7C3AED','#059669','#EA580C','#DC2626','#BE185D','#0D9488','#D97706','#9333EA','#0891B2'];
-  el.innerHTML = RESSOURCES.map((r,i)=>{
-    const c = colors[i%colors.length];
-    return `<div class="res-card" style="animation-delay:${i*0.04}s">
-      <div class="res-icon" style="background:${c}12;color:${c};font-size:14px;font-family:'Syne',sans-serif;font-weight:800">${r.id}</div>
-      <div class="res-info">
+  document.getElementById('res-grid').innerHTML=RESSOURCES.map((r,i)=>`
+    <div class="res-card" style="animation-delay:${Math.min(i,12)*0.04}s">
+      <div class="res-num" style="background:${r.c}14;color:${r.c}">${String(r.id).padStart(2,'0')}</div>
+      <div class="res-body">
         <div class="res-cat">${r.cat}</div>
         <div class="res-title">${r.title}</div>
         <div class="res-desc">${r.desc}</div>
-        <a href="#" class="res-link" onclick="return false">Acceder</a>
+        <a href="#" class="res-action" onclick="return false">Acceder au document</a>
       </div>
-    </div>`;
-  }).join('');
+    </div>`).join('');
 }
 
 function renderStats(){
-  const el = document.getElementById('stats-row');
-  el.innerHTML = STATS.map((s,i)=>`
+  document.getElementById('stats-grid').innerHTML=STATS.map((s,i)=>`
     <div class="stat-card" style="animation-delay:${i*0.08}s">
       <div class="stat-val">${s.val}</div>
       <div class="stat-lbl">${s.lbl}</div>
@@ -766,28 +500,24 @@ function renderStats(){
 }
 
 function renderTeam(){
-  const el = document.getElementById('team-section');
-  const groups = {
-    coord:   { label:"Coordinateurs CNMR" },
-    main:    { label:"ADC — Reims" },
-    chalons: { label:"ADC — Chalons-en-Champagne" },
-  };
-  let html = '';
-  for(const [gk,gv] of Object.entries(groups)){
-    const members = TEAM.filter(m=>m.group===gk);
-    if(!members.length) continue;
-    html += `<div class="team-group-label">${gv.label}</div>
-    <div class="team-grid">
-      ${members.map((m,i)=>`<div class="team-card" style="animation-delay:${i*0.06}s">
-        <div class="team-avatar" style="background:${m.c}">${m.initials}</div>
-        <div class="team-info">
-          <div class="team-name">${m.name}</div>
-          <div class="team-role">${m.role}</div>
-        </div>
-      </div>`).join('')}
+  let html='';
+  for(const [gk,glabel] of Object.entries(GROUPS)){
+    const members=TEAM.filter(m=>m.group===gk);
+    if(!members.length)continue;
+    html+=`<div class="team-group">
+      <div class="team-group-title">${glabel}</div>
+      <div class="team-grid">
+        ${members.map((m,i)=>`<div class="team-card" style="animation-delay:${i*0.06}s">
+          <div class="team-avatar" style="background:${m.c}">${m.initials}</div>
+          <div>
+            <div class="team-name">${m.name}</div>
+            <div class="team-role">${m.role}</div>
+          </div>
+        </div>`).join('')}
+      </div>
     </div>`;
   }
-  el.innerHTML = html;
+  document.getElementById('team-section').innerHTML=html;
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
